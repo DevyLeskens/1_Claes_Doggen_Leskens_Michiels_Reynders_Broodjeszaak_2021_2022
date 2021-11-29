@@ -6,31 +6,51 @@ import java.io.*;
 import java.util.*;
 
 public class SandwichDatabase {
-    public Set<Sandwich> kindOfSandwich;
 
 
-    public SandwichDatabase(){
-        readLinesFromFile();
+    TreeMap<String, Sandwich> sandwichsorts = new TreeMap<>();
+    private static SandwichDatabase sandwichDatabase;
+    private SandwichDatabase(){
+        Load();
     }
-    public void readLinesFromFile() {
-        try (Scanner scanner = new Scanner(new File("src/bestanden/broodjes.xls"))) {
-            while (scanner.hasNext()) {
-                String line = scanner.nextLine();
-                String[] parts = line.split(",");
-                String name = parts[0];
-                double price = Double.parseDouble(parts[1]);
-                int stock = Integer.parseInt(parts[2]);
-                int sold = Integer.parseInt(parts[3]);
-                Sandwich sandwich = new Sandwich(name, price, stock, sold);
-                kindOfSandwich.add(sandwich);
-                System.out.println(kindOfSandwich);
+    public static SandwichDatabase getInstance(){
+        if (sandwichDatabase == null) {
+            sandwichDatabase = new SandwichDatabase();
+        }
+        return sandwichDatabase;
+    }
+
+    public TreeMap<String, Sandwich> getSandwichsorts() {
+        return sandwichsorts;
+    }
+
+    public void Load() {
+        try {
+            Scanner myReader = new Scanner(new File("src/bestanden/broodjes.txt"));
+            while (myReader.hasNextLine()) {
+                String[] data = myReader.nextLine().split(",");
+                Sandwich sandwich =  new Sandwich(data[0] , Double.parseDouble(data[1]), Integer.parseInt(data[2]) , Integer.parseInt(data[3]));
+                sandwichsorts.put(data[0],sandwich);
             }
-        } catch (FileNotFoundException fileNotFoundException) {
-            fileNotFoundException.printStackTrace();
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("could not find input file.");
+            e.printStackTrace();
         }
     }
 
-    public Set<Sandwich> getKindOfSandwich() {
-        return kindOfSandwich;
+
+    public void save(){
+            try {
+                FileWriter myWriter = new FileWriter("src/bestanden/broodjes.txt");
+                for (Sandwich sandwich: sandwichsorts.values()) {
+                    myWriter.write(sandwich.getName() + "," + sandwich.getPrice()+ "," + sandwich.getStock() + "," + sandwich.getSold());
+                }
+                myWriter.close();
+                System.out.println("Successfully wrote to the file.");
+            } catch (IOException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
+            }
     }
 }

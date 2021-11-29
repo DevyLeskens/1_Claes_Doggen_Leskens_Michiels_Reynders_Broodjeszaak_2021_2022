@@ -19,13 +19,7 @@ public class Sandwich {
             throw new IllegalArgumentException("name can not be empty");
         }
         this.price = price;
-        if(stock == 0){
-            throw new IllegalArgumentException("name can not be empty");
-        }
         this.stock = stock;
-        if(sold == 0){
-            throw new IllegalArgumentException("name can not be empty");
-        }
         this.sold = sold;
     }
     public String getName() {
@@ -44,4 +38,13 @@ public class Sandwich {
         return sold;
     }
 
+    @Override
+    public String toString() {
+        return "Sandwich{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", stock=" + stock +
+                ", sold=" + sold +
+                '}';
+    }
 }
