@@ -1,4 +1,4 @@
 package model;
 
-public interface Orderstate {
+public interface OrderState {
 }

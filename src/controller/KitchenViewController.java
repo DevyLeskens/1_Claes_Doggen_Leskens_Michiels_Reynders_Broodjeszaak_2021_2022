@@ -1,4 +1,4 @@
 package controller;
 
-public class Broodjes_belegViewController {
+public class KitchenViewController {
 }

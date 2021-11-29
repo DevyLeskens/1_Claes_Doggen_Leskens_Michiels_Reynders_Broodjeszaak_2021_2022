@@ -1,4 +1,4 @@
 package controller;
 
-public class StatistiekViewController {
+public class AdminViewController {
 }
