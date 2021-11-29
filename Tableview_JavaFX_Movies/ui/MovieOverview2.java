@@ -1,6 +1,6 @@
 package ui;
 
-import domain.Movie;
+import model.domain.Movie;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
@@ -12,7 +12,7 @@ import javafx.scene.control.cell.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.*;
-import domain.MovieCompany;
+import model.domain.MovieCompany;
 
 public class MovieOverview2 {	
 	private MovieCompany movieCompany ;

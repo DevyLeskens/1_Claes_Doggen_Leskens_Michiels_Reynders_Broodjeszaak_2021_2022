@@ -1,10 +1,7 @@
-package domain;
+package model.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 public class MovieCompany {
 	private List<Movie> data;

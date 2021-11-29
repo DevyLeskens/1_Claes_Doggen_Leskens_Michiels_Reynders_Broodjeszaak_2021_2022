@@ -2,8 +2,7 @@ package application;
 
 import javafx.application.*;
 import javafx.stage.*;
-import javafx.scene.*;
-import domain.MovieCompany;
+import model.domain.MovieCompany;
 
 import ui.MovieOverview2;
 

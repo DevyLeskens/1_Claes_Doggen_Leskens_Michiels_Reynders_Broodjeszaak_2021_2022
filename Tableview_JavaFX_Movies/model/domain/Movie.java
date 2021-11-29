@@ -1,4 +1,4 @@
-package domain;
+package model.domain;
 
 public class Movie {    
 	private String title;     
@@ -38,7 +38,7 @@ public class Movie {
 	
 	public void setPrice(double price){   
 		if (price < 0 || price > 50.0){
-			throw new IllegalArgumentException("Prijs moet tussen 0 en 50.0 € liggen");
+			throw new IllegalArgumentException("Prijs moet tussen 0 en 50.0 ï¿½ liggen");
 		}
 		this.price = price; 
 	}
@@ -49,7 +49,7 @@ public class Movie {
 	}
 	
 	public String toString(){
-		return getTitle()+"-"+getYear()+ " "+getPrice()+" €";
+		return getTitle()+"-"+getYear()+ " "+getPrice()+" ï¿½";
 	}
 
 }
