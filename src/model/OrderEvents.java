@@ -1,4 +1,12 @@
 package model;
 
 public enum OrderEvents {
+    ADDSANDWICH,
+    DELETESANDWICH,
+    ADDIDENTICALSANDWICH,
+    ADDTOPPING,
+    CANCELSANDWICH,
+    SANDWICHPAYED,
+    SENDTOKITCHEN,
+    PREPARING,
 }
