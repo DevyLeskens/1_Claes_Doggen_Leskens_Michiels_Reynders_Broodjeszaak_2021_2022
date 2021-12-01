@@ -10,11 +10,10 @@ import view.panels.SandwichOverviewPane;
 import view.panels.ToppingOverviewPane;
 
 public class AdminMainPane extends BorderPane {
-	public AdminMainPane(){
+	public AdminMainPane(OrderFacade orderFacade){
 	    TabPane tabPane = new TabPane();
         //Tab spelVerloopTab = new Tab("Spelverloop");
         HBox panes = new HBox();
-        OrderFacade orderFacade = new OrderFacade();
         panes.getChildren().add(new SandwichOverviewPane(orderFacade.getSandwichDatabase().getSandwichsorts().values()));
         panes.getChildren().add(new ToppingOverviewPane(orderFacade.getToppingDatabase().getToppingsorts().values()));
         Tab broodjesTab = new Tab("Broodjes/Beleg",panes);

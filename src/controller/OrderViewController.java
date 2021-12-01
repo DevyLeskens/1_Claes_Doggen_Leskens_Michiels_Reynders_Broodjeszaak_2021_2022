@@ -5,9 +5,9 @@ import view.OrderView;
 
 public class OrderViewController {
 
-    OrderFacade orderFacade = new OrderFacade();
+    OrderFacade orderFacade = OrderFacade.getInstance();
     OrderView orderView = new OrderView();
 
-    
+
 }
 

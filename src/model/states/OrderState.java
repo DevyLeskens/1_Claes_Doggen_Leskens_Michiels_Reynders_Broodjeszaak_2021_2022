@@ -4,7 +4,7 @@ import model.Order;
 
 public abstract class OrderState {
 
-    private Order order = new Order();
+    private final Order order = new Order();
 
     protected void addSanchwich() { throw new OrderStateException("Action not permitted in current state"); }
 

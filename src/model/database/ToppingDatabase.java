@@ -1,8 +1,9 @@
 package model.database;
 
+import model.database.LoadSaveStrategies.LoadSaveStrategyEnum;
+import model.database.LoadSaveStrategies.LoadSaveStrategyFactory;
 import model.domain.Topping;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.TreeMap;
@@ -16,7 +17,7 @@ public class ToppingDatabase {
     private ToppingDatabase(){
         Load();
     }
-
+    /** Singleton design pattern */
     public static ToppingDatabase getInstance(){
         if (toppingDatabase == null) {
             toppingDatabase = new ToppingDatabase();
@@ -29,10 +30,11 @@ public class ToppingDatabase {
     }
 
     public void Load() {
-        try { this.toppingsorts = new ToppingsTekstLoadSaveStrategy().load(new File("src/bestanden/beleg.txt")); }
-        catch (Exception e){ System.out.println(e.getMessage()); }
+        try {
+            this.toppingsorts = LoadSaveStrategyFactory.createLoadSaveStrategy(LoadSaveStrategyEnum.TEXT_TOPPING).load();
+        } catch (Exception e){ System.out.println(e.getMessage()); }
     }
-
+    // dummy methode
     public void save(){
         try {
             FileWriter myWriter = new FileWriter("src/bestanden/broodjes.txt");

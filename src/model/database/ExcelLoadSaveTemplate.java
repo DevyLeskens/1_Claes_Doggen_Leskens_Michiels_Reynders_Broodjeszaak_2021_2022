@@ -1,29 +1,44 @@
 package model.database;
 
+import excel.ExcelPlugin;
+import jxl.read.biff.BiffException;
+import model.database.LoadSaveStrategies.LoadSaveStrategyEnum;
+
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.TreeMap;
-import
+
 
 public abstract class ExcelLoadSaveTemplate<K,V>  {
-    public final TreeMap<K,V> load(File file) throws IOException {
+
+    protected final LoadSaveStrategyEnum loadSaveStrategyEnum;
+
+    protected ExcelLoadSaveTemplate(LoadSaveStrategyEnum loadSaveStrategyEnum) {
+        this.loadSaveStrategyEnum = loadSaveStrategyEnum;
+    }
+
+    protected TreeMap<K,V> load() throws IOException {
         TreeMap<K,V> returnMap = new TreeMap<K,V>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))){
-            String line = reader.readLine();
-            while (line != null && !line.trim().equals("")) {
-                String[] tokens = line.split(",");
-                V element = maakObject(tokens);
-                K key = getKey(tokens);
+        try (BufferedReader reader = new BufferedReader(new FileReader(loadSaveStrategyEnum.getFile()))){
+            ExcelPlugin excelPlugin = new ExcelPlugin();
+            ArrayList<ArrayList<String>> input = excelPlugin.read(loadSaveStrategyEnum.getFile());
+            for (ArrayList<String> line: input) {
+                V element = makeObject(line);
+                K key = getKey(line);
                 returnMap.put(key,element);
-                line = reader.readLine();
             }
+        } catch (BiffException e) {
+            e.printStackTrace();
         }
         return returnMap;
     }
+    protected  void save(){
 
-    abstract V maakObject(String[] tokens);
+    }
 
-    abstract K getKey(String[] tokens);
+    protected abstract V makeObject(ArrayList<String> tokens);
+
+    protected abstract K getKey(ArrayList<String> tokens);
 }
