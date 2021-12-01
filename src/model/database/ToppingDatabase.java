@@ -1,16 +1,50 @@
 package model.database;
 
-import java.util.ArrayList;
+import model.domain.Sandwich;
+import model.domain.Topping;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.TreeMap;
 
 public class ToppingDatabase {
-//    De soorten beleg (naam beleg, prijs, aantal beschikbare porties en aantal verkochte porties) zitten ofwel in een tekstbestand ofwel in een Excel bestand (bepaald in de settings tab van de admin view).
-//    Deze soorten broodjes en beleg worden bij het opstarten van de app ingelezen in een in memory database (een map met broodjes soorten en een map met beleg soorten) die gedurende gans de sessie wordt gebruikt.
-//    Bij het afsluiten van de app worden de voorraden en omzetstatistieken van de broodjes en beleg soorten in het tekst of Excel bestand bijgewerkt.
-//    Soorten broodjes en beleg toevoegen/ verwijderen, voorraad aanpassingen, … gebeuren niet via de app maar rechtstreeks in het tekst/excel bestand.
 
-    private String name;
-    private double price;
-    private int sold, stock;
-    //private ArrayList;
 
+    TreeMap<String, Topping> toppingsorts = new TreeMap<>();
+
+    private static ToppingDatabase toppingDatabase;
+    private ToppingDatabase(){
+        Load();
+    }
+
+    public static ToppingDatabase getInstance(){
+        if (toppingDatabase == null) {
+            toppingDatabase = new ToppingDatabase();
+        }
+        return toppingDatabase;
+    }
+
+    public TreeMap<String, Topping> getToppingsorts() {
+        return toppingsorts;
+    }
+
+    public void Load() {
+        try { this.toppingsorts = new ToppingsTekstLoadSave().load(new File("src/bestanden/broodjes.txt")); }
+        catch (Exception e){ System.out.println(e.getMessage()); }
+    }
+
+    public void save(){
+        try {
+            FileWriter myWriter = new FileWriter("src/bestanden/broodjes.txt");
+            for (Topping topping: toppingsorts.values()) {
+                myWriter.write(topping.getName() + "," + topping.getPrice()+ "," + topping.getStock() + "," + topping.getSold());
+            }
+            myWriter.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
 }

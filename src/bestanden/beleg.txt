@@ -5,4 +5,3 @@ tomaat,0.35,10,0
 feta,0.50,10,0
 komkommer,0.30,10,0
 olijven,0.25,10,0
-

@@ -9,6 +9,7 @@ public class SandwichDatabase {
 
 
     TreeMap<String, Sandwich> sandwichsorts = new TreeMap<>();
+
     private static SandwichDatabase sandwichDatabase;
     private SandwichDatabase(){
         Load();
@@ -25,20 +26,9 @@ public class SandwichDatabase {
     }
 
     public void Load() {
-        try {
-            Scanner myReader = new Scanner(new File("src/bestanden/broodjes.txt"));
-            while (myReader.hasNextLine()) {
-                String[] data = myReader.nextLine().split(",");
-                Sandwich sandwich =  new Sandwich(data[0] , Double.parseDouble(data[1]), Integer.parseInt(data[2]) , Integer.parseInt(data[3]));
-                sandwichsorts.put(data[0],sandwich);
-            }
-            myReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("could not find input file.");
-            e.printStackTrace();
-        }
+        try { this.sandwichsorts = new SandwichesTekstLoadSave().load(new File("src/bestanden/broodjes.txt")); }
+        catch (Exception e){ System.out.println(e.getMessage()); }
     }
-
 
     public void save(){
             try {
