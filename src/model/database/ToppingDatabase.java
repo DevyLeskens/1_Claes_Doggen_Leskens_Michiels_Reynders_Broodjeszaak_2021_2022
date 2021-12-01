@@ -30,7 +30,7 @@ public class ToppingDatabase {
     }
 
     public void Load() {
-        try { this.toppingsorts = new ToppingsTekstLoadSave().load(new File("src/bestanden/broodjes.txt")); }
+        try { this.toppingsorts = new ToppingsTekstLoadSave().load(new File("src/bestanden/beleg.txt")); }
         catch (Exception e){ System.out.println(e.getMessage()); }
     }
 
