@@ -2,7 +2,7 @@ package model.database;
 
 import model.domain.Sandwich;
 
-public class SandwichesTekstLoadSave extends TekstLoadTemplate<String, Sandwich> {
+public class SandwichesTekstLoadSaveSaveStrategy extends TekstLoadSaveTemplate<String, Sandwich> {
 
     @Override
     Sandwich maakObject(String[] tokens) {

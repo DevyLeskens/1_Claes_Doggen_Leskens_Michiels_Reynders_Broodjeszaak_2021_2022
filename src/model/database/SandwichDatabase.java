@@ -26,7 +26,7 @@ public class SandwichDatabase {
     }
 
     public void Load() {
-        try { this.sandwichsorts = new SandwichesTekstLoadSave().load(new File("src/bestanden/broodjes.txt")); }
+        try { this.sandwichsorts = new SandwichesTekstLoadSaveSaveStrategy().load(new File("src/bestanden/broodjes.txt")); }
         catch (Exception e){ System.out.println(e.getMessage()); }
     }
 

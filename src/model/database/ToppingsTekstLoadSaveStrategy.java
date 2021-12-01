@@ -1,9 +1,8 @@
 package model.database;
 
-import model.domain.Sandwich;
 import model.domain.Topping;
 
-public class ToppingsTekstLoadSave extends TekstLoadTemplate<String, Topping>{
+public class ToppingsTekstLoadSaveStrategy extends TekstLoadSaveTemplate<String, Topping> {
     @Override
     Topping maakObject(String[] tokens) {
         return new Topping(tokens[0] , Double.parseDouble(tokens[1]), Integer.parseInt(tokens[2]) , Integer.parseInt(tokens[3]));

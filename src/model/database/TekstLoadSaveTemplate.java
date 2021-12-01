@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-public abstract class TekstLoadTemplate <K,V>{
+public abstract class TekstLoadSaveTemplate<K,V>{
 
     public final TreeMap<K,V> load(File file) throws IOException {
         TreeMap<K,V> returnMap = new TreeMap<K,V>();

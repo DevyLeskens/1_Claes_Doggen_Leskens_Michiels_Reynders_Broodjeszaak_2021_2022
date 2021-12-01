@@ -1,6 +1,5 @@
 package model.database;
 
-import model.domain.Sandwich;
 import model.domain.Topping;
 
 import java.io.File;
@@ -30,7 +29,7 @@ public class ToppingDatabase {
     }
 
     public void Load() {
-        try { this.toppingsorts = new ToppingsTekstLoadSave().load(new File("src/bestanden/beleg.txt")); }
+        try { this.toppingsorts = new ToppingsTekstLoadSaveStrategy().load(new File("src/bestanden/beleg.txt")); }
         catch (Exception e){ System.out.println(e.getMessage()); }
     }
 
