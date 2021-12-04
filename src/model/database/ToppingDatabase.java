@@ -1,7 +1,11 @@
 package model.database;
 
+<<<<<<< HEAD
 import model.database.LoadSaveStrategies.LoadSaveStrategyEnum;
 import model.database.LoadSaveStrategies.LoadSaveStrategyFactory;
+=======
+import model.domain.Sandwich;
+>>>>>>> parent of ae78113... Working on Story 2
 import model.domain.Topping;
 
 import java.io.FileWriter;
@@ -30,9 +34,14 @@ public class ToppingDatabase {
     }
 
     public void Load() {
+<<<<<<< HEAD
         try {
             this.toppingsorts = new LoadSaveStrategyFactory().createLoadSaveStrategy(LoadSaveStrategyEnum.TEXT_TOPPING).load();
         } catch (Exception e){ System.out.println(e.getMessage()); }
+=======
+        try { this.toppingsorts = new ToppingsTekstLoadSave().load(new File("src/bestanden/beleg.txt")); }
+        catch (Exception e){ System.out.println(e.getMessage()); }
+>>>>>>> parent of ae78113... Working on Story 2
     }
     // dummy methode
     public void save(){

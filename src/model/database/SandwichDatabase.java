@@ -29,7 +29,11 @@ public class SandwichDatabase {
     }
 
     public void Load() {
+<<<<<<< HEAD
         try { this.sandwichsorts = new LoadSaveStrategyFactory<String,Sandwich>().createLoadSaveStrategy(LoadSaveStrategyEnum.EXCEL_SANDWICH).load();}
+=======
+        try { this.sandwichsorts = new SandwichesTekstLoadSave().load(new File("src/bestanden/broodjes.txt")); }
+>>>>>>> parent of ae78113... Working on Story 2
         catch (Exception e){ System.out.println(e.getMessage()); }
     }
 
