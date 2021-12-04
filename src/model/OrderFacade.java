@@ -14,8 +14,8 @@ public class OrderFacade implements Subject{
     private final ArrayList<Observer> observers = new ArrayList<>();
 
     private OrderFacade() {
-        this.toppingDatabase = ToppingDatabase.getInstance();
-        this.sandwichDatabase = SandwichDatabase.getInstance();
+        this.toppingDatabase = new ToppingDatabase();
+        this.sandwichDatabase = new SandwichDatabase();
     }
     public static OrderFacade getInstance(){
         if (orderFacade == null) {
@@ -29,20 +29,5 @@ public class OrderFacade implements Subject{
         return sandwichDatabase;
     }
 
-    @Override
-    public void registerObserver(Observer o) {
-        observers.add(o);
-    }
 
-    @Override
-    public void removeObserver(Observer o) {
-        observers.remove(o);
-    }
-
-    @Override
-    public void notifyObservers() {
-        for (Observer observer:observers) {
-            observer.notify();
-        }
-    }
 }
