@@ -6,7 +6,7 @@ import model.domain.Sandwich;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
-public class SandwichExcelLoadSaveSaveStrategy extends ExcelLoadSaveTemplate<String, Sandwich> implements LoadSaveStrategy {
+public class SandwichExcelLoadSaveSaveStrategy extends ExcelLoadSaveTemplate<String, Sandwich> implements LoadSaveStrategy<String, Sandwich> {
 
     public SandwichExcelLoadSaveSaveStrategy(LoadSaveStrategyEnum loadSaveStrategyEnum) {
         super(loadSaveStrategyEnum);

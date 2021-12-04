@@ -5,7 +5,7 @@ import model.domain.Sandwich;
 
 import java.util.TreeMap;
 
-public class SandwichesTextLoadSaveStrategy extends TextLoadSaveTemplate<String, Sandwich> implements LoadSaveStrategy {
+public class SandwichesTextLoadSaveStrategy extends TextLoadSaveTemplate<String, Sandwich> implements LoadSaveStrategy<String, Sandwich> {
 
     public SandwichesTextLoadSaveStrategy(LoadSaveStrategyEnum loadSaveStrategyEnum) {
         super(loadSaveStrategyEnum);

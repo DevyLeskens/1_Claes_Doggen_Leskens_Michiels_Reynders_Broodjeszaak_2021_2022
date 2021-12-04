@@ -5,7 +5,7 @@ import model.domain.Topping;
 
 import java.util.TreeMap;
 
-public class ToppingsTextLoadSaveStrategy extends TextLoadSaveTemplate<String, Topping> implements LoadSaveStrategy {
+public class ToppingsTextLoadSaveStrategy extends TextLoadSaveTemplate<String, Topping> implements LoadSaveStrategy<String, Topping> {
 
     public ToppingsTextLoadSaveStrategy(LoadSaveStrategyEnum loadSaveStrategyEnum) {
         super(loadSaveStrategyEnum);

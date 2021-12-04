@@ -2,8 +2,8 @@ package model.database.LoadSaveStrategies;
 
 import java.util.TreeMap;
 
-public interface LoadSaveStrategy {
+public interface LoadSaveStrategy<K,V>  {
 
-    TreeMap load();
+    TreeMap<K,V> load();
     void save();
 }

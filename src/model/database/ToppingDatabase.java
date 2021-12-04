@@ -31,7 +31,7 @@ public class ToppingDatabase {
 
     public void Load() {
         try {
-            this.toppingsorts = LoadSaveStrategyFactory.createLoadSaveStrategy(LoadSaveStrategyEnum.TEXT_TOPPING).load();
+            this.toppingsorts = new LoadSaveStrategyFactory().createLoadSaveStrategy(LoadSaveStrategyEnum.TEXT_TOPPING).load();
         } catch (Exception e){ System.out.println(e.getMessage()); }
     }
     // dummy methode
