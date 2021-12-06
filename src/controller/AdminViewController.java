@@ -1,7 +1,7 @@
 package controller;
 
 import model.OrderFacade;
-import view.AdminView;
+import view.adminPane.AdminView;
 
 import java.util.Observable;
 import java.util.Observer;

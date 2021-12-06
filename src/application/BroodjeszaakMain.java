@@ -1,19 +1,15 @@
 package application;
 
 import controller.AdminViewController;
-import controller.KitchenViewController;
 import controller.OrderViewController;
-import excel.ExcelPlugin;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import jxl.read.biff.BiffException;
 import model.OrderFacade;
-import model.database.SandwichDatabase;
-import view.AdminView;
+import view.adminPane.AdminView;
 import view.KitchenView;
-import view.OrderView;
+import view.orderMainPane.OrderView;
 
-import java.io.File;
 import java.io.IOException;
 
 
@@ -27,7 +23,9 @@ public class BroodjeszaakMain extends Application {
 		AdminView adminView = new AdminView(adminViewController);
 
 		KitchenView kitchenView = new KitchenView();
-		OrderView orderView = new OrderView();
+
+		OrderViewController orderViewController = new OrderViewController(orderFacade);
+		OrderView orderView = new OrderView(orderViewController);
 
 	}
 

@@ -1,13 +1,32 @@
 package controller;
 
 import model.OrderFacade;
-import view.OrderView;
+import view.adminPane.AdminView;
+import view.orderMainPane.OrderView;
 
-public class OrderViewController {
+import java.util.Observable;
+import java.util.Observer;
 
-    OrderFacade orderFacade = OrderFacade.getInstance();
-    OrderView orderView = new OrderView();
+public class OrderViewController implements Observer {
+
+    private OrderView orderView;
+    private final OrderFacade orderFacade = OrderFacade.getInstance();
+
+    public OrderViewController(OrderFacade orderFacade) {
+        orderFacade.registerObserver(this);
+    }
+
+    public void setView(OrderView view) {
+        this.orderView = view;
+    }
 
 
+    public OrderFacade getOrderFacade() {
+        return orderFacade;
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+    }
 }
 

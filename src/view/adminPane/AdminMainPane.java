@@ -1,4 +1,4 @@
-package view;
+package view.adminPane;
 
 
 import javafx.scene.control.Tab;
@@ -6,8 +6,6 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import model.OrderFacade;
-import view.panels.SandwichOverviewPane;
-import view.panels.ToppingOverviewPane;
 
 public class AdminMainPane extends BorderPane {
 	public AdminMainPane(OrderFacade orderFacade){

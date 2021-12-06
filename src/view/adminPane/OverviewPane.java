@@ -1,4 +1,4 @@
-package view.panels;
+package view.adminPane;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

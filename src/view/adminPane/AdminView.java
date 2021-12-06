@@ -1,4 +1,4 @@
-package view;
+package view.adminPane;
 
 import controller.AdminViewController;
 import javafx.scene.Group;
