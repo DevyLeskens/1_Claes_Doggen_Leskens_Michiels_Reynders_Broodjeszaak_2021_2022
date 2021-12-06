@@ -8,7 +8,13 @@ public class Topping {
     int sold;
 
     public Topping(String name, double price, int stock, int sold) {
+        if(name == null || name.trim().isEmpty()){
+            throw new IllegalArgumentException("name can not be empty");
+        }
         this.name = name;
+        if(price == 0){
+            throw new IllegalArgumentException("name can not be empty");
+        }
         this.price = price;
         this.stock = stock;
         this.sold = sold;

@@ -1,5 +1,7 @@
 package model.database;
 
+import model.database.LoadSaveStrategies.LoadSaveStrategyEnum;
+import model.database.LoadSaveStrategies.LoadSaveStrategyFactory;
 import model.domain.Sandwich;
 
 import java.io.*;
@@ -14,6 +16,7 @@ public class SandwichDatabase {
     private SandwichDatabase(){
         Load();
     }
+    /** Singleton design pattern */
     public static SandwichDatabase getInstance(){
         if (sandwichDatabase == null) {
             sandwichDatabase = new SandwichDatabase();
@@ -26,13 +29,14 @@ public class SandwichDatabase {
     }
 
     public void Load() {
-        try { this.sandwichsorts = new SandwichesTekstLoadSave().load(new File("src/bestanden/broodjes.txt")); }
+        try { this.sandwichsorts = new LoadSaveStrategyFactory<String,Sandwich>().createLoadSaveStrategy(LoadSaveStrategyEnum.EXCEL_SANDWICH).load();}
         catch (Exception e){ System.out.println(e.getMessage()); }
     }
 
+
     public void save(){
             try {
-                FileWriter myWriter = new FileWriter("src/bestanden/broodjes.txt");
+                FileWriter myWriter = new FileWriter("src/bestanden/broodjes.xls");
                 for (Sandwich sandwich: sandwichsorts.values()) {
                     myWriter.write(sandwich.getName() + "," + sandwich.getPrice()+ "," + sandwich.getStock() + "," + sandwich.getSold());
                 }

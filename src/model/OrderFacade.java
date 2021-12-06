@@ -2,6 +2,7 @@ package model;
 
 import model.database.SandwichDatabase;
 import model.database.ToppingDatabase;
+import model.domain.Topping;
 
 import java.util.ArrayList;
 import java.util.Observer;
@@ -14,8 +15,8 @@ public class OrderFacade implements Subject{
     private final ArrayList<Observer> observers = new ArrayList<>();
 
     private OrderFacade() {
-        this.toppingDatabase = new ToppingDatabase();
-        this.sandwichDatabase = new SandwichDatabase();
+        this.toppingDatabase = ToppingDatabase.getInstance();
+        this.sandwichDatabase = SandwichDatabase.getInstance();
     }
     public static OrderFacade getInstance(){
         if (orderFacade == null) {
@@ -30,4 +31,18 @@ public class OrderFacade implements Subject{
     }
 
 
+    @Override
+    public void registerObserver(Observer o) {
+
+    }
+
+    @Override
+    public void removeObserver(Observer o) {
+
+    }
+
+    @Override
+    public void notifyObservers() {
+
+    }
 }
