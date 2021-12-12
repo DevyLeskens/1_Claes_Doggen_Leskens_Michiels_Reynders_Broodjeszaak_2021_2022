@@ -1,9 +1,9 @@
 package model.database.LoadSaveStrategies;
 
-public class LoadSaveStrategyFactory<K,V> {
-    public LoadSaveStrategy<K,V> createLoadSaveStrategy(LoadSaveStrategyEnum filetypeEnum){
+public class LoadSaveStrategyFactory {
+    public static LoadSaveStrategy createLoadSaveStrategy(LoadSaveStrategyEnum filetypeEnum){
         String klasseNaam = filetypeEnum.getLocatie();
-        LoadSaveStrategy<K,V> fileInterface = null;
+        LoadSaveStrategy fileInterface = null;
         try{
             Class dbClass = Class.forName(klasseNaam);
             Object dbObject = dbClass.getConstructor(LoadSaveStrategyEnum.class).newInstance(filetypeEnum);

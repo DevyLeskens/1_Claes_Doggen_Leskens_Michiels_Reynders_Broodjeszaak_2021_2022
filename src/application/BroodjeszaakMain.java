@@ -13,7 +13,7 @@ import view.orderMainPane.OrderView;
 import java.io.IOException;
 
 
-public class BroodjeszaakMain extends Application {
+public class 	BroodjeszaakMain extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException, BiffException {
 

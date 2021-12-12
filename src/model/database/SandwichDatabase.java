@@ -29,7 +29,7 @@ public class SandwichDatabase {
     }
 
     public void Load() {
-        try { this.sandwichsorts = new LoadSaveStrategyFactory<String,Sandwich>().createLoadSaveStrategy(LoadSaveStrategyEnum.EXCEL_SANDWICH).load();}
+        try { this.sandwichsorts = LoadSaveStrategyFactory.createLoadSaveStrategy(LoadSaveStrategyEnum.EXCEL_SANDWICH).load();}
         catch (Exception e){ System.out.println(e.getMessage()); }
     }
 
