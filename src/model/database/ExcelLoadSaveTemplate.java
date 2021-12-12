@@ -19,7 +19,7 @@ public abstract class ExcelLoadSaveTemplate<K,V>  {
         this.loadSaveStrategyEnum = loadSaveStrategyEnum;
     }
 
-    protected TreeMap<K,V> load() throws IOException {
+    protected TreeMap<K,V> load() throws IOException, BiffException {
         TreeMap<K,V> returnMap = new TreeMap<K,V>();
         try (BufferedReader reader = new BufferedReader(new FileReader(loadSaveStrategyEnum.getFile()))){
             ExcelPlugin excelPlugin = new ExcelPlugin();
