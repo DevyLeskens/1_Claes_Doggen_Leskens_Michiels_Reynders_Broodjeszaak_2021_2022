@@ -3,18 +3,23 @@ package model;
 import model.database.SandwichDatabase;
 import model.database.ToppingDatabase;
 
-import java.util.ArrayList;
-import java.util.Observer;
+import java.util.*;
 
 public class OrderFacade implements Subject{
     private static OrderFacade orderFacade;
     private final ToppingDatabase toppingDatabase;
     private final SandwichDatabase sandwichDatabase;
-    private final ArrayList<Observer> observers = new ArrayList<>();
+    private Order order;
+    private final Map<OrderEvent, List<Observer>> observers = new HashMap<>();
+
 
     private OrderFacade() {
         this.toppingDatabase = ToppingDatabase.getInstance();
         this.sandwichDatabase = SandwichDatabase.getInstance();
+
+        for (OrderEvent orderEvent: OrderEvent.values()) {
+            observers.put(orderEvent, new ArrayList<Observer>());
+        }
     }
     /* ----------- singleton-------------*/
     public static OrderFacade getInstance(){
@@ -31,13 +36,13 @@ public class OrderFacade implements Subject{
 
 
     @Override
-    public void registerObserver(Observer o) {
-
+    public void registerObserver(OrderEvent orderEvent, Observer observer) {
+        observers.get(orderEvent).add(observer);
     }
 
     @Override
-    public void removeObserver(Observer o) {
-
+    public void removeObserver(OrderEvent orderEvent, Observer o) {
+        observers.get(orderEvent).(observer);
     }
 
     @Override
