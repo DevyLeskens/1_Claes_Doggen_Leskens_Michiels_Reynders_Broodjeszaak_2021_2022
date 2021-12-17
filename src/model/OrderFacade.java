@@ -66,6 +66,7 @@ public class OrderFacade implements Subject {
     public void addOrderline(String sandwichName) {
         Sandwich sandwich = sandwichDatabase.getSandwich(sandwichName);
         order.addOrderLine(sandwich);
+        notifyObservers(OrderEvent.ADD_SANDWICH);
     }
 
     public List<OrderLine> getOrderLines() {

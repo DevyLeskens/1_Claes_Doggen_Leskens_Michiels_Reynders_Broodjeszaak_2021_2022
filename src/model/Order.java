@@ -20,4 +20,11 @@ public class Order {
     public void addOrderLine(Sandwich sandwich) {
         this.orderLines.add(new OrderLine(sandwich));
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderLines=" + orderLines +
+                '}';
+    }
 }

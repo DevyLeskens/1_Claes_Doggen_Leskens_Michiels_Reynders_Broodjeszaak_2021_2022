@@ -14,7 +14,7 @@ public class AdminViewController implements Observer {
     private final OrderFacade orderFacade = OrderFacade.getInstance();
 
     public AdminViewController(OrderFacade orderFacade) {
-        orderFacade.registerObserver(OrderEvent.ADD_SANDWICH, this);
+
     }
 
     public void setView(AdminView view) {

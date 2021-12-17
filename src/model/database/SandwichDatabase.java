@@ -65,4 +65,11 @@ public class SandwichDatabase {
         }
         return stockListSandwiches;
     }
+
+    @Override
+    public String toString() {
+        return "SandwichDatabase{" +
+                "sandwichsorts=" + sandwichsorts +
+                '}';
+    }
 }

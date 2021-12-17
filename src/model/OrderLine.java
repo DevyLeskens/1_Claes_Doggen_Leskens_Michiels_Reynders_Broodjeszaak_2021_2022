@@ -48,4 +48,14 @@ public class OrderLine {
     public void setToppingssort(ArrayList<Topping> toppingssort) {
         this.toppingssort = toppingssort;
     }
+
+    @Override
+    public String toString() {
+        return "OrderLine{" +
+                "sandwichname='" + sandwichname + '\'' +
+                ", toppingnames=" + toppingnames +
+                ", sandwich=" + sandwich +
+                ", toppingssort=" + toppingssort +
+                '}';
+    }
 }

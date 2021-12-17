@@ -48,4 +48,11 @@ public class ToppingDatabase {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public String toString() {
+        return "ToppingDatabase{" +
+                "toppingsorts=" + toppingsorts +
+                '}';
+    }
 }

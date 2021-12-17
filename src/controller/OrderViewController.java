@@ -45,17 +45,18 @@ public class OrderViewController implements Observer {
         orderView.updateOrderLines(getOrderLines());
     }
 
-    public HashMap<String, Integer> getStockListSandwiches(){
+    public HashMap<String, Integer> getStockListSandwiches() {
         return orderFacade.getStockListSandwiches();
     }
 
-    public void updateStatusSandwichesButtons(){
+    public void updateStatusSandwichesButtons() {
         orderView.updateStatusSandwichesButtons(getStockListSandwiches());
     }
 
     @Override
     public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order) {
-        System.out.println(toppingDatabase.toString() + " " + sandwichDatabase.toString() + " " + order.toString());
+        System.out.println("NotifyObserversReport:\n----------------------\n - " + order.toString() + "\n - " +
+                sandwichDatabase.toString() + "\n - " + toppingDatabase.toString());
     }
 }
 
