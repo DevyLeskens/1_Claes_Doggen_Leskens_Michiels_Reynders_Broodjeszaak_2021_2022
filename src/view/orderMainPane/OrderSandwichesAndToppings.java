@@ -21,24 +21,28 @@ public class OrderSandwichesAndToppings extends VBox {
     public void setSandwichesButtons(){
         for (Sandwich sandwich: OrderFacade.getInstance().getSandwichDatabase().getSandwichsorts().values()) {
             Button sandwichType = new Button(sandwich.getName());
+            //css
             sandwichType.setMinWidth(110);
             sandwichType.setMinHeight(40);
             sandwichType.setBackground(new Background((new BackgroundFill(Color.WHITE,new CornerRadii(5),new Insets(0)))));
             sandwiches.setHgap(10);
             sandwiches.setVgap(10);
             sandwiches.setPadding(new Insets(10,10,10,10));
+            //css
             sandwiches.getChildren().add(sandwichType);
         }
     }
     public void setToppingsButtons(){
         for (Topping toppping: OrderFacade.getInstance().getToppingDatabase().getToppingsorts().values()) {
             Button toppingButton = new Button(toppping.getName());
+            //css
             toppingButton.setMinWidth(110);
             toppingButton.setMinHeight(40);
             toppingButton.setBackground(new Background(new BackgroundFill(Color.YELLOW,new CornerRadii(5),new Insets(0))));
             toppings.setHgap(10);
             toppings.setVgap(10);
             toppings.setPadding(new Insets(10,10,30,10));
+            //css
             toppings.getChildren().add(toppingButton);
         }
     }
