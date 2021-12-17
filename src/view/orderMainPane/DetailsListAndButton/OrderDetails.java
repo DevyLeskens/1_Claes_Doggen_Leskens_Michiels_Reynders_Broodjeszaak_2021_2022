@@ -1,9 +1,9 @@
-package view.orderMainPane;
+package view.orderMainPane.DetailsListAndButton;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import view.orderMainPane.DetailsListAndButton.OrderDetailsListAndButton;
 
 public class OrderDetails extends HBox {
     protected TableView tableView;

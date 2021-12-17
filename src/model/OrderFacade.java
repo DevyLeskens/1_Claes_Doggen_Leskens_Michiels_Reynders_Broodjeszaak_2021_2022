@@ -18,6 +18,7 @@ public class OrderFacade implements Subject{
         this.toppingDatabase = ToppingDatabase.getInstance();
         this.sandwichDatabase = SandwichDatabase.getInstance();
     }
+    /* ----------- singleton-------------*/
     public static OrderFacade getInstance(){
         if (orderFacade == null) {
             orderFacade = new OrderFacade();

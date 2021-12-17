@@ -1,4 +1,4 @@
-package view.orderMainPane;
+package view.orderMainPane.DetailsListAndButton;
 
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
