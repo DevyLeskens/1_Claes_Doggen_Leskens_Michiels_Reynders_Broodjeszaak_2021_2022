@@ -12,6 +12,7 @@ public class OrderViewController implements Observer {
     private OrderView orderView;
     private final OrderFacade orderFacade = OrderFacade.getInstance();
 
+
     public OrderViewController(OrderFacade orderFacade) {
         orderFacade.registerObserver(this);
     }
@@ -27,6 +28,9 @@ public class OrderViewController implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
+
     }
+
 }
+
 

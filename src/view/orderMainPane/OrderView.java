@@ -26,6 +26,7 @@ public class OrderView {
 		root.getChildren().add(vBox);
 		stage.setScene(scene);
 		stage.sizeToScene();			
-		stage.show();		
+		stage.show();
+		orderViewController.setView(this); //observer
 	}
 }

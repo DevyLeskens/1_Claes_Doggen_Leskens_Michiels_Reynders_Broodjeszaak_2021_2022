@@ -2,13 +2,11 @@ package model;
 
 import model.database.SandwichDatabase;
 import model.database.ToppingDatabase;
-import model.domain.Topping;
 
 import java.util.ArrayList;
 import java.util.Observer;
 
 public class OrderFacade implements Subject{
-
     private static OrderFacade orderFacade;
     private final ToppingDatabase toppingDatabase;
     private final SandwichDatabase sandwichDatabase;
@@ -43,7 +41,7 @@ public class OrderFacade implements Subject{
     }
 
     @Override
-    public void notifyObservers() {
+    public void notifyObservers(int count) {
 
     }
 }

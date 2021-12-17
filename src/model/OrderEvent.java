@@ -1,7 +1,7 @@
 package model;
 
-public enum OrderEvents {
-    TOEVOEGEN_BROODJE,
+public enum OrderEvent {
+    ADD_SANDWICH,
     VERWIJDER_BROODJE,
     TOEVOEGEN_IDENTIEK_BROODJE,
     TOEVOEGEN_BELEG,
