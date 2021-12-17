@@ -1,5 +1,15 @@
 package model.states;
 
-public class StateInOrder extends OrderState{
+import model.Order;
 
+public class StateInOrder extends OrderState {
+
+    public StateInOrder(Order order) {
+        super(order);
+    }
+
+    @Override
+    public void addSanchwich() {
+
+    }
 }

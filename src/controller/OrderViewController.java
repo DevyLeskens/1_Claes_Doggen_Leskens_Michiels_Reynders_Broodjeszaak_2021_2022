@@ -56,7 +56,7 @@ public class OrderViewController implements Observer {
     @Override
     public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order) {
         System.out.println("NotifyObserversReport:\n----------------------\n - " + order.toString() + "\n - " +
-                sandwichDatabase.toString() + "\n - " + toppingDatabase.toString());
+                sandwichDatabase.toString() + "\n - " + toppingDatabase.toString() + "\n");
     }
 }
 
