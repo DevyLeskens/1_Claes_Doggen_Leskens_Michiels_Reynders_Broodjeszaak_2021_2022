@@ -14,7 +14,7 @@ public class AdminView {
 	public AdminView(AdminViewController adminViewController){
 		stage.setTitle("ADMIN VIEW");
 		stage.initStyle(StageStyle.UTILITY);
-		stage.setX(680);
+		stage.setX(880);
 		stage.setY(20);
 		Group root = new Group();
 		Scene scene = new Scene(root, 650, 400);

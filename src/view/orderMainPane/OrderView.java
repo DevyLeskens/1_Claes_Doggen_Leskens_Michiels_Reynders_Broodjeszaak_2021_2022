@@ -1,6 +1,7 @@
 package view.orderMainPane;
 
 import controller.OrderViewController;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -19,13 +20,13 @@ public class OrderView {
 		stage.setX(20);
 		stage.setY(20);
 		Group root = new Group();
-		Scene scene = new Scene(root, 650, 650);
+		Scene scene = new Scene(root, 850, 650);
 		VBox vBox = new OrderMainPane(orderViewController.getOrderFacade());
 		vBox.prefHeightProperty().bind(scene.heightProperty());
 		vBox.prefWidthProperty().bind(scene.widthProperty());
 		root.getChildren().add(vBox);
 		stage.setScene(scene);
 		stage.sizeToScene();			
-		stage.show();		
+		stage.show();
 	}
 }
