@@ -11,8 +11,10 @@ public class OrderLine {
     Sandwich sandwich;
     ArrayList<Topping> toppingssort;
 
-    public OrderLine(){
-
+    public OrderLine(Sandwich sandwich){
+        setSandwich(sandwich);
+        setSandwichname(sandwich.getName());
+        sandwich.updateStock();
     }
 
     public String getSandwichname() {

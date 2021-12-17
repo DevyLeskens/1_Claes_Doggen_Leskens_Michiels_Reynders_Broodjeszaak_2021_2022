@@ -1,12 +1,16 @@
 package controller;
 
+import model.Order;
 import model.OrderEvent;
 import model.OrderFacade;
+import model.OrderLine;
+import model.database.SandwichDatabase;
+import model.database.ToppingDatabase;
 import view.adminPane.AdminView;
 import view.orderMainPane.OrderView;
 
-import java.util.Observable;
-import java.util.Observer;
+import java.util.HashMap;
+import java.util.List;
 
 public class OrderViewController implements Observer {
 
@@ -27,11 +31,32 @@ public class OrderViewController implements Observer {
         return orderFacade;
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-
+    public void addOrderLine(String sandwichName) {
+        orderFacade.addOrderline(sandwichName);
+        updateOrderLines();
+        updateStatusSandwichesButtons();
     }
 
+    public List<OrderLine> getOrderLines() {
+        return orderFacade.getOrderLines();
+    }
+
+    public void updateOrderLines() {
+        orderView.updateOrderLines(getOrderLines());
+    }
+
+    public HashMap<String, Integer> getStockListSandwiches(){
+        return orderFacade.getStockListSandwiches();
+    }
+
+    public void updateStatusSandwichesButtons(){
+        orderView.updateStatusSandwichesButtons(getStockListSandwiches());
+    }
+
+    @Override
+    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order) {
+        System.out.println(toppingDatabase.toString() + " " + sandwichDatabase.toString() + " " + order.toString());
+    }
 }
 
 

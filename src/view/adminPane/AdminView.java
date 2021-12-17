@@ -25,6 +25,6 @@ public class AdminView {
 		stage.setScene(scene);
 		stage.sizeToScene();
 		stage.show();
-		adminViewController.setView(this); // Observer
+		adminViewController.setView(this); // controller.Observer
 	}
 }

@@ -1,5 +1,6 @@
 package view.orderMainPane;
 
+import controller.OrderViewController;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -8,12 +9,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class OrderFooter extends HBox {
+    OrderViewController orderViewController;
     Button endOrder= new Button("End order");
     Label bill = new Label("Amount:");
     Button pay = new Button("Pay");
     Button toKitchen = new Button("To kitchen");
 
-    public OrderFooter(){
+    public OrderFooter(OrderViewController orderViewController){
         //css
         endOrder.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, new CornerRadii(5), new Insets(0))));
         endOrder.setFont(Font.font("Verdana",15));

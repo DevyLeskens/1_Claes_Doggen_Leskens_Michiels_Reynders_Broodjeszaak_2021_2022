@@ -42,7 +42,6 @@ public abstract class OverviewPane<E> extends GridPane {
             tableview.getColumns().add(col);
         }
     }
-
     public void refresh(Collection<E> lijst){
         item = FXCollections.observableArrayList(lijst);
         this.tableView.setItems(item);

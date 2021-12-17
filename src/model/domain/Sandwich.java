@@ -7,8 +7,8 @@ import java.util.ArrayList;
 public class Sandwich extends Product {
 
 
-    public Sandwich(String name, double price, int stock, int sold){
-        super(name,price,stock,sold);
+    public Sandwich(String name, double price, int stock, int sold) {
+        super(name, price, stock, sold);
 
     }
 
@@ -21,4 +21,5 @@ public class Sandwich extends Product {
                 ", sold=" + sold +
                 '}';
     }
+
 }

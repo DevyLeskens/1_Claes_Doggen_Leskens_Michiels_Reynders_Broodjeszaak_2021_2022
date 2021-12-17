@@ -1,16 +1,23 @@
 package model;
 
+import model.database.SandwichDatabase;
+import model.domain.Sandwich;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-    private List<OrderLine> orders;
+    ArrayList<OrderLine> orderLines;
 
-
-    public List<OrderLine> getOrders() {
-        return orders;
+    public Order() {
+        orderLines = new ArrayList<>();
     }
 
-    public void addOrderLine(OrderLine orders) {
-        this.orders.add(orders);
+    public List<OrderLine> getOrderLines() {
+        return orderLines;
+    }
+
+    public void addOrderLine(Sandwich sandwich) {
+        this.orderLines.add(new OrderLine(sandwich));
     }
 }

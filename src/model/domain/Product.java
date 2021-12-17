@@ -8,7 +8,6 @@ public abstract class Product {
     public int sold;
 
     public Product(String name, double price, int stock, int sold) {
-
         setName(name);
         setPrice(price);
         setStock(stock);
@@ -20,7 +19,9 @@ public abstract class Product {
     }
 
     public void setName(String name) {
-        if(name.isEmpty() || name.trim().isEmpty()){throw new DomainException("Name cannot be empty");}
+        if (name.isEmpty() || name.trim().isEmpty()) {
+            throw new DomainException("Name cannot be empty");
+        }
         this.name = name;
     }
 
@@ -29,7 +30,9 @@ public abstract class Product {
     }
 
     public void setPrice(double price) {
-        if(price < 0){throw new DomainException("Price can not be negative");}
+        if (price < 0) {
+            throw new DomainException("Price can not be negative");
+        }
         this.price = price;
     }
 
@@ -38,7 +41,9 @@ public abstract class Product {
     }
 
     public void setStock(int stock) {
-        if(stock < 0){throw new DomainException("Stock can not be negative");}
+        if (stock < 0) {
+            throw new DomainException("Stock can not be negative");
+        }
         this.stock = stock;
     }
 
@@ -47,9 +52,17 @@ public abstract class Product {
     }
 
     public void setSold(int sold) {
-        if(sold < 0){throw new DomainException("Sold can not be negative");}
+        if (sold < 0) {
+            throw new DomainException("Sold can not be negative");
+        }
         this.sold = sold;
     }
 
-
+    public void updateStock() {
+        if (stock > 0) {
+            stock--;
+        } else {
+            throw new IllegalArgumentException("There is currently no stock available.");
+        }
+    }
 }

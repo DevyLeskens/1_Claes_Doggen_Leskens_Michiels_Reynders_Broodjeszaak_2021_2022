@@ -1,11 +1,12 @@
 package controller;
 
+import model.Order;
 import model.OrderEvent;
 import model.OrderFacade;
+import model.database.SandwichDatabase;
+import model.database.ToppingDatabase;
 import view.adminPane.AdminView;
 
-import java.util.Observable;
-import java.util.Observer;
 
 public class AdminViewController implements Observer {
 
@@ -26,7 +27,7 @@ public class AdminViewController implements Observer {
     }
 
     @Override
-    public void update(Observable o, Object arg) {
-
+    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order) {
+        System.out.println(toppingDatabase.toString() + " " + sandwichDatabase.toString() + " " + order.toString());
     }
 }

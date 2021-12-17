@@ -2,8 +2,14 @@ package model;
 
 import model.database.SandwichDatabase;
 import model.database.ToppingDatabase;
+import model.domain.Sandwich;
 
-import java.util.*;
+import controller.Observer;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class OrderFacade implements Subject {
     private static OrderFacade orderFacade;
@@ -16,9 +22,10 @@ public class OrderFacade implements Subject {
     private OrderFacade() {
         this.toppingDatabase = ToppingDatabase.getInstance();
         this.sandwichDatabase = SandwichDatabase.getInstance();
+        this.order = new Order();
 
         for (OrderEvent orderEvent : OrderEvent.values()) {
-            observers.put(orderEvent, new ArrayList<Observer>());
+            observers.put(orderEvent, new ArrayList<>());
         }
     }
 
@@ -50,7 +57,23 @@ public class OrderFacade implements Subject {
     }
 
     @Override
-    public void notifyObservers(int count) {
-
+    public void notifyObservers(OrderEvent orderEvent) {
+        for (Observer observer : observers.get(orderEvent)) {
+            observer.update(toppingDatabase, sandwichDatabase, order);
+        }
     }
+
+    public void addOrderline(String sandwichName) {
+        Sandwich sandwich = sandwichDatabase.getSandwich(sandwichName);
+        order.addOrderLine(sandwich);
+    }
+
+    public List<OrderLine> getOrderLines() {
+        return order.getOrderLines();
+    }
+
+    public HashMap<String, Integer> getStockListSandwiches() {
+        return sandwichDatabase.getStockListSandwiches();
+    }
+
 }

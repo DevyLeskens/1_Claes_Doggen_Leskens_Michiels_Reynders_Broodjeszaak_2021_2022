@@ -1,12 +1,14 @@
 package model;
 
-import java.util.Observer;
+import controller.Observer;
 
 
 public interface Subject {
 
     public void registerObserver(OrderEvent orderevent, Observer o);
-    public void removeObserver(OrderEvent orderEvent,Observer o);
-    public void notifyObservers(int count);
+
+    public void removeObserver(OrderEvent orderEvent, Observer o);
+
+    public void notifyObservers(OrderEvent orderEvent);
 
 }

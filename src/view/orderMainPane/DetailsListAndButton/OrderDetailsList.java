@@ -1,5 +1,6 @@
 package view.orderMainPane.DetailsListAndButton;
 
+import controller.OrderViewController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.*;
@@ -8,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 
 public class OrderDetailsList extends VBox {
+    OrderViewController orderViewController;
     Label select = new Label("select line in list");
     Button addSameSandwich= new Button("Add identical sandwich");
     Button deleteSandwich = new Button("Delete sandwich");

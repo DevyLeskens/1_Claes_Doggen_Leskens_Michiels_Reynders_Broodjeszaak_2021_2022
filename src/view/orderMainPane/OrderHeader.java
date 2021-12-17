@@ -1,5 +1,6 @@
 package view.orderMainPane;
 
+import controller.OrderViewController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -10,11 +11,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class OrderHeader extends HBox {
+    OrderViewController orderViewController;
     Button newOrder = new Button("New order");
     Label followNr =  new Label("Follownr");
     ComboBox combobox= new ComboBox();
 
-    public OrderHeader(){
+    public OrderHeader(OrderViewController orderViewController){
         //css
         newOrder.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY,new CornerRadii(5),new Insets(0))));
         newOrder.setFont(Font.font("Verdana",25));
