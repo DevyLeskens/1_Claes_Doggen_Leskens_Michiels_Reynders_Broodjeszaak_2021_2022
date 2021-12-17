@@ -8,5 +8,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="jxl-2.6.123" level="project" />
+    <orderEntry type="library" name="ExcelPlugin3" level="project" />
   </component>
 </module>

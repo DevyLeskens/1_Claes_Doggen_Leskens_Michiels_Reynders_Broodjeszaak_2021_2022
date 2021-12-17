@@ -1,5 +1,6 @@
 package controller;
 
+import model.OrderEvent;
 import model.OrderFacade;
 import view.adminPane.AdminView;
 import view.orderMainPane.OrderView;
@@ -14,7 +15,7 @@ public class OrderViewController implements Observer {
 
 
     public OrderViewController(OrderFacade orderFacade) {
-        orderFacade.registerObserver(this);
+        orderFacade.registerObserver(OrderEvent.ADD_SANDWICH, this);
     }
 
     public void setView(OrderView view) {

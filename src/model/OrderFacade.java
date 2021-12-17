@@ -5,7 +5,7 @@ import model.database.ToppingDatabase;
 
 import java.util.*;
 
-public class OrderFacade implements Subject{
+public class OrderFacade implements Subject {
     private static OrderFacade orderFacade;
     private final ToppingDatabase toppingDatabase;
     private final SandwichDatabase sandwichDatabase;
@@ -17,19 +17,23 @@ public class OrderFacade implements Subject{
         this.toppingDatabase = ToppingDatabase.getInstance();
         this.sandwichDatabase = SandwichDatabase.getInstance();
 
-        for (OrderEvent orderEvent: OrderEvent.values()) {
+        for (OrderEvent orderEvent : OrderEvent.values()) {
             observers.put(orderEvent, new ArrayList<Observer>());
         }
     }
+
     /* ----------- singleton-------------*/
-    public static OrderFacade getInstance(){
+    public static OrderFacade getInstance() {
         if (orderFacade == null) {
             orderFacade = new OrderFacade();
         }
         return orderFacade;
     }
 
-    public ToppingDatabase getToppingDatabase() { return toppingDatabase; }
+    public ToppingDatabase getToppingDatabase() {
+        return toppingDatabase;
+    }
+
     public SandwichDatabase getSandwichDatabase() {
         return sandwichDatabase;
     }
@@ -42,7 +46,7 @@ public class OrderFacade implements Subject{
 
     @Override
     public void removeObserver(OrderEvent orderEvent, Observer o) {
-        observers.get(orderEvent).(observer);
+        observers.get(orderEvent).remove(o);
     }
 
     @Override

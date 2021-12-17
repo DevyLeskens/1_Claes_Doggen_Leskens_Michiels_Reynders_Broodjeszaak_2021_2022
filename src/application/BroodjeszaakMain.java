@@ -13,24 +13,24 @@ import view.orderMainPane.OrderView;
 import java.io.IOException;
 
 
-public class 	BroodjeszaakMain extends Application {
-	@Override
-	public void start(Stage primaryStage) throws IOException, BiffException {
+public class BroodjeszaakMain extends Application {
+    @Override
+    public void start(Stage primaryStage) throws IOException, BiffException {
 
-		OrderFacade orderFacade = OrderFacade.getInstance();
+        OrderFacade orderFacade = OrderFacade.getInstance();
 
-		AdminViewController adminViewController = new AdminViewController(orderFacade);
-		AdminView adminView = new AdminView(adminViewController);
+        AdminViewController adminViewController = new AdminViewController(orderFacade);
+        AdminView adminView = new AdminView(adminViewController);
 
-		KitchenView kitchenView = new KitchenView();
+        KitchenView kitchenView = new KitchenView();
 
-		OrderViewController orderViewController = new OrderViewController(orderFacade);
-		OrderView orderView = new OrderView(orderViewController);
+        OrderViewController orderViewController = new OrderViewController(orderFacade);
+        OrderView orderView = new OrderView(orderViewController);
 
-	}
+    }
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+    public static void main(String[] args) {
+        launch(args);
+    }
 
 }
