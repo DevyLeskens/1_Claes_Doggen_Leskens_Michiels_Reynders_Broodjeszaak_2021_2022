@@ -9,10 +9,28 @@ public class StateInOrder extends OrderState {
     }
 
     @Override
-    public void addSanchwich() {
+    public void addSandwich() {
     }
+
+    @Override
+    public void deleteSandwich() {
+    }
+
+    @Override
+    public void addIdenticalSandwich() {
+    }
+
+    @Override
+    public void addTopping() {
+    }
+
     @Override
     public void terminate(){
          order.setOrderState(order.getStateIsTerminated());
+    }
+
+    @Override
+    public void cancelOrder(){
+        order.setOrderState(order.getStateIsCanceled());
     }
 }

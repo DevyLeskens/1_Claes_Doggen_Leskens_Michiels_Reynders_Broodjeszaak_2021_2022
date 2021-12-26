@@ -6,4 +6,5 @@ public class StateIsPrepared extends OrderState{
     public StateIsPrepared(Order order) {
         super(order);
     }
+
 }

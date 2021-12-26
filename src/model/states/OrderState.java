@@ -10,11 +10,11 @@ public abstract class OrderState {
         this.order = order;
     }
 
-    public void addSanchwich() {
+    public void addSandwich() {
         throw new OrderStateException("Action not permitted in current state");
     }
 
-    public void deleteSanchwich() {
+    public void deleteSandwich() {
         throw new OrderStateException("Action not permitted in current state");
     }
 
