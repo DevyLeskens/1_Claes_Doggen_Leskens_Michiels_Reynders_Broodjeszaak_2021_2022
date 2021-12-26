@@ -9,13 +9,16 @@ import model.OrderFacade;
 import model.OrderLine;
 import model.domain.Sandwich;
 import model.domain.Topping;
+import view.orderMainPane.DetailsListAndButton.OrderDetails;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
 
 public class OrderSandwichesAndToppings extends VBox {
+    private static int selectedColumnId = 0;
     ArrayList<Button> sandwichButtons = new ArrayList<>();
     TilePane sandwiches = new TilePane();
     TilePane toppings = new TilePane();
@@ -52,8 +55,8 @@ public class OrderSandwichesAndToppings extends VBox {
     }
 
     public void setToppingsButtons() {
-        for (Topping toppping : OrderFacade.getInstance().getToppingDatabase().getToppingsorts().values()) {
-            Button toppingButton = new Button(toppping.getName());
+        for (Topping topping : OrderFacade.getInstance().getToppingDatabase().getToppingsorts().values()) {
+            Button toppingButton = new Button(topping.getName());
             //css
             toppingButton.setMinWidth(105);
             toppingButton.setMinHeight(40);
@@ -64,6 +67,9 @@ public class OrderSandwichesAndToppings extends VBox {
             toppings.setPadding(new Insets(10, 10, 30, 10));
             //css
             toppings.getChildren().add(toppingButton);
+
+            toppingButton.setOnAction(event -> orderViewController.addTopping(OrderSandwichesAndToppings.getSelectedColumnId(), topping.getName()));
+
         }
     }
 
@@ -74,4 +80,14 @@ public class OrderSandwichesAndToppings extends VBox {
             }
         }
     }
+
+    public static void setSelectedColumnId(int newselectedColumnId) {
+        selectedColumnId = newselectedColumnId;
+    }
+    public static int getSelectedColumnId() {
+        OrderLine orderLine = (OrderLine) OrderDetails.tableView.getSelectionModel().getSelectedItem();
+        OrderSandwichesAndToppings.setSelectedColumnId(OrderDetails.getIdOfTable(orderLine ,  (Collection<OrderLine>) OrderDetails.tableView.getItems()));
+        return selectedColumnId;
+    }
+
 }

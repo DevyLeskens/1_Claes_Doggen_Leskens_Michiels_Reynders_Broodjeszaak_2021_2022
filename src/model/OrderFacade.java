@@ -5,6 +5,7 @@ import model.database.ToppingDatabase;
 import model.domain.Sandwich;
 
 import controller.Observer;
+import model.domain.Topping;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +18,7 @@ public class OrderFacade implements Subject {
     private final SandwichDatabase sandwichDatabase;
     private Order order;
     private final Map<OrderEvent, List<Observer>> observers = new HashMap<>();
- 
+
 
     private OrderFacade() {
         this.toppingDatabase = ToppingDatabase.getInstance();
@@ -67,6 +68,10 @@ public class OrderFacade implements Subject {
         Sandwich sandwich = sandwichDatabase.getSandwich(sandwichName);
         order.addOrderLine(sandwich);
         notifyObservers(OrderEvent.ADD_SANDWICH);
+    }
+    public void addTopping(int id, String toppingName){
+       order.addTopping(id ,toppingName);
+        //notifyObservers(OrderEvent.ADD_TOPING);
     }
 
     public List<OrderLine> getOrderLines() {

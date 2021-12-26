@@ -2,6 +2,7 @@ package model.database;
 
 import model.database.LoadSaveStrategies.LoadSaveStrategyEnum;
 import model.database.LoadSaveStrategies.LoadSaveStrategyFactory;
+import model.domain.Sandwich;
 import model.domain.Topping;
 
 import java.io.FileWriter;
@@ -28,6 +29,11 @@ public class ToppingDatabase {
     public TreeMap<String, Topping> getToppingsorts() {
         return toppingsorts;
     }
+
+    public Topping getTopping(String name) {
+        return toppingsorts.get(name);
+    }
+
 
     public void Load() {
         try {

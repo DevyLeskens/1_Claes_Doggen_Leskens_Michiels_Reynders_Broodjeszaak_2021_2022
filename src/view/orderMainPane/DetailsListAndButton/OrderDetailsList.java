@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import view.orderMainPane.OrderSandwichesAndToppings;
 
 public class OrderDetailsList extends VBox {
     OrderViewController orderViewController;
@@ -31,6 +32,7 @@ public class OrderDetailsList extends VBox {
         this.setSpacing(10);
         this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         //css
+        //this.addSameSandwich.setOnAction(event -> orderViewController.addIdenticallSandwich(OrderSandwichesAndToppings.getSelectedColumnId(), topping.getName()));
 
         this.getChildren().addAll(select, addSameSandwich, deleteSandwich );
     }

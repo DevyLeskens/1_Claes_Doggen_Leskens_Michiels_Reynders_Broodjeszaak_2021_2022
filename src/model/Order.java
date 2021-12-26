@@ -36,6 +36,11 @@ public class Order {
         orderState.addSandwich();
         this.orderLines.add(new OrderLine(sandwich));
     }
+    public void addTopping(int sandwichid, String toppingname) {
+        orderState.addTopping();
+        orderLines.get(sandwichid).addTopping(toppingname);
+    }
+
 
     @Override
     public String toString() {

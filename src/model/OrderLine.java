@@ -4,10 +4,11 @@ import model.domain.Sandwich;
 import model.domain.Topping;
 
 import java.util.ArrayList;
+import java.util.TooManyListenersException;
 
 public class OrderLine {
     String sandwichname;
-    ArrayList<String> toppingnames;
+    String toppingnames = "";
     Sandwich sandwich;
     ArrayList<Topping> toppingssort;
 
@@ -25,12 +26,18 @@ public class OrderLine {
         this.sandwichname = sandwichname;
     }
 
-    public ArrayList<String> getToppingnames() {
+    public String getToppingnames() {
         return toppingnames;
     }
 
     public void setToppingnames(ArrayList<String> toppingnames) {
-        this.toppingnames = toppingnames;
+        this.toppingnames = toppingnames.toString();
+    }
+
+    public void addTopping(String topping) {
+        toppingnames +=  topping + ", ";
+        this.toppingnames = toppingnames.replaceFirst(" ", ",");
+        this.toppingnames = toppingnames.substring(0,toppingnames.length()-2) + " ";
     }
 
     public Sandwich getSandwich() {

@@ -37,6 +37,12 @@ public class OrderViewController implements Observer {
         updateStatusSandwichesButtons();
     }
 
+    public void addTopping(int id, String toppingName){
+        updateOrderLines();
+        orderFacade.addTopping(id, toppingName);
+        updateOrderLines();
+    }
+
     public List<OrderLine> getOrderLines() {
         return orderFacade.getOrderLines();
     }
