@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import model.OrderLine;
 import view.orderMainPane.DetailsListAndButton.OrderDetailsListAndButton;
@@ -16,20 +17,24 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
-public class OrderDetails extends HBox {
+public class OrderDetails extends BorderPane {
     private OrderViewController orderViewController;
     protected TableView tableView;
     public OrderDetails(OrderViewController orderViewController){
         this.tableView = new TableView<>();
         this.setPadding(new Insets(5, 5, 5, 5));
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        this.getChildren().addAll(tableView, new OrderDetailsListAndButton());
+        tableView.setMinWidth(350);
+        this.setLeft(tableView);
+        this.setRight(new OrderDetailsListAndButton());
+
     }
 
     public void fillTable(List<OrderLine> orderLines) {
         refresh(orderLines);
         if(tableView.getColumns().size() == 0) {
             this.setEqualColumns(new String[]{"sandwichname", "toppingnames"}, tableView);
+
         }
     }
     public void setEqualColumns(String[] names, TableView tableview){

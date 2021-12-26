@@ -10,7 +10,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class OrderHeader extends HBox {
+public class OrderHeader extends BorderPane {
     OrderViewController orderViewController;
     Button newOrder = new Button("New order");
     Label followNr =  new Label("Follownr");
@@ -20,12 +20,13 @@ public class OrderHeader extends HBox {
         //css
         newOrder.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY,new CornerRadii(5),new Insets(0))));
         newOrder.setFont(Font.font("Verdana",25));
-        newOrder.setTextFill(Color.GREY);
-        newOrder.setAlignment(Pos.BASELINE_LEFT);
-        followNr.setFont(Font.font("Verdana",25));
-        followNr.setPadding(new Insets(10,10,10,20));
+        newOrder.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT)));
+        followNr.setFont(Font.font("Verdana",20));
         //css
-        this.getChildren().addAll(newOrder, followNr, combobox);
+        this.setPadding(new Insets(3,0,7,3));
+        this.setLeft(newOrder);
+        this.setCenter(followNr);
+        this.setRight(combobox);
     }
 
 

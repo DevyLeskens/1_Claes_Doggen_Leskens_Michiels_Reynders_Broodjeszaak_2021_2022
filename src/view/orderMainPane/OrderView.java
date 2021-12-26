@@ -1,12 +1,13 @@
 package view.orderMainPane;
 
 import controller.OrderViewController;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.OrderLine;
@@ -32,11 +33,14 @@ public class OrderView {
 
         stage.setTitle("ORDER VIEW");
         stage.initStyle(StageStyle.UTILITY);
-        stage.setX(20);
+        stage.setX(150);
         stage.setY(20);
         Group root = new Group();
-        Scene scene = new Scene(root, 650, 650);
+        Scene scene = new Scene(root, 720, 650);
         VBox vBox = new VBox();
+        vBox.setBackground(new Background(new BackgroundFill(Color.SNOW,new CornerRadii(0),new Insets(0))));
+        countSandwiches.setFont(Font.font("Verdana", 15));
+        countSandwiches.setPadding(new Insets(5, 0, 5, 5));
         vBox.getChildren().addAll(orderHeader, orderSandwichesAndToppings, countSandwiches, orderDetails, orderFooter);
         vBox.prefHeightProperty().bind(scene.heightProperty());
         vBox.prefWidthProperty().bind(scene.widthProperty());
@@ -44,6 +48,7 @@ public class OrderView {
         stage.setScene(scene);
         stage.sizeToScene();
         stage.show();
+
         orderViewController.setView(this); //observer
     }
 

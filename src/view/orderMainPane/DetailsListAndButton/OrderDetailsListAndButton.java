@@ -1,15 +1,23 @@
 package view.orderMainPane.DetailsListAndButton;
 
 import controller.OrderViewController;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
 public class OrderDetailsListAndButton extends VBox {
-    Button cancelOrder = new Button("cancel order");
+
     OrderViewController orderViewController;
+
     public OrderDetailsListAndButton(){
-        this.getChildren().addAll(new OrderDetailsList(), cancelOrder);
+        this.setPadding(new Insets(0, 22,0, 30));
+        this.setSpacing(30);
+        this.setMinWidth(350);
+        this.getChildren().addAll(new OrderDetailsList(), new CancelButton());
+
     }
+
+
 
 }
