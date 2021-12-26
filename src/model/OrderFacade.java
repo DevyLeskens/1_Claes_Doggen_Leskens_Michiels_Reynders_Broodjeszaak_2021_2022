@@ -17,7 +17,7 @@ public class OrderFacade implements Subject {
     private final SandwichDatabase sandwichDatabase;
     private Order order;
     private final Map<OrderEvent, List<Observer>> observers = new HashMap<>();
-
+ 
 
     private OrderFacade() {
         this.toppingDatabase = ToppingDatabase.getInstance();

@@ -10,6 +10,9 @@ public class StateInOrder extends OrderState {
 
     @Override
     public void addSanchwich() {
-
+    }
+    @Override
+    public void terminate(){
+         order.setOrderState(order.getStateIsTerminated());
     }
 }

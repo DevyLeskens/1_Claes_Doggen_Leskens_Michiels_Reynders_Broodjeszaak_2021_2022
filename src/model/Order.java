@@ -4,13 +4,17 @@ import model.database.SandwichDatabase;
 import model.domain.Sandwich;
 import model.states.OrderState;
 import model.states.StateInOrder;
+import model.states.StateIsTerminated;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-    OrderState orderState;
-    ArrayList<OrderLine> orderLines;
+    private OrderState orderState;
+    private ArrayList<OrderLine> orderLines;
+
+    private StateInOrder stateInOrder = new StateInOrder(this);
+    private StateIsTerminated stateIsTerminated = new StateIsTerminated(this);
 
     public Order() {
         orderLines = new ArrayList<>();
@@ -36,4 +40,21 @@ public class Order {
                 "orderLines=" + orderLines +
                 '}';
     }
+
+    public OrderState getOrderState() {
+        return orderState;
+    }
+
+    public void setOrderLines(ArrayList<OrderLine> orderLines) {
+        this.orderLines = orderLines;
+    }
+
+    public StateInOrder getStateInOrder() {
+        return stateInOrder;
+    }
+    public StateIsTerminated getStateIsTerminated() {
+        return stateIsTerminated;
+    }
+
+
 }

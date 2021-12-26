@@ -14,39 +14,39 @@ public abstract class OrderState {
         throw new OrderStateException("Action not permitted in current state");
     }
 
-    private void deleteSanchwich() {
+    public void deleteSanchwich() {
         throw new OrderStateException("Action not permitted in current state");
     }
 
-    private void addIdenticalSandwich() {
+    public void addIdenticalSandwich() {
         throw new OrderStateException("Action not permitted in current state");
     }
 
-    private void addTopping() {
+    public void addTopping() {
         throw new OrderStateException("Action not permitted in current state");
     }
 
-    private void pay() {
+    public void pay() {
         throw new OrderStateException("Action not permitted in current state");
     }
 
-    private void cancelOrder() {
+    public void cancelOrder() {
         throw new OrderStateException("Action not permitted in current state");
     }
 
-    private void terminate() {
+    public void terminate() {
         throw new OrderStateException("Action not permitted in current state");
     }
 
-    private void sendToKitchen() {
+    public void sendToKitchen() {
         throw new OrderStateException("Action not permitted in current state");
     }
 
-    private void startPreparation() {
+    public void startPreparation() {
         throw new OrderStateException("Action not permitted in current state");
     }
 
-    private void done() {
+    public void done() {
         throw new OrderStateException("Action not permitted in current state");
     }
 
