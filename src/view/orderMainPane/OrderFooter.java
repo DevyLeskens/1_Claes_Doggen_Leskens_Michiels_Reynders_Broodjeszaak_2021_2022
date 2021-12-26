@@ -4,6 +4,7 @@ import controller.OrderViewController;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -22,7 +23,7 @@ public class OrderFooter extends BorderPane {
         this.setBackground(new Background(new BackgroundFill(Color.DARKSEAGREEN, new CornerRadii(0), new Insets(0))));
         this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         //css
-        this.setPadding(new Insets(5,5,5,5));
+        this.setPadding(new Insets(5,10,5,10));
         this.setLeft(endOrder);
         this.setCenter(bill);
         this.setRight(new FooterToKitchenAndPay());

@@ -3,6 +3,7 @@ package view.orderMainPane;
 import controller.OrderViewController;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import model.OrderFacade;
@@ -47,6 +48,7 @@ public class OrderSandwichesAndToppings extends VBox {
             sandwiches.setHgap(10);
             sandwiches.setVgap(10);
             sandwiches.setPadding(new Insets(10, 10, 10, 10));
+            sandwiches.setEffect(new DropShadow(2, Color.BLACK));
             //css
             sandwiches.getChildren().add(sandwichType);
 
@@ -65,6 +67,7 @@ public class OrderSandwichesAndToppings extends VBox {
             toppings.setHgap(10);
             toppings.setVgap(10);
             toppings.setPadding(new Insets(10, 10, 30, 10));
+            toppings.setEffect(new DropShadow(2, Color.BLACK));
             //css
             toppings.getChildren().add(toppingButton);
 
