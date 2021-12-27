@@ -1,10 +1,11 @@
 package model.discountStrategies;
 
 import model.Order;
+import model.OrderLine;
 
 public class DiscountCheapestSandwichFree implements DiscountStrategy{
 
     public double calcDiscount(Order order) {
-        throw new IllegalArgumentException("Not yet implemented");
+        return order.getCheapest();
     }
 }

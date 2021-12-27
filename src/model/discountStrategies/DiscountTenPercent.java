@@ -5,7 +5,6 @@ import model.Order;
 public class DiscountTenPercent implements DiscountStrategy{
 
     public double calcDiscount(Order order) {
-        // return order.getTotalPrice * 0.10
-        throw new IllegalArgumentException("Not yet implemented");
+        return order.getTotalPrice() * 0.10;
     }
 }
