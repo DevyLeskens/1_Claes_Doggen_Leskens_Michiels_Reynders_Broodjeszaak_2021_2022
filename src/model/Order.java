@@ -54,6 +54,9 @@ public class Order{
         orderState.addTopping();
         orderLines.get(sandwichid).addTopping(topping);
     }
+    public void toKitchen() {
+        orderState.sendToKitchen();
+    }
 
 
 
@@ -131,7 +134,11 @@ public class Order{
         }
         return cheapest;
     }
+    public void pay() {
+        orderState.pay();
+    }
 
-
-
+    public void endOrder() {
+        orderState.terminate();
+    }
 }

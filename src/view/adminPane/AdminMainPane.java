@@ -1,6 +1,7 @@
 package view.adminPane;
 
 
+import controller.AdminViewController;
 import javafx.geometry.Insets;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -9,14 +10,14 @@ import javafx.scene.paint.Color;
 import model.OrderFacade;
 
 public class AdminMainPane extends BorderPane {
-	public AdminMainPane(OrderFacade orderFacade){
+	public AdminMainPane(AdminViewController adminViewController){
 	    TabPane tabPane = new TabPane();
         //Tab spelVerloopTab = new Tab("Spelverloop");
         HBox panes = new HBox();
-        panes.getChildren().add(new SandwichOverviewPane(orderFacade.getSandwichDatabase().getSandwichsorts().values()));
-        panes.getChildren().add(new ToppingOverviewPane(orderFacade.getToppingDatabase().getToppingsorts().values()));
+        panes.getChildren().add(new SandwichOverviewPane(adminViewController));
+        panes.getChildren().add(new ToppingOverviewPane(adminViewController));
         VBox stats = new VBox();
-        stats.getChildren().add(new Statistics());
+        stats.getChildren().add(new Statistics(adminViewController));
         Tab broodjesTab = new Tab("Broodjes/Beleg",panes);
         Tab instellingTab = new Tab("Instellingen");
         Tab statistiekTab = new Tab("Statistieken", stats);

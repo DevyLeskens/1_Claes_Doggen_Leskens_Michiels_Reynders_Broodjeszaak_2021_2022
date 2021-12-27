@@ -29,12 +29,12 @@ public class FooterToKitchenAndPay extends HBox {
             orderViewController.toKitchen();
             ArrayList<String> dontchange = new ArrayList<>(Arrays.asList("New order"));
             OrderView.changeallbuttons(OrderView.vBox,true, dontchange);
-            orderViewController.increaseOrderCount();
         });
 
         pay.setOnAction(event -> {
             ArrayList<String> dontchange = new ArrayList<>(Collections.singletonList("To kitchen"));
             OrderView.changeallbuttons(OrderView.vBox, true, dontchange);
+            orderViewController.pay();
         });
     }
 }

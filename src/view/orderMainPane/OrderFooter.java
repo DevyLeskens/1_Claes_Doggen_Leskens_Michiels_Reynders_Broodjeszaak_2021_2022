@@ -40,7 +40,7 @@ public class OrderFooter extends BorderPane {
             ArrayList<String> dontchange = new ArrayList<>(Arrays.asList("cancel order","Pay"));
             OrderView.changeallbuttons(OrderView.vBox, true, dontchange);
             System.out.println(OrderHeader.getChoiceBox().getSelectionModel().getSelectedItem());
-            orderViewController.calculateDiscount((DiscountStrategyEnum) OrderHeader.getChoiceBox().getSelectionModel().getSelectedItem());
+            orderViewController.endOrder((DiscountStrategyEnum) OrderHeader.getChoiceBox().getSelectionModel().getSelectedItem());
         });
 
 

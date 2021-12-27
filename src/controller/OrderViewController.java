@@ -10,6 +10,7 @@ import model.discountStrategies.DiscountStrategyEnum;
 import model.states.OrderStateException;
 import view.orderMainPane.OrderView;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -26,7 +27,6 @@ public class OrderViewController implements Observer {
 
     public void increaseOrderCount() {
        orderFacade.increaseOrderCount();
-
     }
 
     public void setView(OrderView view) {
@@ -51,6 +51,8 @@ public class OrderViewController implements Observer {
     }
 
     public void toKitchen(){
+
+        increaseOrderCount();
         orderFacade.toKitchen();
         updateOrderLines();
     }
@@ -120,9 +122,18 @@ public class OrderViewController implements Observer {
 
     }
     @Override
-    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int ordercount, Set<Order> orderdone) {
+    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int ordercount, HashMap<String , HashMap<String , Integer>> orderdone) {
         System.out.println("NotifyObserversReport:\n----------------------\n - " + order.toString() + "\n - " +
                 sandwichDatabase.toString() + "\n - " + toppingDatabase.toString() + "\n");
+    }
+
+    public void pay() {
+        orderFacade.pay();
+    }
+
+    public void endOrder(DiscountStrategyEnum selectedItem) {
+        calculateDiscount(selectedItem);
+        orderFacade.endOrder();
     }
 }
 

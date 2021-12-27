@@ -15,15 +15,16 @@ import javafx.stage.StageStyle;
 public class AdminView {
 
 	private Stage stage = new Stage();
-
+	AdminViewController adminViewController;
 	public AdminView(AdminViewController adminViewController){
+		this.adminViewController = adminViewController;
 		stage.setTitle("ADMIN VIEW");
 		stage.initStyle(StageStyle.UTILITY);
 		stage.setX(880);
 		stage.setY(20);
 		Group root = new Group();
 		Scene scene = new Scene(root, 650, 410);
-		BorderPane borderPane = new AdminMainPane(adminViewController.getOrderFacade());
+		BorderPane borderPane = new AdminMainPane(adminViewController);
 		borderPane.prefHeightProperty().bind(scene.heightProperty());
 		borderPane.prefWidthProperty().bind(scene.widthProperty());
 		borderPane.setBackground(new Background(new BackgroundFill(Color.SNOW,new CornerRadii(0),new Insets(0))));
@@ -35,6 +36,7 @@ public class AdminView {
 	}
 
     public void update() {
-		// na sander
+		Statistics.setData(adminViewController);
+		OverviewPane.update(adminViewController);
     }
 }

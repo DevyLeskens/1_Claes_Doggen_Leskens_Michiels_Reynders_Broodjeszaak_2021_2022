@@ -3,6 +3,7 @@ package model;
 import model.database.SandwichDatabase;
 import model.database.ToppingDatabase;
 import model.discountStrategies.DiscountStrategyEnum;
+import model.domain.Product;
 import model.domain.Sandwich;
 
 import controller.Observer;
@@ -19,7 +20,7 @@ public class OrderFacade implements Subject {
     private ToppingDatabase toppingDatabase;
     private SandwichDatabase sandwichDatabase;
     private Order order;
-    private final Set<Order> orderdone = new HashSet<>();
+    private final HashMap<String , HashMap<String , Integer>> doneorders = new HashMap<>();
     private final Map<OrderEvent, List<Observer>> observers = new HashMap<>();
     private final Queue<Order> kitchenQueue = new LinkedList();
 
@@ -30,6 +31,14 @@ public class OrderFacade implements Subject {
 
         for (OrderEvent orderEvent : OrderEvent.values()) {
             observers.put(orderEvent, new ArrayList<>());
+        }
+        doneorders.put("Toppings", new HashMap<>());
+        doneorders.put("Sandwiches", new HashMap<>());
+        for (Topping topping : toppingDatabase.getToppingsorts().values()) {
+            doneorders.get("Toppings").put(topping.getName(), 0);
+        }
+        for (Sandwich sandwich : sandwichDatabase.getSandwichsorts().values()) {
+            doneorders.get("Sandwiches").put(sandwich.getName(), 0);
         }
     }
 
@@ -57,10 +66,9 @@ public class OrderFacade implements Subject {
 
     public void toKitchen(){
         kitchenQueue.add(order);
-        cancelOrder();
-        this.sandwichDatabase.reset();
-        this.toppingDatabase.reset();
+        order.toKitchen();
         order = new Order();
+        notifyObservers(OrderEvent.ORDER_TO_KITCHEN);
     }
 
     public Order getOrder() {
@@ -80,7 +88,7 @@ public class OrderFacade implements Subject {
     @Override
     public void notifyObservers(OrderEvent orderEvent) {
         for (Observer observer : observers.get(orderEvent)) {
-            observer.update(toppingDatabase, sandwichDatabase, order, orderCount, orderdone);
+            observer.update(toppingDatabase, sandwichDatabase, order, orderCount, doneorders);
         }
     }
     public void addOrderline(String sandwichName) {
@@ -146,7 +154,24 @@ public class OrderFacade implements Subject {
         orderCount--;
     }
     public void addOrderlineToDone(){
-        orderdone.add(order);
+        for (OrderLine orderline:order.getOrderLines()) {
+            doneorders.get("Sandwiches").put(orderline.getSandwichname() , doneorders.get("Sandwiches").get(orderline.getSandwichname()) + 1);
+            for(Topping topping: orderline.getToppingssort()){
+                doneorders.get("Toppings").put(topping.getName() , doneorders.get("Toppings").get(topping.getName()) + 1);
+            };
+        }
+    }
+
+    public void pay() {
+        order.pay();
+    }
+
+    public void endOrder() {
+        order.endOrder();
+    }
+
+    public HashMap<String , HashMap<String , Integer>> getdoneorders() {
+        return doneorders;
     }
 }
 

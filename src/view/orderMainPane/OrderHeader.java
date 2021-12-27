@@ -39,7 +39,7 @@ public class OrderHeader extends BorderPane {
         choiceBox.setValue(discounts[0]);
         newOrder.setOnAction(event -> {
             updateFollownr();
-            ArrayList<String> dontchange = new ArrayList<>(Arrays.asList("New order", "To kitchen"));
+            ArrayList<String> dontchange = new ArrayList<>(Arrays.asList("New order", "To kitchen" , "Pay" ));
             OrderView.changeallbuttons(OrderView.vBox, false, dontchange);
             newOrder.setDisable(true);
         });

@@ -5,9 +5,12 @@ import model.OrderEvent;
 import model.OrderFacade;
 import model.database.SandwichDatabase;
 import model.database.ToppingDatabase;
+import model.domain.Sandwich;
+import model.domain.Topping;
 import view.adminPane.AdminView;
 
-import java.util.Set;
+import java.util.Collection;
+import java.util.HashMap;
 
 
 public class AdminViewController implements Observer {
@@ -28,12 +31,21 @@ public class AdminViewController implements Observer {
     }
 
     @Override
-    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int countrorder, Set<Order> orderdone) {
+    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int countrorder, HashMap<String , HashMap<String , Integer>> orderdone) {
         System.out.println(toppingDatabase.toString() + " " + sandwichDatabase.toString() + " " + order.toString());
         orderFacade.addOrderlineToDone();
         adminView.update();
-        /// db ---> verkocht
-        /// ---> add --> verkocht
-        /// displayed <-- verkochte
+    }
+
+    public Collection<Sandwich> getSandwichDatabase() {
+        return  orderFacade.getSandwichDatabase().getSandwichsorts().values();
+    }
+
+    public Collection<Topping> getToppingDatabase() {
+        return orderFacade.getToppingDatabase().getToppingsorts().values();
+    }
+
+    public HashMap<String , HashMap<String , Integer>> getSoldOrders() {
+        return orderFacade.getdoneorders();
     }
 }

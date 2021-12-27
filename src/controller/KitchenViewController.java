@@ -7,6 +7,7 @@ import model.database.SandwichDatabase;
 import model.database.ToppingDatabase;
 import view.KitchenPane.KitchenView;
 
+import java.util.HashMap;
 import java.util.Set;
 
 public class KitchenViewController implements Observer {
@@ -26,7 +27,7 @@ public class KitchenViewController implements Observer {
     }
 
     @Override
-    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int orderCount, Set<Order> orderdone){
+    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int orderCount, HashMap<String , HashMap<String , Integer>> orderdone){
         System.out.println(toppingDatabase.toString() + " " + sandwichDatabase.toString() + " " + order.toString());
         kitchenView.update(orderCount);
     }

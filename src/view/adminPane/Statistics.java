@@ -1,28 +1,34 @@
 package view.adminPane;
 
+import controller.AdminViewController;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import model.Order;
 import model.OrderFacade;
+import model.OrderLine;
 import model.domain.Sandwich;
 import model.domain.Topping;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Statistics extends VBox {
     Label sandwiches  = new Label("Revenue statistics sandwiches (in parts)");
     Label toppings = new Label("Revenue statistics toppings (in parts)");
-    VBox sandwichesStats = new VBox();
-    VBox toppingsStats = new VBox();
+    static VBox sandwichesStats = new VBox();
+    static VBox toppingsStats = new VBox();
     HBox sandwichesFullStats = new HBox();
     HBox toppingFullStats = new HBox();
+    AdminViewController adminViewController;
 
-    public Statistics(){
-        setSandwiches();
-        setToppings();
+    public Statistics(AdminViewController adminViewController){
+        this.adminViewController = adminViewController;
         sandwichesFullStats.getChildren().addAll(sandwichesStats);
         toppingFullStats.getChildren().addAll((toppingsStats));
         //add to main
@@ -40,7 +46,59 @@ public class Statistics extends VBox {
         toppingFullStats.setEffect(new DropShadow(10, Color.BLACK));
     }
 
-    public void setSandwiches(){
+    public static void setData(AdminViewController adminViewController) {
+        toppingsStats.getChildren().clear();
+        sandwichesStats.getChildren().clear();
+
+        for (Map.Entry<String, HashMap<String, Integer>> productmap: adminViewController.getSoldOrders().entrySet() ) {
+            for (Map.Entry<String, Integer> product: productmap.getValue().entrySet()) {
+                BorderPane borderPane = new BorderPane();
+                String name = product.getKey();
+                Label sandwichtype = new Label(name);
+                String sandwichCount = String.valueOf(product.getValue());
+                Label soldCount = new Label(sandwichCount);
+                borderPane.setLeft(sandwichtype);
+                borderPane.setRight(soldCount);
+                borderPane.setPadding(new Insets(5, 0, 5, 10));
+                borderPane.setMinSize(150, 20);
+                if (productmap.getKey().equals("Toppings")) {
+                    toppingsStats.getChildren().add(borderPane);
+                } else {
+                    sandwichesStats.getChildren().add(borderPane);
+                }
+            }
+       }
+    }
+
+    public static void setSandwiches(Sandwich sandwich){
+
+            BorderPane borderPane = new BorderPane();
+            String name = sandwich.getName();
+            Label sandwichtype = new Label(name);
+            String sandwichCount = String.valueOf(sandwich.getSold());
+            Label soldCount = new Label(sandwichCount);
+            borderPane.setLeft(sandwichtype);
+            borderPane.setRight(soldCount);
+            borderPane.setPadding(new Insets(5,0,5,10));
+            borderPane.setMinSize(150, 20);
+            sandwichesStats.getChildren().add(borderPane);
+    }
+
+    public static void setToppings(ArrayList<Topping> toppings){
+        for (Topping topping : toppings) {
+            BorderPane borderPane = new BorderPane();
+            Label toppingtype= new Label(topping.getName());
+            String toppingCount = String.valueOf(topping);
+            Label soldCount = new Label(toppingCount);
+            borderPane.setLeft(toppingtype);
+            borderPane.setRight(soldCount);
+            borderPane.setPadding(new Insets(5,0,5,10));
+            borderPane.setMinSize(150, 20);
+            toppingsStats.getChildren().add(borderPane);
+        }
+    }
+    public void setSandwichesDefault(){
+        // TODO
         for (Sandwich sandwich : OrderFacade.getInstance().getSandwichDatabase().getSandwichsorts().values()) {
             BorderPane borderPane = new BorderPane();
             String name = sandwich.getName();
@@ -55,7 +113,7 @@ public class Statistics extends VBox {
         }
     }
 
-    public void setToppings(){
+    public void setToppingsDefault(){
         for (Topping topping : OrderFacade.getInstance().getToppingDatabase().getToppingsorts().values()) {
             BorderPane borderPane = new BorderPane();
             Label toppingtype= new Label(topping.getName());
