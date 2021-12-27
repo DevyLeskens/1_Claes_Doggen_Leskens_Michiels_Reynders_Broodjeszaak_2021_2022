@@ -2,12 +2,17 @@ package view.orderMainPane;
 
 import controller.OrderViewController;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class OrderFooter extends BorderPane {
     OrderViewController orderViewController;
@@ -28,6 +33,13 @@ public class OrderFooter extends BorderPane {
         this.setLeft(endOrder);
         this.setCenter(bill);
         this.setRight(new FooterToKitchenAndPay());
+
+        endOrder.setOnAction(event -> {
+            ArrayList<String> dontchange = new ArrayList<>(Arrays.asList("cancel order","Pay"));
+            OrderView.changeallbuttons(OrderView.vBox, true, dontchange);
+        });
+
+
     }
     public static void updateAmount(double amount){
         bill.setText("Amount: " + amount);

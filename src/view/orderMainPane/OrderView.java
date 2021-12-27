@@ -20,6 +20,7 @@ import view.adminPane.AdminMainPane;
 import view.orderMainPane.DetailsListAndButton.OrderDetails;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -56,8 +57,8 @@ public class OrderView {
         vBox.prefWidthProperty().bind(scene.widthProperty());
         root.getChildren().add(vBox);
 
-
-        changeallbuttons(vBox, true);
+        ArrayList<String> dontchange = new ArrayList<>(Arrays.asList("New order"));
+        changeallbuttons(vBox, true, dontchange);
 
         stage.setScene(scene);
         stage.sizeToScene();
@@ -78,16 +79,16 @@ public class OrderView {
     }
 
 
-    public static void changeallbuttons(Parent parent, boolean state) {
+    public static void changeallbuttons(Parent parent, boolean state, ArrayList<String> dontchange) {
         for (Node node : parent.getChildrenUnmodifiable()) {
             if (node instanceof Button){
                 node.setDisable(state);
             }
-            if(node instanceof Button && ((Button) node).getText().equalsIgnoreCase("New order")){
-                node.setDisable(false);
+            if(node instanceof Button && dontchange.contains(((Button) node).getText())){
+                node.setDisable(!state);
             }
             if (node instanceof Parent)
-                changeallbuttons((Parent)node,state);
+                changeallbuttons((Parent)node,state,dontchange);
         }
     }
 

@@ -11,6 +11,9 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class OrderHeader extends BorderPane {
     OrderViewController orderViewController;
     Button newOrder = new Button("New order");
@@ -29,7 +32,8 @@ public class OrderHeader extends BorderPane {
         //css
 
         newOrder.setOnAction(event -> {
-            OrderView.changeallbuttons(OrderView.vBox, false);
+            ArrayList<String> dontchange = new ArrayList<>(Arrays.asList("New order"));
+            OrderView.changeallbuttons(OrderView.vBox, false, dontchange);
             newOrder.setDisable(true);
         });
 
