@@ -7,6 +7,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import model.discountStrategies.DiscountStrategyEnum;
+import view.KitchenPane.KitchenView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,6 +29,7 @@ public class FooterToKitchenAndPay extends HBox {
             orderViewController.toKitchen();
             ArrayList<String> dontchange = new ArrayList<>(Arrays.asList("New order"));
             OrderView.changeallbuttons(OrderView.vBox,true, dontchange);
+            orderViewController.increaseOrderCount();
         });
 
         pay.setOnAction(event -> {

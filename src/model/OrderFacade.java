@@ -11,10 +11,15 @@ import model.domain.Topping;
 import java.util.*;
 
 public class OrderFacade implements Subject {
+
+
+    private static int follownr = 0;
+    private int orderCount = 0;
     private static OrderFacade orderFacade;
     private ToppingDatabase toppingDatabase;
     private SandwichDatabase sandwichDatabase;
     private Order order;
+    private final Set<Order> orderdone = new HashSet<>();
     private final Map<OrderEvent, List<Observer>> observers = new HashMap<>();
     private final Queue<Order> kitchenQueue = new LinkedList();
 
@@ -53,7 +58,11 @@ public class OrderFacade implements Subject {
     public void toKitchen(){
         kitchenQueue.add(order);
         cancelOrder();
+        this.sandwichDatabase.reset();
+        this.toppingDatabase.reset();
+        order = new Order();
     }
+
     public Order getOrder() {
         return order;
     }
@@ -71,7 +80,7 @@ public class OrderFacade implements Subject {
     @Override
     public void notifyObservers(OrderEvent orderEvent) {
         for (Observer observer : observers.get(orderEvent)) {
-            observer.update(toppingDatabase, sandwichDatabase, order);
+            observer.update(toppingDatabase, sandwichDatabase, order, orderCount, orderdone);
         }
     }
     public void addOrderline(String sandwichName) {
@@ -115,8 +124,29 @@ public class OrderFacade implements Subject {
         return order.getTotalPriceWithDiscount(discount);
     }
 
-
+    public static int getNextfollownrAndIncrease() {
+        follownr++;
+        return follownr;
+    }
+    public int getfollownr() {
+        return follownr;
+    }
     public DiscountStrategyEnum[] getDiscounts() {
         return DiscountStrategyEnum.values();
     }
+
+    public void increaseOrderCount() {
+        orderCount++;
+        notifyObservers(OrderEvent.ORDER_TO_KITCHEN);
+    }
+    public int getOrderCount() {
+        return orderCount;
+    }
+    public void decreaseOrderCount() {
+        orderCount--;
+    }
+    public void addOrderlineToDone(){
+        orderdone.add(order);
+    }
 }
+

@@ -14,6 +14,7 @@ public class Order{
     private DiscountStrategy discountStrategy = new DiscountTenPercent();
     private OrderState orderState;
     private ArrayList<OrderLine> orderLines;
+    private int follownr;
 
     private StateInWait stateInWait = new StateInWait(this);
     private StateInOrder stateInOrder = new StateInOrder(this);
@@ -27,6 +28,7 @@ public class Order{
     public Order()  {
         orderLines = new ArrayList<>();
         setOrderState(stateInWait);
+        this.follownr = OrderFacade.getNextfollownrAndIncrease();
     }
     public void setOrderState(OrderState orderState) {
         this.orderState = orderState;
@@ -38,6 +40,7 @@ public class Order{
     public void deleteSandwich(int id){
         orderState.deleteSandwich();
         orderLines.remove(id);
+
     }
     public void addIdenticalSandwich(int id){
         orderState.addIdenticalSandwich();
@@ -51,6 +54,7 @@ public class Order{
         orderState.addTopping();
         orderLines.get(sandwichid).addTopping(topping);
     }
+
 
 
     @Override
@@ -127,6 +131,7 @@ public class Order{
         }
         return cheapest;
     }
+
 
 
 }

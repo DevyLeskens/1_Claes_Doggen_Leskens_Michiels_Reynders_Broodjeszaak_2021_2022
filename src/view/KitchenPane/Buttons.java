@@ -1,5 +1,7 @@
 package view.KitchenPane;
 
+import controller.KitchenViewController;
+import controller.OrderViewController;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
@@ -10,7 +12,7 @@ public class Buttons extends BorderPane {
     Button next = new Button("Next order");
     Button orderFinished = new Button("Order finished");
 
-    public Buttons(){
+    public Buttons(KitchenViewController kitchenViewController){
         this.setLeft(next);
         this.setRight(orderFinished);
         this.setPadding(new Insets(5,10,5,10));
@@ -22,6 +24,10 @@ public class Buttons extends BorderPane {
         next.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, new CornerRadii(5), new Insets(0))));
         orderFinished.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, new CornerRadii(5), new Insets(0))));
 
+        orderFinished.setOnAction(event -> {
+            kitchenViewController.decreaseOrderCount();
+            //KitchenView.update();
+        });
 
     }
 }

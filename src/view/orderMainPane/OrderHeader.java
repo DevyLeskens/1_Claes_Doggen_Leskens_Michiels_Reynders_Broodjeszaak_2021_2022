@@ -17,15 +17,16 @@ import java.util.Arrays;
 public class OrderHeader extends BorderPane {
     OrderViewController orderViewController;
     Button newOrder = new Button("New order");
-    Label followNr =  new Label("Follownr:");
+    private Label followNrlabel =  new Label("Follownr: None");
     private static ChoiceBox choiceBox = new ChoiceBox();
 
     public OrderHeader(OrderViewController orderViewController){
         //css
+        this.orderViewController = orderViewController;
         newOrder.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY,new CornerRadii(5),new Insets(0))));
         newOrder.setFont(Font.font("Verdana",25));
         newOrder.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT)));
-        followNr.setFont(Font.font("Verdana",20));
+        followNrlabel.setFont(Font.font("Verdana",20));
         choiceBox.setValue("Add cheapest sandwich");
         choiceBox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT)));
         choiceBox.setMinSize(100, 53);
@@ -37,6 +38,7 @@ public class OrderHeader extends BorderPane {
         // properties
         choiceBox.setValue(discounts[0]);
         newOrder.setOnAction(event -> {
+            updateFollownr();
             ArrayList<String> dontchange = new ArrayList<>(Arrays.asList("New order", "To kitchen"));
             OrderView.changeallbuttons(OrderView.vBox, false, dontchange);
             newOrder.setDisable(true);
@@ -44,12 +46,16 @@ public class OrderHeader extends BorderPane {
 
         this.setPadding(new Insets(5,10,7,10));
         this.setLeft(newOrder);
-        this.setCenter(followNr);
+        this.setCenter(followNrlabel);
         this.setRight(choiceBox);
 
     }
 
     public static ChoiceBox getChoiceBox() {
         return choiceBox;
+    }
+
+    public void updateFollownr(){
+         followNrlabel.setText("Follownr: " + orderViewController.getfollownr());
     }
 }

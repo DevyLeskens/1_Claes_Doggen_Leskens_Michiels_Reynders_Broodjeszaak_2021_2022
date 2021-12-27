@@ -8,13 +8,13 @@ import model.database.SandwichDatabase;
 import model.database.ToppingDatabase;
 import model.discountStrategies.DiscountStrategyEnum;
 import model.states.OrderStateException;
-import view.adminPane.AdminView;
 import view.orderMainPane.OrderView;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 public class OrderViewController implements Observer {
+
 
     private OrderView orderView;
     private final OrderFacade orderFacade = OrderFacade.getInstance();
@@ -22,6 +22,11 @@ public class OrderViewController implements Observer {
 
     public OrderViewController(OrderFacade orderFacade) {
         orderFacade.registerObserver(OrderEvent.ADD_SANDWICH, this);
+    }
+
+    public void increaseOrderCount() {
+       orderFacade.increaseOrderCount();
+
     }
 
     public void setView(OrderView view) {
@@ -43,7 +48,6 @@ public class OrderViewController implements Observer {
         catch (OrderStateException e){
             errorBox("You can not add this order.");
         }
-
     }
 
     public void toKitchen(){
@@ -92,11 +96,7 @@ public class OrderViewController implements Observer {
         orderView.updateStatusToppingButtons(orderFacade.getStockListToppings());
     }
 
-    @Override
-    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order) {
-        System.out.println("NotifyObserversReport:\n----------------------\n - " + order.toString() + "\n - " +
-                sandwichDatabase.toString() + "\n - " + toppingDatabase.toString() + "\n");
-    }
+
 
     public void addIdenticalSandwich(int id) {
         try{
@@ -107,6 +107,9 @@ public class OrderViewController implements Observer {
         }
 
     }
+    public int getfollownr() {
+       return orderFacade.getfollownr();
+    }
     public void deleteSandwich(int id){
         try{
             orderFacade.deleteSandwich(id);
@@ -115,6 +118,11 @@ public class OrderViewController implements Observer {
             errorBox("Kan broodje niet verwijderen");
         }
 
+    }
+    @Override
+    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int ordercount, Set<Order> orderdone) {
+        System.out.println("NotifyObserversReport:\n----------------------\n - " + order.toString() + "\n - " +
+                sandwichDatabase.toString() + "\n - " + toppingDatabase.toString() + "\n");
     }
 }
 

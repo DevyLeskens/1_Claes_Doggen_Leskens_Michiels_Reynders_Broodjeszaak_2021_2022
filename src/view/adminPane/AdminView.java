@@ -33,4 +33,8 @@ public class AdminView {
 		stage.show();
 		adminViewController.setView(this); // controller.Observer
 	}
+
+    public void update() {
+		// na sander
+    }
 }

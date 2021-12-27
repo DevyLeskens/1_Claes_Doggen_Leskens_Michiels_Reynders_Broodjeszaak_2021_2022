@@ -27,6 +27,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class OrderView {
+
+    public int ordercount;
     public static VBox vBox = new VBox();
     private Stage stage = new Stage();
     public static int sandwichCount = 0;
@@ -69,18 +71,15 @@ public class OrderView {
         orderViewController.setView(this); //observer
     }
 
-    public void updateOrderLines(List<OrderLine> orderLines, double amount) {
-        orderDetails.fillTable(orderLines);
-        OrderFooter.updateAmount(amount);
+    public void increaseOrderCount() {
+        ordercount++;
     }
-    public void updateStatusSandwichesButtons(HashMap<String, Integer> stockListSandwiches) {
-        orderSandwichesAndToppings.updateStatusSandwichButtons(stockListSandwiches);
+    public int getOrderCount() {
+        return ordercount;
     }
-    public void updateStatusToppingButtons(HashMap<String, Integer> stockListTopings){
-        orderSandwichesAndToppings.updateStatusToppingButtons(stockListTopings);
+    public void decreaseOrderCount() {
+        ordercount--;
     }
-
-
 
 
     public static void changeallbuttons(Parent parent, boolean state, ArrayList<String> dontchange) {
@@ -96,10 +95,7 @@ public class OrderView {
         }
     }
 
-    public static void updatelabel(){
-        sandwichCount++;
-        countSandwiches.setText("Sandwich count: " + sandwichCount);
-    }
+
     public static void resetlabel(){
         sandwichCount = 0;
         countSandwiches.setText("Sandwich count: " + sandwichCount);
@@ -108,5 +104,18 @@ public class OrderView {
     {
         JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
-
+    public static void updatelabel(){
+        sandwichCount++;
+        countSandwiches.setText("Sandwich count: " + sandwichCount);
+    }
+    public void updateOrderLines(List<OrderLine> orderLines, double amount) {
+        orderDetails.fillTable(orderLines);
+        OrderFooter.updateAmount(amount);
+    }
+    public void updateStatusSandwichesButtons(HashMap<String, Integer> stockListSandwiches) {
+        orderSandwichesAndToppings.updateStatusSandwichButtons(stockListSandwiches);
+    }
+    public void updateStatusToppingButtons(HashMap<String, Integer> stockListTopings){
+        orderSandwichesAndToppings.updateStatusToppingButtons(stockListTopings);
+    }
 }
