@@ -19,6 +19,7 @@ import model.states.StateInWait;
 import view.adminPane.AdminMainPane;
 import view.orderMainPane.DetailsListAndButton.OrderDetails;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -100,6 +101,9 @@ public class OrderView {
         sandwichCount = 0;
         countSandwiches.setText("Sandwich count: " + sandwichCount);
     }
-
+    public void errorBox(String infoMessage, String titleBar)
+    {
+        JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
+    }
 
 }

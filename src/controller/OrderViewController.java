@@ -6,6 +6,7 @@ import model.OrderFacade;
 import model.OrderLine;
 import model.database.SandwichDatabase;
 import model.database.ToppingDatabase;
+import model.states.OrderStateException;
 import view.adminPane.AdminView;
 import view.orderMainPane.OrderView;
 
@@ -30,17 +31,33 @@ public class OrderViewController implements Observer {
     public OrderFacade getOrderFacade() {
         return orderFacade;
     }
+    public void errorBox(String infoMessage) {orderView.errorBox(infoMessage,"Action not permitted");}
 
     public void addOrderLine(String sandwichName) {
         orderFacade.addOrderline(sandwichName);
         updateOrderLines();
         updateStatusSandwichesButtons();
+        try{
+            orderFacade.addOrderline(sandwichName);
+            updateOrderLines();
+            updateStatusSandwichesButtons();
+        }
+        catch (OrderStateException e){
+            errorBox("Kan deze order niet toevoegen");
+        }
+
     }
 
     public void addTopping(int id, String toppingName){
-        orderFacade.addTopping(id, toppingName);
-        updateOrderLines();
-        updateStatusToppingButtons();
+        try {
+            orderFacade.addTopping(id, toppingName);
+            updateOrderLines();
+            updateStatusToppingButtons();
+        }
+        catch (OrderStateException e){
+            errorBox("Kan deze topping niet toevoegen");
+        }
+
     }
 
     public List<OrderLine> getOrderLines() {
@@ -52,8 +69,14 @@ public class OrderViewController implements Observer {
     }
 
     public void cancelOrder(){
-        orderFacade.cancelOrder();
-        updateOrderLines();
+        try{
+            orderFacade.cancelOrder();
+            updateOrderLines();
+        }
+        catch (OrderStateException e){
+            errorBox("Kan deze order niet annuleren");
+        }
+
     }
     public void updateStatusSandwichesButtons() {
         orderView.updateStatusSandwichesButtons(orderFacade.getStockListSandwiches());
@@ -69,12 +92,22 @@ public class OrderViewController implements Observer {
     }
 
     public void addIdenticalSandwich(int id) {
-        orderFacade.addIdenticalSandwich(id);
-        updateOrderLines();
+        try{
+            orderFacade.addIdenticalSandwich(id);
+            updateOrderLines();
+        }catch (OrderStateException e){
+            errorBox("Kan identieke broodje niet toevoegen");
+        }
+
     }
     public void deleteSandwich(int id){
-        orderFacade.deleteSandwich(id);
-        updateOrderLines();
+        try{
+            orderFacade.deleteSandwich(id);
+            updateOrderLines();
+        }catch (OrderStateException e){
+            errorBox("Kan broodje niet verwijderen");
+        }
+
     }
 }
 
