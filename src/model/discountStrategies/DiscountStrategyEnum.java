@@ -1,9 +1,9 @@
 package model.discountStrategies;
 
 public enum DiscountStrategyEnum {
-    DISCOUNT_NONE ("No discount", "model.database.LoadSaveStrategies.SandwichExcelLoadSaveSaveStrategy"),
-    DISCOUNT_TENPERCENT ("10% discount", "model.database.LoadSaveStrategies.ToppingExcelLoadSaveSaveStrategy"),
-    DISCOUNT_CHEAPEST_SANDWICH_FRE ("Cheapest sandwich for free", "model.database.LoadSaveStrategies.SandwichesTextLoadSaveStrategy");
+    DISCOUNT_NONE ("No discount", "model.discountStrategies.DiscountNone"),
+    DISCOUNT_TEN_PERCENT ("10% discount", "model.discountStrategies.DiscountTenPercent"),
+    DISCOUNT_CHEAPEST_SANDWICH_FREE ("Cheapest sandwich for free", "model.discountStrategies.DiscountCheapestSandwichFree");
 
     private final String name;
     private final String location;
