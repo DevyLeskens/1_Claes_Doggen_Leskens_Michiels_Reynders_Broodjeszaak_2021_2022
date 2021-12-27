@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 import jxl.read.biff.BiffException;
 import model.OrderFacade;
 import view.adminPane.AdminView;
-import view.KitchenView;
+import view.KitchenPane.KitchenView;
 import view.orderMainPane.OrderView;
 
 import java.io.IOException;

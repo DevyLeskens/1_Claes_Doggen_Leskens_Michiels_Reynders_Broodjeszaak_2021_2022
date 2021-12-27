@@ -1,10 +1,11 @@
 package view.adminPane;
 
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import model.OrderFacade;
 
 public class AdminMainPane extends BorderPane {
@@ -18,6 +19,7 @@ public class AdminMainPane extends BorderPane {
         Tab instellingTab = new Tab("Instellingen");
         Tab statistiekTab = new Tab("Statistieken");
         //tabPane.getTabs().add(spelVerloopTab);
+
         tabPane.getTabs().add(broodjesTab);
         tabPane.getTabs().add(statistiekTab);
         tabPane.getTabs().add(instellingTab);

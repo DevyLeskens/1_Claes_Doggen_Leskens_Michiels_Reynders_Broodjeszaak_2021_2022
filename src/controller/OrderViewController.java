@@ -41,7 +41,7 @@ public class OrderViewController implements Observer {
             updateStatusSandwichesButtons();
         }
         catch (OrderStateException e){
-            errorBox("Kan deze order niet toevoegen");
+            errorBox("You can not add this order.");
         }
 
     }
@@ -57,7 +57,7 @@ public class OrderViewController implements Observer {
             updateStatusToppingButtons();
         }
         catch (OrderStateException e){
-            errorBox("Kan deze topping niet toevoegen");
+            errorBox("You first have to add a sandwich.");
         }
 
     }

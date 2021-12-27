@@ -1,7 +1,7 @@
 package controller;
 
 import model.OrderFacade;
-import view.KitchenView;
+import view.KitchenPane.KitchenView;
 
 public class KitchenViewController {
 
