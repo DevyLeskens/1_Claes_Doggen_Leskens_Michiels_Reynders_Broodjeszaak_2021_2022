@@ -109,5 +109,14 @@ public class Order{
         }
         return total;
     }
+    public double getCheapest(){
+        double cheapest = orderLines.get(0).getPrice();
+        for (OrderLine orderLine:orderLines){
+            if(orderLine.getPrice() < cheapest){
+                cheapest=orderLine.getPrice();
+            }
+        }
+        return cheapest;
+    }
 
 }
