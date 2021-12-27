@@ -15,9 +15,11 @@ public class AdminMainPane extends BorderPane {
         HBox panes = new HBox();
         panes.getChildren().add(new SandwichOverviewPane(orderFacade.getSandwichDatabase().getSandwichsorts().values()));
         panes.getChildren().add(new ToppingOverviewPane(orderFacade.getToppingDatabase().getToppingsorts().values()));
+        VBox stats = new VBox();
+        stats.getChildren().add(new Statistics());
         Tab broodjesTab = new Tab("Broodjes/Beleg",panes);
         Tab instellingTab = new Tab("Instellingen");
-        Tab statistiekTab = new Tab("Statistieken");
+        Tab statistiekTab = new Tab("Statistieken", stats);
         //tabPane.getTabs().add(spelVerloopTab);
 
         tabPane.getTabs().add(broodjesTab);
