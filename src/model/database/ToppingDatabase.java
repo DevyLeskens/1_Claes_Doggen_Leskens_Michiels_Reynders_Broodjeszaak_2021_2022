@@ -44,7 +44,7 @@ public class ToppingDatabase {
     // dummy methode
     public void save(){
         try {
-            FileWriter myWriter = new FileWriter("src/bestanden/broodjes.txt");
+            FileWriter myWriter = new FileWriter("src/bestanden/sandwiches.xls");
             for (Topping topping: toppingsorts.values()) {
                 myWriter.write(topping.getName() + "," + topping.getPrice()+ "," + topping.getStock() + "," + topping.getSold());
             }

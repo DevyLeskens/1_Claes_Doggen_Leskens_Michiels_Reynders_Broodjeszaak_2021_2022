@@ -4,10 +4,10 @@ import java.io.File;
 
 public enum LoadSaveStrategyEnum {
 
-    EXCEL_SANDWICH ("Excel Sandwich", "model.database.LoadSaveStrategies.SandwichExcelLoadSaveSaveStrategy", new File("src/bestanden/broodjes.xls")),
-    EXCEL_TOPPING ("Excel Topping", "model.database.LoadSaveStrategies.ToppingExcelLoadSaveSaveStrategy",new File("src/bestanden/beleg.xls")),
-    TEXT_SANDWICH ("Text Sandwich", "model.database.LoadSaveStrategies.SandwichesTextLoadSaveStrategy", new File("src/bestanden/broodjes.txt")),
-    TEXT_TOPPING ("Text Topping", "model.database.LoadSaveStrategies.ToppingsTextLoadSaveStrategy",new File("src/bestanden/beleg.txt"));
+    EXCEL_SANDWICH ("Excel Sandwich", "model.database.LoadSaveStrategies.SandwichExcelLoadSaveSaveStrategy", new File("src/bestanden/sandwiches.xls")),
+    EXCEL_TOPPING ("Excel Topping", "model.database.LoadSaveStrategies.ToppingExcelLoadSaveSaveStrategy",new File("src/bestanden/toppings.xls")),
+    TEXT_SANDWICH ("Text Sandwich", "model.database.LoadSaveStrategies.SandwichesTextLoadSaveStrategy", new File("src/bestanden/sandwiches.txt")),
+    TEXT_TOPPING ("Text Topping", "model.database.LoadSaveStrategies.ToppingsTextLoadSaveStrategy",new File("src/bestanden/toppings.txt"));
 
     private final String naam;
     private final String locatie;

@@ -49,7 +49,7 @@ public class SandwichDatabase {
 
     public void save() {
         try {
-            FileWriter myWriter = new FileWriter("src/bestanden/broodjes.xls");
+            FileWriter myWriter = new FileWriter("src/bestanden/sandwiches.xls");
             for (Sandwich sandwich : sandwichsorts.values()) {
                 myWriter.write(sandwich.getName() + "," + sandwich.getPrice() + "," + sandwich.getStock() + "," + sandwich.getSold());
             }
