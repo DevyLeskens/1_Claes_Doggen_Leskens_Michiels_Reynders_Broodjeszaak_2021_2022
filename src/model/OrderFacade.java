@@ -82,7 +82,7 @@ public class OrderFacade implements Subject {
     public void addTopping(int id, String toppingName){
         Topping topping = toppingDatabase.getTopping(toppingName);
         topping.updateStock();
-        order.addTopping(id ,toppingName);
+        order.addTopping(id ,topping);
         notifyObservers(OrderEvent.ADD_TOPING);
     }
     public void addIdenticalSandwich(int id){
@@ -105,6 +105,9 @@ public class OrderFacade implements Subject {
     }
     public HashMap<String, Integer> getStockListToppings() {
         return toppingDatabase.getStockListToppings();
+    }
+    public double getAmount(){
+        return order.getTotalPrice();
     }
 
 

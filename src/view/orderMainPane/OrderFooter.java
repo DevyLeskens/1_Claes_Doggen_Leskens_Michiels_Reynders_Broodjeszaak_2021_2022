@@ -12,7 +12,8 @@ import javafx.scene.text.Font;
 public class OrderFooter extends BorderPane {
     OrderViewController orderViewController;
     Button endOrder= new Button("End order");
-    Label bill = new Label("Amount:");
+    private double amount = 0;
+    private static Label bill = new Label("Amount: " + 0);
 
     public OrderFooter(OrderViewController orderViewController){
         //css
@@ -27,7 +28,8 @@ public class OrderFooter extends BorderPane {
         this.setLeft(endOrder);
         this.setCenter(bill);
         this.setRight(new FooterToKitchenAndPay());
-
-
+    }
+    public static void updateAmount(double amount){
+        bill.setText("Amount: " + amount);
     }
 }

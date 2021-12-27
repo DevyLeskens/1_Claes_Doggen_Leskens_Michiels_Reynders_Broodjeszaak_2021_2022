@@ -7,16 +7,21 @@ import java.util.ArrayList;
 import java.util.TooManyListenersException;
 
 public class OrderLine {
-    String sandwichname;
-    String toppingnames = "";
-    Sandwich sandwich;
-    ArrayList<Topping> toppingssort;
+    private double price;
+    private String sandwichname;
+    private String toppingnames = "";
+    private Sandwich sandwich;
+    private ArrayList<Topping> toppingssort = new ArrayList<>();
 
     public OrderLine(Sandwich sandwich){
         setSandwich(sandwich);
         setSandwichname(sandwich.getName());
     }
-
+    public double getPrice(){
+        double total = sandwich.getPrice();
+        for (Topping topping: toppingssort) { total += topping.getPrice(); }
+        return total;
+    }
     public String getSandwichname() {
         return sandwichname;
     }
@@ -33,8 +38,9 @@ public class OrderLine {
         this.toppingnames = toppingnames.toString();
     }
 
-    public void addTopping(String topping) {
-        toppingnames +=  topping + ", ";
+    public void addTopping(Topping topping) {
+        toppingnames +=  topping.getName() + ", ";
+        this.toppingssort.add(topping);
         this.toppingnames = toppingnames.replaceFirst(" ", ",");
         this.toppingnames = toppingnames.substring(0,toppingnames.length()-2) + " ";
     }

@@ -2,6 +2,7 @@ package model;
 
 import model.domain.DomainException;
 import model.domain.Sandwich;
+import model.domain.Topping;
 import model.states.*;
 
 import java.util.ArrayList;
@@ -44,9 +45,9 @@ public class Order{
         orderState.addSandwich();
         this.orderLines.add(new OrderLine(sandwich));
     }
-    public void addTopping(int sandwichid, String toppingname) {
+    public void addTopping(int sandwichid, Topping topping) {
         orderState.addTopping();
-        orderLines.get(sandwichid).addTopping(toppingname);
+        orderLines.get(sandwichid).addTopping(topping);
     }
 
 
@@ -100,6 +101,13 @@ public class Order{
     public void reset(){
         this.orderLines = new ArrayList<>();
         orderState.cancelOrder();
+    }
+    public double getTotalPrice(){
+        double total = 0;
+        for (OrderLine orderline:orderLines) {
+           total += orderline.getPrice();
+        }
+        return total;
     }
 
 }

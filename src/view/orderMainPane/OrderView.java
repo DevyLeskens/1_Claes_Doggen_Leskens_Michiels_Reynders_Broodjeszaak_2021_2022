@@ -66,8 +66,9 @@ public class OrderView {
         orderViewController.setView(this); //observer
     }
 
-    public void updateOrderLines(List<OrderLine> orderLines) {
+    public void updateOrderLines(List<OrderLine> orderLines, double amount) {
         orderDetails.fillTable(orderLines);
+        OrderFooter.updateAmount(amount);
     }
     public void updateStatusSandwichesButtons(HashMap<String, Integer> stockListSandwiches) {
         orderSandwichesAndToppings.updateStatusSandwichButtons(stockListSandwiches);
@@ -79,8 +80,11 @@ public class OrderView {
 
     public static void changeallbuttons(Parent parent, boolean state) {
         for (Node node : parent.getChildrenUnmodifiable()) {
-            if (node instanceof Button && !((Button) node).getText().equalsIgnoreCase("New order")){
+            if (node instanceof Button){
                 node.setDisable(state);
+            }
+            if(node instanceof Button && ((Button) node).getText().equalsIgnoreCase("New order")){
+                node.setDisable(false);
             }
             if (node instanceof Parent)
                 changeallbuttons((Parent)node,state);

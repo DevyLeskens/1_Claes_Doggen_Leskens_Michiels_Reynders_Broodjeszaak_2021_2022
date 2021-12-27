@@ -48,7 +48,7 @@ public class OrderViewController implements Observer {
     }
 
     public void updateOrderLines() {
-        orderView.updateOrderLines(getOrderLines());
+        orderView.updateOrderLines(getOrderLines() , orderFacade.getAmount());
     }
 
     public void cancelOrder(){
