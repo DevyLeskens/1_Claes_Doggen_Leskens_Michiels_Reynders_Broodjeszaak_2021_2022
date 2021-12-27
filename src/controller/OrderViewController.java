@@ -6,6 +6,7 @@ import model.OrderFacade;
 import model.OrderLine;
 import model.database.SandwichDatabase;
 import model.database.ToppingDatabase;
+import model.discountStrategies.DiscountStrategyEnum;
 import model.states.OrderStateException;
 import view.adminPane.AdminView;
 import view.orderMainPane.OrderView;
@@ -34,9 +35,6 @@ public class OrderViewController implements Observer {
     public void errorBox(String infoMessage) {orderView.errorBox(infoMessage,"Action not permitted");}
 
     public void addOrderLine(String sandwichName) {
-        orderFacade.addOrderline(sandwichName);
-        updateOrderLines();
-        updateStatusSandwichesButtons();
         try{
             orderFacade.addOrderline(sandwichName);
             updateOrderLines();
@@ -59,7 +57,12 @@ public class OrderViewController implements Observer {
         }
 
     }
-
+    public void calculateDiscount(DiscountStrategyEnum discount){
+        orderView.updateOrderLines(getOrderLines() , orderFacade.getDiscountAmount(discount));
+    }
+    public DiscountStrategyEnum[] getDiscounts(){
+        return orderFacade.getDiscounts();
+    }
     public List<OrderLine> getOrderLines() {
         return orderFacade.getOrderLines();
     }
