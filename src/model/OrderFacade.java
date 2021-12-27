@@ -1,5 +1,6 @@
 package model;
 
+import model.database.LoadSaveStrategies.LoadSaveStrategyEnum;
 import model.database.SandwichDatabase;
 import model.database.ToppingDatabase;
 import model.discountStrategies.DiscountStrategyEnum;
@@ -15,6 +16,7 @@ public class OrderFacade implements Subject {
 
 
     private static int follownr = 0;
+    private List<Enum> loads;
     private int orderCount = 0;
     private static OrderFacade orderFacade;
     private ToppingDatabase toppingDatabase;
@@ -118,6 +120,7 @@ public class OrderFacade implements Subject {
         return order.getOrderLines();
     }
 
+
     public HashMap<String, Integer> getStockListSandwiches() {
         return sandwichDatabase.getStockListSandwiches();
     }
@@ -141,6 +144,9 @@ public class OrderFacade implements Subject {
     }
     public DiscountStrategyEnum[] getDiscounts() {
         return DiscountStrategyEnum.values();
+    }
+    public LoadSaveStrategyEnum[] getLoadTypes(){
+        return LoadSaveStrategyEnum.values();
     }
 
     public void increaseOrderCount() {

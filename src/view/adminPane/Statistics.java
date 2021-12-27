@@ -2,6 +2,8 @@ package view.adminPane;
 
 import controller.AdminViewController;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.*;
@@ -70,60 +72,8 @@ public class Statistics extends VBox {
        }
     }
 
-    public static void setSandwiches(Sandwich sandwich){
 
-            BorderPane borderPane = new BorderPane();
-            String name = sandwich.getName();
-            Label sandwichtype = new Label(name);
-            String sandwichCount = String.valueOf(sandwich.getSold());
-            Label soldCount = new Label(sandwichCount);
-            borderPane.setLeft(sandwichtype);
-            borderPane.setRight(soldCount);
-            borderPane.setPadding(new Insets(5,0,5,10));
-            borderPane.setMinSize(150, 20);
-            sandwichesStats.getChildren().add(borderPane);
-    }
 
-    public static void setToppings(ArrayList<Topping> toppings){
-        for (Topping topping : toppings) {
-            BorderPane borderPane = new BorderPane();
-            Label toppingtype= new Label(topping.getName());
-            String toppingCount = String.valueOf(topping);
-            Label soldCount = new Label(toppingCount);
-            borderPane.setLeft(toppingtype);
-            borderPane.setRight(soldCount);
-            borderPane.setPadding(new Insets(5,0,5,10));
-            borderPane.setMinSize(150, 20);
-            toppingsStats.getChildren().add(borderPane);
-        }
-    }
-    public void setSandwichesDefault(){
-        // TODO
-        for (Sandwich sandwich : OrderFacade.getInstance().getSandwichDatabase().getSandwichsorts().values()) {
-            BorderPane borderPane = new BorderPane();
-            String name = sandwich.getName();
-            Label sandwichtype = new Label(name);
-            String sandwichCount = String.valueOf(sandwich.getSold());
-            Label soldCount = new Label(sandwichCount);
-            borderPane.setLeft(sandwichtype);
-            borderPane.setRight(soldCount);
-            borderPane.setPadding(new Insets(5,0,5,10));
-            borderPane.setMinSize(150, 20);
-            sandwichesStats.getChildren().add(borderPane);
-        }
-    }
 
-    public void setToppingsDefault(){
-        for (Topping topping : OrderFacade.getInstance().getToppingDatabase().getToppingsorts().values()) {
-            BorderPane borderPane = new BorderPane();
-            Label toppingtype= new Label(topping.getName());
-            String toppingCount = String.valueOf(topping.getSold());
-            Label soldCount = new Label(toppingCount);
-            borderPane.setLeft(toppingtype);
-            borderPane.setRight(soldCount);
-            borderPane.setPadding(new Insets(5,0,5,10));
-            borderPane.setMinSize(150, 20);
-            toppingsStats.getChildren().add(borderPane);
-        }
-    }
+
 }
