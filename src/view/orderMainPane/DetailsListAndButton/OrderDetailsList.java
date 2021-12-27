@@ -18,7 +18,7 @@ public class OrderDetailsList extends VBox {
     Button deleteSandwich = new Button("Delete sandwich");
 
 
-    public OrderDetailsList(){
+    public OrderDetailsList(OrderViewController orderViewController){
         //css
         select.setMaxWidth(Double.MAX_VALUE);
         //select.setBackground(new Background(new BackgroundFill(Color.SKYBLUE, new CornerRadii(0), new Insets(0))));
@@ -33,7 +33,10 @@ public class OrderDetailsList extends VBox {
         this.setSpacing(10);
         this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT)));
         this.setEffect(new DropShadow(10, Color.BLACK));
-        //this.addSameSandwich.setOnAction(event -> orderViewController.addIdenticallSandwich(OrderSandwichesAndToppings.getSelectedColumnId(), topping.getName()));
+        this.orderViewController = orderViewController;
+        this.addSameSandwich.setOnAction(event -> orderViewController.addIdenticalSandwich(OrderSandwichesAndToppings.getSelectedColumnId()));
+        this.deleteSandwich.setOnAction(event -> orderViewController.deleteSandwich(OrderSandwichesAndToppings.getSelectedColumnId()));
+
 
         this.getChildren().addAll(select, addSameSandwich, deleteSandwich );
     }

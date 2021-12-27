@@ -31,6 +31,6 @@ public class StateInOrder extends OrderState {
 
     @Override
     public void cancelOrder(){
-        order.setOrderState(order.getStateIsCanceled());
+        order.setOrderState(order.getStateInOrder());
     }
 }

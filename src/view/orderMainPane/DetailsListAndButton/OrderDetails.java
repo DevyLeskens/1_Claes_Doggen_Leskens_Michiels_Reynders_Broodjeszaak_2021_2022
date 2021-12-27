@@ -29,7 +29,7 @@ public class OrderDetails extends BorderPane {
         tableView.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT)));
         tableView.setEffect(new DropShadow(10, Color.BLACK));
         this.setLeft(tableView);
-        this.setRight(new OrderDetailsListAndButton());
+        this.setRight(new OrderDetailsListAndButton(orderViewController));
 
     }
 
@@ -37,7 +37,6 @@ public class OrderDetails extends BorderPane {
         refresh(orderLines);
         if(tableView.getColumns().size() == 0) {
             this.setEqualColumns(new String[]{"sandwichname", "toppingnames"}, tableView);
-
         }
     }
     public void setEqualColumns(String[] names, TableView tableview){

@@ -1,12 +1,14 @@
 package model;
 
+import model.domain.DomainException;
 import model.domain.Sandwich;
 import model.states.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Order {
+public class Order{
+
     private OrderState orderState;
     private ArrayList<OrderLine> orderLines;
 
@@ -19,11 +21,10 @@ public class Order {
     private StateIsPrepared stateIsPrepared = new StateIsPrepared(this);
     private StateIsCanceled stateIsCanceled = new StateIsCanceled(this);
 
-    public Order() {
+    public Order()  {
         orderLines = new ArrayList<>();
         setOrderState(new StateInOrder(this));
     }
-
     public void setOrderState(OrderState orderState) {
         this.orderState = orderState;
     }
@@ -31,7 +32,14 @@ public class Order {
     public List<OrderLine> getOrderLines() {
         return orderLines;
     }
-
+    public void deleteSandwich(int id){
+        orderState.deleteSandwich();
+        orderLines.remove(id);
+    }
+    public void addIdenticalSandwich(int id){
+        orderState.addIdenticalSandwich();
+        orderLines.add(orderLines.get(id));
+    }
     public void addOrderLine(Sandwich sandwich) {
         orderState.addSandwich();
         this.orderLines.add(new OrderLine(sandwich));
@@ -88,4 +96,10 @@ public class Order {
     public StateIsCanceled getStateIsCanceled() {
         return stateIsCanceled;
     }
+
+    public void reset(){
+        this.orderLines = new ArrayList<>();
+        orderState.cancelOrder();
+    }
+
 }

@@ -10,11 +10,11 @@ public class OrderDetailsListAndButton extends VBox {
 
     OrderViewController orderViewController;
 
-    public OrderDetailsListAndButton(){
+    public OrderDetailsListAndButton(OrderViewController orderViewController){
         this.setPadding(new Insets(0, 22,0, 30));
         this.setSpacing(30);
         this.setMinWidth(350);
-        this.getChildren().addAll(new OrderDetailsList(), new CancelButton());
+        this.getChildren().addAll(new OrderDetailsList(orderViewController), new CancelButton(orderViewController));
 
     }
 

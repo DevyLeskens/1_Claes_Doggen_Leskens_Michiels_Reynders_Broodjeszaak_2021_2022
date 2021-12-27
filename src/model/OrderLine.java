@@ -15,7 +15,6 @@ public class OrderLine {
     public OrderLine(Sandwich sandwich){
         setSandwich(sandwich);
         setSandwichname(sandwich.getName());
-        sandwich.updateStock();
     }
 
     public String getSandwichname() {

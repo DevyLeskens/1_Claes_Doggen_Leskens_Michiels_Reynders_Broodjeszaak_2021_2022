@@ -38,9 +38,9 @@ public class OrderViewController implements Observer {
     }
 
     public void addTopping(int id, String toppingName){
-        updateOrderLines();
         orderFacade.addTopping(id, toppingName);
         updateOrderLines();
+        updateStatusToppingButtons();
     }
 
     public List<OrderLine> getOrderLines() {
@@ -51,18 +51,30 @@ public class OrderViewController implements Observer {
         orderView.updateOrderLines(getOrderLines());
     }
 
-    public HashMap<String, Integer> getStockListSandwiches() {
-        return orderFacade.getStockListSandwiches();
+    public void cancelOrder(){
+        orderFacade.cancelOrder();
+        updateOrderLines();
     }
-
     public void updateStatusSandwichesButtons() {
-        orderView.updateStatusSandwichesButtons(getStockListSandwiches());
+        orderView.updateStatusSandwichesButtons(orderFacade.getStockListSandwiches());
+    }
+    public void updateStatusToppingButtons(){
+        orderView.updateStatusToppingButtons(orderFacade.getStockListToppings());
     }
 
     @Override
     public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order) {
         System.out.println("NotifyObserversReport:\n----------------------\n - " + order.toString() + "\n - " +
                 sandwichDatabase.toString() + "\n - " + toppingDatabase.toString() + "\n");
+    }
+
+    public void addIdenticalSandwich(int id) {
+        orderFacade.addIdenticalSandwich(id);
+        updateOrderLines();
+    }
+    public void deleteSandwich(int id){
+        orderFacade.deleteSandwich(id);
+        updateOrderLines();
     }
 }
 

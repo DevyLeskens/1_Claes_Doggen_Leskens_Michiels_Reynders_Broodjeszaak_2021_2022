@@ -11,15 +11,21 @@ public class SandwichDatabase {
 
     TreeMap<String, Sandwich> sandwichsorts = new TreeMap<>();
 
+
     private static SandwichDatabase sandwichDatabase;
 
     private SandwichDatabase() {
-        Load();
+        load();
+
     }
+
 
     /**
      * Singleton design pattern
      */
+
+
+
     public static SandwichDatabase getInstance() {
         if (sandwichDatabase == null) {
             sandwichDatabase = new SandwichDatabase();
@@ -31,7 +37,7 @@ public class SandwichDatabase {
         return sandwichsorts;
     }
 
-    public void Load() {
+    public void load() {
         try {
             this.sandwichsorts = LoadSaveStrategyFactory.createLoadSaveStrategy(LoadSaveStrategyEnum.EXCEL_SANDWICH).load();
         } catch (Exception e) {
@@ -54,6 +60,9 @@ public class SandwichDatabase {
         }
     }
 
+
+
+
     public Sandwich getSandwich(String name) {
         return sandwichsorts.get(name);
     }
@@ -66,10 +75,15 @@ public class SandwichDatabase {
         return stockListSandwiches;
     }
 
+
     @Override
     public String toString() {
         return "SandwichDatabase{" +
                 "sandwichsorts=" + sandwichsorts +
                 '}';
+    }
+
+    public void reset() {
+       load();
     }
 }

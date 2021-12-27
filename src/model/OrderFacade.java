@@ -14,8 +14,8 @@ import java.util.Map;
 
 public class OrderFacade implements Subject {
     private static OrderFacade orderFacade;
-    private final ToppingDatabase toppingDatabase;
-    private final SandwichDatabase sandwichDatabase;
+    private ToppingDatabase toppingDatabase;
+    private SandwichDatabase sandwichDatabase;
     private Order order;
     private final Map<OrderEvent, List<Observer>> observers = new HashMap<>();
 
@@ -46,6 +46,15 @@ public class OrderFacade implements Subject {
         return sandwichDatabase;
     }
 
+    public void cancelOrder(){
+        this.sandwichDatabase.reset();
+        this.toppingDatabase.reset();
+        this.order.reset();
+    }
+
+    public Order getOrder() {
+        return order;
+    }
 
     @Override
     public void registerObserver(OrderEvent orderEvent, Observer observer) {
@@ -66,12 +75,25 @@ public class OrderFacade implements Subject {
 
     public void addOrderline(String sandwichName) {
         Sandwich sandwich = sandwichDatabase.getSandwich(sandwichName);
+        sandwich.updateStock();
         order.addOrderLine(sandwich);
         notifyObservers(OrderEvent.ADD_SANDWICH);
     }
     public void addTopping(int id, String toppingName){
-       order.addTopping(id ,toppingName);
-        //notifyObservers(OrderEvent.ADD_TOPING);
+        Topping topping = toppingDatabase.getTopping(toppingName);
+        topping.updateStock();
+        order.addTopping(id ,toppingName);
+        notifyObservers(OrderEvent.ADD_TOPING);
+    }
+    public void addIdenticalSandwich(int id){
+       if(order.getOrderLines().size() > 0) {
+           order.addIdenticalSandwich(id);
+       }
+       notifyObservers(OrderEvent.ADD_IDENTICAL_SANDWICH);
+    }
+    public void deleteSandwich(int id){
+       order.deleteSandwich(id);
+       notifyObservers(OrderEvent.DELETE_SANDWICH);
     }
 
     public List<OrderLine> getOrderLines() {
@@ -81,5 +103,9 @@ public class OrderFacade implements Subject {
     public HashMap<String, Integer> getStockListSandwiches() {
         return sandwichDatabase.getStockListSandwiches();
     }
+    public HashMap<String, Integer> getStockListToppings() {
+        return toppingDatabase.getStockListToppings();
+    }
+
 
 }

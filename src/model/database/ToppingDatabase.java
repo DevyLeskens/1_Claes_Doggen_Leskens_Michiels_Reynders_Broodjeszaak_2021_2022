@@ -2,11 +2,11 @@ package model.database;
 
 import model.database.LoadSaveStrategies.LoadSaveStrategyEnum;
 import model.database.LoadSaveStrategies.LoadSaveStrategyFactory;
-import model.domain.Sandwich;
 import model.domain.Topping;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.TreeMap;
 
 public class ToppingDatabase {
@@ -16,7 +16,7 @@ public class ToppingDatabase {
 
     private static ToppingDatabase toppingDatabase;
     private ToppingDatabase(){
-        Load();
+        load();
     }
     /** Singleton design pattern */
     public static ToppingDatabase getInstance(){
@@ -35,7 +35,7 @@ public class ToppingDatabase {
     }
 
 
-    public void Load() {
+    public void load() {
         try {
             this.toppingsorts = LoadSaveStrategyFactory.createLoadSaveStrategy(LoadSaveStrategyEnum.TEXT_TOPPING).load();
         } catch (Exception e){ System.out.println(e.getMessage()); }
@@ -60,5 +60,20 @@ public class ToppingDatabase {
         return "ToppingDatabase{" +
                 "toppingsorts=" + toppingsorts +
                 '}';
+    }
+
+    public HashMap<String, Integer> getStockListToppings() {
+        HashMap<String, Integer> stockListSandwiches = new HashMap<>();
+        for (Topping topping : toppingsorts.values()) {
+            stockListSandwiches.put(topping.getName(), topping.getStock());
+        }
+        return stockListSandwiches;
+    }
+
+    public void setToppingsorts(TreeMap<String, Topping> toppingsorts) {
+        this.toppingsorts = toppingsorts;
+    }
+    public void reset() {
+        load();
     }
 }

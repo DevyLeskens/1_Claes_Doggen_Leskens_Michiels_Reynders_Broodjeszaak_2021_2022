@@ -21,6 +21,7 @@ import java.util.List;
 public class OrderSandwichesAndToppings extends VBox {
     private static int selectedColumnId = 0;
     ArrayList<Button> sandwichButtons = new ArrayList<>();
+    ArrayList<Button> toppingButtons = new ArrayList<>();
     TilePane sandwiches = new TilePane();
     TilePane toppings = new TilePane();
     OrderViewController orderViewController;
@@ -29,11 +30,14 @@ public class OrderSandwichesAndToppings extends VBox {
         this.orderViewController = orderViewController;
         setSandwichesButtons();
         setToppingsButtons();
+        updateStatusToppingButtons(orderViewController.getOrderFacade().getStockListToppings());
+        updateStatusSandwichButtons(orderViewController.getOrderFacade().getStockListSandwiches());
         //css
         this.setBackground(new Background(new BackgroundFill(Color.DARKSEAGREEN, new CornerRadii(0), new Insets(0))));
         this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         //css
         this.getChildren().addAll(sandwiches, toppings);
+
     }
 
     public void setSandwichesButtons() {
@@ -59,6 +63,7 @@ public class OrderSandwichesAndToppings extends VBox {
     public void setToppingsButtons() {
         for (Topping topping : OrderFacade.getInstance().getToppingDatabase().getToppingsorts().values()) {
             Button toppingButton = new Button(topping.getName());
+            toppingButtons.add(toppingButton);
             //css
             toppingButton.setMinWidth(105);
             toppingButton.setMinHeight(40);
@@ -83,7 +88,13 @@ public class OrderSandwichesAndToppings extends VBox {
             }
         }
     }
-
+    public void updateStatusToppingButtons(HashMap<String, Integer> stockListTopings) {
+        for (Button toppingButton: toppingButtons) {
+            if (stockListTopings.get(toppingButton.getText()) <= 0) {
+                toppingButton.setDisable(true);
+            }
+        }
+    }
     public static void setSelectedColumnId(int newselectedColumnId) {
         selectedColumnId = newselectedColumnId;
     }
@@ -92,5 +103,6 @@ public class OrderSandwichesAndToppings extends VBox {
         OrderSandwichesAndToppings.setSelectedColumnId(OrderDetails.getIdOfTable(orderLine ,  (Collection<OrderLine>) OrderDetails.tableView.getItems()));
         return selectedColumnId;
     }
+
 
 }

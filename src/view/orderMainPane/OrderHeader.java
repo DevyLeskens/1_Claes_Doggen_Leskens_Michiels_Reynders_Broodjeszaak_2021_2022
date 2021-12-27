@@ -27,6 +27,11 @@ public class OrderHeader extends BorderPane {
         combobox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT)));
         combobox.setMinSize(100, 53);
         //css
+
+        newOrder.setOnAction(event -> {
+            OrderView.changeallbuttons(OrderView.vBox, false);
+        });
+
         this.setPadding(new Insets(5,10,7,10));
         this.setLeft(newOrder);
         this.setCenter(followNr);
