@@ -74,7 +74,6 @@ public class OrderFacade implements Subject {
             observer.update(toppingDatabase, sandwichDatabase, order);
         }
     }
-
     public void addOrderline(String sandwichName) {
         Sandwich sandwich = sandwichDatabase.getSandwich(sandwichName);
         sandwich.updateStock();

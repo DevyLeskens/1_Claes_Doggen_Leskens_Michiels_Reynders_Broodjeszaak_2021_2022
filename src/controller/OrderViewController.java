@@ -46,6 +46,10 @@ public class OrderViewController implements Observer {
 
     }
 
+    public void toKitchen(){
+        orderFacade.toKitchen();
+        updateOrderLines();
+    }
     public void addTopping(int id, String toppingName){
         try {
             orderFacade.addTopping(id, toppingName);
