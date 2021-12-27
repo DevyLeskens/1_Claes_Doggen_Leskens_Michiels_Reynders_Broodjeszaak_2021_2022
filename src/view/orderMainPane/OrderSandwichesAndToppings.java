@@ -56,7 +56,10 @@ public class OrderSandwichesAndToppings extends VBox {
             //css
             sandwiches.getChildren().add(sandwichType);
 
-            sandwichType.setOnAction(event -> orderViewController.addOrderLine(sandwich.getName()));
+            sandwichType.setOnAction(event -> {
+                orderViewController.addOrderLine(sandwich.getName());
+                OrderView.updatelabel();
+            });
         }
     }
 

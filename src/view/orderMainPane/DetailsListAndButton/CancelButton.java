@@ -14,6 +14,7 @@ public class CancelButton extends BorderPane {
         cancelOrder.setOnAction(event -> {
             OrderView.changeallbuttons(OrderView.vBox,true);
             orderViewController.cancelOrder();
+            OrderView.resetlabel();
         });
 
     }

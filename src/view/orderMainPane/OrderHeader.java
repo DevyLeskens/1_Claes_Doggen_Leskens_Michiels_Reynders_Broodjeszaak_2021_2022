@@ -30,6 +30,7 @@ public class OrderHeader extends BorderPane {
 
         newOrder.setOnAction(event -> {
             OrderView.changeallbuttons(OrderView.vBox, false);
+            newOrder.setDisable(true);
         });
 
         this.setPadding(new Insets(5,10,7,10));

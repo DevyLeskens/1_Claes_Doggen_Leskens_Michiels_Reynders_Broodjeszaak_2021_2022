@@ -26,7 +26,9 @@ import java.util.List;
 public class OrderView {
     public static VBox vBox = new VBox();
     private Stage stage = new Stage();
-    Label countSandwiches = new Label("Sandwich count:");
+    public static int sandwichCount = 0;
+    public static Label countSandwiches = new Label("Sandwich count: " + sandwichCount);
+
     OrderHeader orderHeader;
     OrderSandwichesAndToppings orderSandwichesAndToppings;
     OrderDetails orderDetails;
@@ -37,9 +39,6 @@ public class OrderView {
         orderSandwichesAndToppings = new OrderSandwichesAndToppings(orderViewController);
         orderDetails = new OrderDetails(orderViewController);
         orderFooter = new OrderFooter(orderViewController);
-
-
-
 
 
         stage.setTitle("ORDER VIEW");
@@ -86,6 +85,15 @@ public class OrderView {
             if (node instanceof Parent)
                 changeallbuttons((Parent)node,state);
         }
+    }
+
+    public static void updatelabel(){
+        sandwichCount++;
+        countSandwiches.setText("Sandwich count: " + sandwichCount);
+    }
+    public static void resetlabel(){
+        sandwichCount = 0;
+        countSandwiches.setText("Sandwich count: " + sandwichCount);
     }
 
 

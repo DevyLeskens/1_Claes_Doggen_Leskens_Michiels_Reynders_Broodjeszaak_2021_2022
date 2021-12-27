@@ -23,7 +23,7 @@ public class Order{
 
     public Order()  {
         orderLines = new ArrayList<>();
-        setOrderState(new StateInOrder(this));
+        setOrderState(stateInWait);
     }
     public void setOrderState(OrderState orderState) {
         this.orderState = orderState;
