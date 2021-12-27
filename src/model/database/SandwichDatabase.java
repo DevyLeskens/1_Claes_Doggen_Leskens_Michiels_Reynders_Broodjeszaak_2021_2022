@@ -40,6 +40,7 @@ public class SandwichDatabase {
     public void load() {
         try {
             this.sandwichsorts = LoadSaveStrategyFactory.createLoadSaveStrategy(LoadSaveStrategyEnum.EXCEL_SANDWICH).load();
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

@@ -10,7 +10,7 @@ public class DiscountFactory {
         DiscountStrategy fileInterface = null;
         try{
             Class dbClass = Class.forName(klasseNaam);
-            Object dbObject = dbClass.getConstructor(DiscountStrategy.class).newInstance();
+            Object dbObject = dbClass.getConstructor().newInstance();
             fileInterface  = (DiscountStrategy) dbObject;
         }
         catch (Exception ignored){}

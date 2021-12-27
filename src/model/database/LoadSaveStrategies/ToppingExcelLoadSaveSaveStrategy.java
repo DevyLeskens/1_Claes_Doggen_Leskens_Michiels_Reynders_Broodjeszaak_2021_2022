@@ -2,19 +2,20 @@ package model.database.LoadSaveStrategies;
 
 import model.database.ExcelLoadSaveTemplate;
 import model.domain.Sandwich;
+import model.domain.Topping;
 
 import java.util.ArrayList;
 import java.util.TreeMap;
 
-public class ToppingExcelLoadSaveSaveStrategy extends ExcelLoadSaveTemplate<String, Sandwich> implements LoadSaveStrategy<String, Sandwich> {
+public class ToppingExcelLoadSaveSaveStrategy extends ExcelLoadSaveTemplate<String, Topping> implements LoadSaveStrategy<String, Topping> {
 
     public ToppingExcelLoadSaveSaveStrategy(LoadSaveStrategyEnum loadSaveStrategyEnum) {
         super(loadSaveStrategyEnum);
     }
 
     @Override
-    public Sandwich makeObject(ArrayList<String> tokens) {
-        return new Sandwich(tokens.get(0),Double.parseDouble(tokens.get(1)),Integer.parseInt(tokens.get(2)),Integer.parseInt(tokens.get(3)));
+    public Topping makeObject(ArrayList<String> tokens) {
+        return new Topping(tokens.get(0),Double.parseDouble(tokens.get(1)),Integer.parseInt(tokens.get(2)),Integer.parseInt(tokens.get(3)));
     }
 
     @Override
@@ -23,7 +24,7 @@ public class ToppingExcelLoadSaveSaveStrategy extends ExcelLoadSaveTemplate<Stri
     }
 
     @Override
-    public TreeMap<String, Sandwich> load() {
+    public TreeMap<String, Topping> load() {
        try {
            return super.load();
        }catch (Exception ignored){ }

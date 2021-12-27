@@ -10,6 +10,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import model.discountStrategies.DiscountStrategyEnum;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,6 +23,7 @@ public class OrderFooter extends BorderPane {
 
     public OrderFooter(OrderViewController orderViewController){
         //css
+
         endOrder.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, new CornerRadii(5), new Insets(0))));
         endOrder.setFont(Font.font("Verdana",20));
         endOrder.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT)));
@@ -32,12 +34,16 @@ public class OrderFooter extends BorderPane {
         this.setPadding(new Insets(5,10,5,10));
         this.setLeft(endOrder);
         this.setCenter(bill);
-        this.setRight(new FooterToKitchenAndPay());
+        this.setRight(new FooterToKitchenAndPay(orderViewController));
 
         endOrder.setOnAction(event -> {
             ArrayList<String> dontchange = new ArrayList<>(Arrays.asList("cancel order","Pay"));
             OrderView.changeallbuttons(OrderView.vBox, true, dontchange);
+            System.out.println(OrderHeader.getChoiceBox().getSelectionModel().getSelectedItem());
+            orderViewController.calculateDiscount((DiscountStrategyEnum) OrderHeader.getChoiceBox().getSelectionModel().getSelectedItem());
         });
+
+
 
 
     }

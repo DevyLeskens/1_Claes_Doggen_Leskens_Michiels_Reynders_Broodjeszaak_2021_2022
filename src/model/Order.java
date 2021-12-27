@@ -1,5 +1,6 @@
 package model;
 
+import model.discountStrategies.*;
 import model.domain.DomainException;
 import model.domain.Sandwich;
 import model.domain.Topping;
@@ -10,6 +11,7 @@ import java.util.List;
 
 public class Order{
 
+    private DiscountStrategy discountStrategy = new DiscountTenPercent();
     private OrderState orderState;
     private ArrayList<OrderLine> orderLines;
 
@@ -99,8 +101,8 @@ public class Order{
     }
 
     public void reset(){
-        this.orderLines = new ArrayList<>();
         orderState.cancelOrder();
+        this.orderLines = new ArrayList<>();
     }
     public double getTotalPrice(){
         double total = 0;
@@ -109,7 +111,14 @@ public class Order{
         }
         return total;
     }
-    public double getCheapest(){
+    public double getTotalPriceWithDiscount(DiscountStrategyEnum discount){
+        setDiscountStrategy(DiscountFactory.createLoadSaveStrategy(discount.getLocation()));
+        return getTotalPrice() - discountStrategy.calcDiscount(this);
+    }
+    public void setDiscountStrategy(DiscountStrategy discountStrategy) {
+        this.discountStrategy = discountStrategy;
+    }
+    public double getCheapestOrderline(){
         double cheapest = orderLines.get(0).getPrice();
         for (OrderLine orderLine:orderLines){
             if(orderLine.getPrice() < cheapest){
@@ -118,5 +127,6 @@ public class Order{
         }
         return cheapest;
     }
+
 
 }

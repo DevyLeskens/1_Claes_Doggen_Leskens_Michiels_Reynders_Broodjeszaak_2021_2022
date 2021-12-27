@@ -37,7 +37,8 @@ public class ToppingDatabase {
 
     public void load() {
         try {
-            this.toppingsorts = LoadSaveStrategyFactory.createLoadSaveStrategy(LoadSaveStrategyEnum.TEXT_TOPPING).load();
+            this.toppingsorts = LoadSaveStrategyFactory.createLoadSaveStrategy(LoadSaveStrategyEnum.EXCEL_TOPPING).load();
+
         } catch (Exception e){ System.out.println(e.getMessage()); }
     }
     // dummy methode
@@ -63,11 +64,11 @@ public class ToppingDatabase {
     }
 
     public HashMap<String, Integer> getStockListToppings() {
-        HashMap<String, Integer> stockListSandwiches = new HashMap<>();
+        HashMap<String, Integer> stockListToppings = new HashMap<>();
         for (Topping topping : toppingsorts.values()) {
-            stockListSandwiches.put(topping.getName(), topping.getStock());
+            stockListToppings.put(topping.getName(), topping.getStock());
         }
-        return stockListSandwiches;
+        return stockListToppings;
     }
 
     public void setToppingsorts(TreeMap<String, Topping> toppingsorts) {

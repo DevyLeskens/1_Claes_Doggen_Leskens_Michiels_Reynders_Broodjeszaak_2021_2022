@@ -2,15 +2,13 @@ package model;
 
 import model.database.SandwichDatabase;
 import model.database.ToppingDatabase;
+import model.discountStrategies.DiscountStrategyEnum;
 import model.domain.Sandwich;
 
 import controller.Observer;
 import model.domain.Topping;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class OrderFacade implements Subject {
     private static OrderFacade orderFacade;
@@ -18,7 +16,7 @@ public class OrderFacade implements Subject {
     private SandwichDatabase sandwichDatabase;
     private Order order;
     private final Map<OrderEvent, List<Observer>> observers = new HashMap<>();
-
+    private final Queue<Order> kitchenQueue = new LinkedList();
 
     private OrderFacade() {
         this.toppingDatabase = ToppingDatabase.getInstance();
@@ -52,6 +50,10 @@ public class OrderFacade implements Subject {
         this.order.reset();
     }
 
+    public void toKitchen(){
+        kitchenQueue.add(order);
+        cancelOrder();
+    }
     public Order getOrder() {
         return order;
     }
@@ -110,5 +112,12 @@ public class OrderFacade implements Subject {
         return order.getTotalPrice();
     }
 
+    public double getDiscountAmount(DiscountStrategyEnum discount){
+        return order.getTotalPriceWithDiscount(discount);
+    }
 
+
+    public DiscountStrategyEnum[] getDiscounts() {
+        return DiscountStrategyEnum.values();
+    }
 }
