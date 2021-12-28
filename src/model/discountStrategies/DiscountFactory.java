@@ -1,19 +1,16 @@
 package model.discountStrategies;
 
-import model.database.LoadSaveStrategies.LoadSaveStrategy;
-import model.database.LoadSaveStrategies.LoadSaveStrategyEnum;
-
 public class DiscountFactory {
 
-    public static DiscountStrategy createLoadSaveStrategy(String filelocation){
-        String klasseNaam = filelocation;
+    public static DiscountStrategy createLoadSaveStrategy(String fileLocation) {
+        String className = fileLocation;
         DiscountStrategy fileInterface = null;
-        try{
-            Class dbClass = Class.forName(klasseNaam);
+        try {
+            Class dbClass = Class.forName(className);
             Object dbObject = dbClass.getConstructor().newInstance();
-            fileInterface  = (DiscountStrategy) dbObject;
+            fileInterface = (DiscountStrategy) dbObject;
+        } catch (Exception ignored) {
         }
-        catch (Exception ignored){}
         return fileInterface;
     }
 }

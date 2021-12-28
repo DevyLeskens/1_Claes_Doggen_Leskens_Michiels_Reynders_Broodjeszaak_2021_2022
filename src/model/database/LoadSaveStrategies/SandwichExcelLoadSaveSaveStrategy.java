@@ -14,7 +14,7 @@ public class SandwichExcelLoadSaveSaveStrategy extends ExcelLoadSaveTemplate<Str
 
     @Override
     public Sandwich makeObject(ArrayList<String> tokens) {
-        return new Sandwich(tokens.get(0),Double.parseDouble(tokens.get(1)),Integer.parseInt(tokens.get(2)),Integer.parseInt(tokens.get(3)));
+        return new Sandwich(tokens.get(0), Double.parseDouble(tokens.get(1)), Integer.parseInt(tokens.get(2)), Integer.parseInt(tokens.get(3)));
     }
 
     @Override
@@ -24,10 +24,11 @@ public class SandwichExcelLoadSaveSaveStrategy extends ExcelLoadSaveTemplate<Str
 
     @Override
     public TreeMap<String, Sandwich> load() {
-       try {
-           return super.load();
-       }catch (Exception ignored){ }
-       return null;
+        try {
+            return super.load();
+        } catch (Exception ignored) {
+        }
+        return null;
     }
 
     @Override

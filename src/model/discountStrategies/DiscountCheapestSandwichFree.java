@@ -2,9 +2,9 @@ package model.discountStrategies;
 
 import model.Order;
 
-public class DiscountCheapestSandwichFree implements DiscountStrategy{
+public class DiscountCheapestSandwichFree implements DiscountStrategy {
 
     public double calcDiscount(Order order) {
-        return order.getCheapestOrderline();
+        return order.getCheapestOrderLine();
     }
 }

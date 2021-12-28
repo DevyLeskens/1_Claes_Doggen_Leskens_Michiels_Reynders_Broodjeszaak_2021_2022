@@ -10,23 +10,22 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import model.discountStrategies.DiscountStrategyEnum;
 
-import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class OrderHeader extends BorderPane {
     OrderViewController orderViewController;
     Button newOrder = new Button("New order");
-    private Label followNrlabel =  new Label("Follownr: None");
+    private Label followNumberLabel = new Label("Follownr: None");
     private static ChoiceBox choiceBox = new ChoiceBox();
 
-    public OrderHeader(OrderViewController orderViewController){
+    public OrderHeader(OrderViewController orderViewController) {
         //css
         this.orderViewController = orderViewController;
-        newOrder.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY,new CornerRadii(5),new Insets(0))));
-        newOrder.setFont(Font.font("Verdana",25));
+        newOrder.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, new CornerRadii(5), new Insets(0))));
+        newOrder.setFont(Font.font("Verdana", 25));
         newOrder.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT)));
-        followNrlabel.setFont(Font.font("Verdana",20));
+        followNumberLabel.setFont(Font.font("Verdana", 20));
         choiceBox.setValue("Add cheapest sandwich");
         choiceBox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT)));
         choiceBox.setMinSize(100, 53);
@@ -38,15 +37,15 @@ public class OrderHeader extends BorderPane {
         // properties
         choiceBox.setValue(DiscountStrategyEnum.getEnumFromString(orderViewController.getPreferredDiscountStrategy()));
         newOrder.setOnAction(event -> {
-            updateFollownr();
-            ArrayList<String> dontchange = new ArrayList<>(Arrays.asList("New order", "To kitchen" , "Pay" ));
-            OrderView.changeallbuttons(OrderView.vBox, false, dontchange);
+            updateFollowNumber();
+            ArrayList<String> dontChange = new ArrayList<>(Arrays.asList("New order", "To kitchen", "Pay"));
+            OrderView.changeAllButtons(OrderView.vBox, false, dontChange);
             newOrder.setDisable(true);
         });
 
-        this.setPadding(new Insets(5,10,7,10));
+        this.setPadding(new Insets(5, 10, 7, 10));
         this.setLeft(newOrder);
-        this.setCenter(followNrlabel);
+        this.setCenter(followNumberLabel);
         this.setRight(choiceBox);
 
     }
@@ -55,7 +54,7 @@ public class OrderHeader extends BorderPane {
         return choiceBox;
     }
 
-    public void updateFollownr(){
-         followNrlabel.setText("Follownr: " + orderViewController.getfollownr());
+    public void updateFollowNumber() {
+        followNumberLabel.setText("Follownr: " + orderViewController.getFollowNumber());
     }
 }

@@ -1,4 +1,5 @@
 package view.orderMainPane.DetailsListAndButton;
+
 import controller.OrderViewController;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -11,14 +12,14 @@ import java.util.Arrays;
 public class CancelButton extends BorderPane {
     Button cancelOrder = new Button("cancel order");
 
-    public CancelButton(OrderViewController orderViewController){
-        cancelOrder.setFont(Font.font("Verdana",15));
+    public CancelButton(OrderViewController orderViewController) {
+        cancelOrder.setFont(Font.font("Verdana", 15));
         this.setCenter(cancelOrder);
         cancelOrder.setOnAction(event -> {
-            ArrayList<String> dontchange = new ArrayList<>(Arrays.asList("New order"));
-            OrderView.changeallbuttons(OrderView.vBox,true, dontchange);
+            ArrayList<String> dontChange = new ArrayList<>(Arrays.asList("New order"));
+            OrderView.changeAllButtons(OrderView.vBox, true, dontChange);
             orderViewController.cancelOrder();
-            OrderView.resetlabel();
+            OrderView.resetLabel();
         });
 
     }

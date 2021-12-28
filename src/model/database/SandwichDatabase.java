@@ -10,8 +10,7 @@ import java.util.*;
 
 public class SandwichDatabase {
 
-    TreeMap<String, Sandwich> sandwichsorts = new TreeMap<>();
-
+    TreeMap<String, Sandwich> sandwichSorts = new TreeMap<>();
 
     private static SandwichDatabase sandwichDatabase;
 
@@ -19,12 +18,9 @@ public class SandwichDatabase {
         load();
     }
 
-
     /**
      * Singleton design pattern
      */
-
-
 
     public static SandwichDatabase getInstance() {
         if (sandwichDatabase == null) {
@@ -33,24 +29,23 @@ public class SandwichDatabase {
         return sandwichDatabase;
     }
 
-    public TreeMap<String, Sandwich> getSandwichsorts() {
-        return sandwichsorts;
+    public TreeMap<String, Sandwich> getSandwichSorts() {
+        return sandwichSorts;
     }
 
     public void load() {
         try {
-            this.sandwichsorts = LoadSaveStrategyFactory.createLoadSaveStrategy(Settings.getProductFormatReaderSettings() == "excel" ? LoadSaveStrategyEnum.EXCEL_SANDWICH : LoadSaveStrategyEnum.TEXT_SANDWICH ).load();
+            this.sandwichSorts = LoadSaveStrategyFactory.createLoadSaveStrategy(Settings.getProductFormatReaderSettings() == "excel" ? LoadSaveStrategyEnum.EXCEL_SANDWICH : LoadSaveStrategyEnum.TEXT_SANDWICH).load();
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-
     public void save() {
         try {
             FileWriter myWriter = new FileWriter("src/bestanden/sandwiches.xls");
-            for (Sandwich sandwich : sandwichsorts.values()) {
+            for (Sandwich sandwich : sandwichSorts.values()) {
                 myWriter.write(sandwich.getName() + "," + sandwich.getPrice() + "," + sandwich.getStock() + "," + sandwich.getSold());
             }
             myWriter.close();
@@ -61,30 +56,26 @@ public class SandwichDatabase {
         }
     }
 
-
-
-
     public Sandwich getSandwich(String name) {
-        return sandwichsorts.get(name);
+        return sandwichSorts.get(name);
     }
 
     public HashMap<String, Integer> getStockListSandwiches() {
         HashMap<String, Integer> stockListSandwiches = new HashMap<>();
-        for (Sandwich sandwich : sandwichsorts.values()) {
+        for (Sandwich sandwich : sandwichSorts.values()) {
             stockListSandwiches.put(sandwich.getName(), sandwich.getStock());
         }
         return stockListSandwiches;
     }
 
-
     @Override
     public String toString() {
         return "SandwichDatabase{" +
-                "sandwichsorts=" + sandwichsorts +
+                "sandwichSorts=" + sandwichSorts +
                 '}';
     }
 
     public void reset() {
-       load();
+        load();
     }
 }

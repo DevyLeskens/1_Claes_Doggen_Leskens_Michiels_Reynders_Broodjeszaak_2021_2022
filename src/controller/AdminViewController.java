@@ -14,7 +14,6 @@ import view.adminPane.AdminView;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 
 
 public class AdminViewController implements Observer {
@@ -41,25 +40,23 @@ public class AdminViewController implements Observer {
     }
 
     @Override
-    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int countrorder, boolean orderisinspected, HashMap<String, HashMap<String, Integer>> orderdone, HashMap<String, Integer> peek) {
+    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int countOrder, boolean orderIsInspected, HashMap<String, HashMap<String, Integer>> orderDone, HashMap<String, Integer> peek) {
         System.out.println(toppingDatabase.toString() + " " + sandwichDatabase.toString() + " " + order.toString());
-        orderFacade.addOrderlineToDone();
+        orderFacade.addOrderLineToDone();
         adminView.update();
     }
 
     public Collection<Sandwich> getSandwichDatabase() {
-        return  orderFacade.getSandwichDatabase().getSandwichsorts().values();
+        return  orderFacade.getSandwichDatabase().getSandwichSorts().values();
     }
 
     public Collection<Topping> getToppingDatabase() {
-        return orderFacade.getToppingDatabase().getToppingsorts().values();
+        return orderFacade.getToppingDatabase().getToppingSorts().values();
     }
 
     public HashMap<String , HashMap<String , Integer>> getSoldOrders() {
-        return orderFacade.getdoneorders();
+        return orderFacade.getDoneOrders();
     }
-
-
 
     public void savePreferences(String format, String discount) {
         Settings.setProperties(format , discount);

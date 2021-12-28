@@ -5,7 +5,7 @@ import java.util.Properties;
 
 public class Settings {
 
-    public static void setProperties(String format,String discount){
+    public static void setProperties(String format, String discount) {
         try (OutputStream output = new FileOutputStream("src/bestanden/properties.properties")) {
             Properties prop = new Properties();
             prop.setProperty("productFormatReader", format);
@@ -16,7 +16,7 @@ public class Settings {
         }
     }
 
-    public static String getProductFormatReaderSettings(){
+    public static String getProductFormatReaderSettings() {
         try (InputStream input = new FileInputStream("src/bestanden/properties.properties")) {
             Properties prop = new Properties();
             prop.load(input);
@@ -26,7 +26,8 @@ public class Settings {
         }
         return null;
     }
-    public static String getPreferredDiscountStrategySettings(){
+
+    public static String getPreferredDiscountStrategySettings() {
         try (InputStream input = new FileInputStream("src/bestanden/properties.properties")) {
             Properties prop = new Properties();
             prop.load(input);

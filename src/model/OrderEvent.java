@@ -4,7 +4,7 @@ public enum OrderEvent {
     ADD_SANDWICH,
     DELETE_SANDWICH,
     ADD_IDENTICAL_SANDWICH,
-    ADD_TOPING,
+    Add_TOPPING,
     CANCEL_ORDER,
     TERMINATE_ORDER,
     PAY_ORDER,

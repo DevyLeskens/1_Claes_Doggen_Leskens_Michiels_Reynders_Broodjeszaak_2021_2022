@@ -13,7 +13,7 @@ public class ToppingsTextLoadSaveStrategy extends TextLoadSaveTemplate<String, T
 
     public @Override
     Topping makeObject(String[] tokens) {
-        return new Topping(tokens[0] , Double.parseDouble(tokens[1]), Integer.parseInt(tokens[2]) , Integer.parseInt(tokens[3]));
+        return new Topping(tokens[0], Double.parseDouble(tokens[1]), Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]));
 
     }
 
@@ -26,10 +26,13 @@ public class ToppingsTextLoadSaveStrategy extends TextLoadSaveTemplate<String, T
     public void save() {
 
     }
+
     @Override
     public TreeMap<String, Topping> load() {
-        try { return super.load();
-        }catch (Exception ignored){ }
+        try {
+            return super.load();
+        } catch (Exception ignored) {
+        }
         return null;
     }
 

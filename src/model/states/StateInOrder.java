@@ -25,12 +25,12 @@ public class StateInOrder extends OrderState {
     }
 
     @Override
-    public void terminate(){
-         order.setOrderState(order.getStateIsTerminated());
+    public void terminate() {
+        order.setOrderState(order.getStateIsTerminated());
     }
 
     @Override
-    public void cancelOrder(){
+    public void cancelOrder() {
         order.setOrderState(order.getStateInOrder());
     }
 }

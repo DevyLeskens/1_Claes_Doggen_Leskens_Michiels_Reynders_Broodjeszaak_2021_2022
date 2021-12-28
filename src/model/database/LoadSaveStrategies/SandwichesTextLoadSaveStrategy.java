@@ -13,7 +13,7 @@ public class SandwichesTextLoadSaveStrategy extends TextLoadSaveTemplate<String,
 
     @Override
     public Sandwich makeObject(String[] tokens) {
-        return new Sandwich(tokens[0] , Double.parseDouble(tokens[1]), Integer.parseInt(tokens[2]) , Integer.parseInt(tokens[3]));
+        return new Sandwich(tokens[0], Double.parseDouble(tokens[1]), Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]));
     }
 
     @Override
@@ -23,8 +23,10 @@ public class SandwichesTextLoadSaveStrategy extends TextLoadSaveTemplate<String,
 
     @Override
     public TreeMap<String, Sandwich> load() {
-        try { return super.load();
-        }catch (Exception ignored){ }
+        try {
+            return super.load();
+        } catch (Exception ignored) {
+        }
         return null;
     }
 

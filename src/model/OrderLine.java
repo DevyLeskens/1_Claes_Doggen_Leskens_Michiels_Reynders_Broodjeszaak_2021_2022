@@ -5,57 +5,61 @@ import model.domain.Topping;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.TooManyListenersException;
 
 public class OrderLine {
     private double price;
-    private String sandwichname;
-    private String toppingnames = "";
+    private String sandwichName;
+    private String toppingNames = "";
     private Sandwich sandwich;
-    private ArrayList<Topping> toppingssort = new ArrayList<>();
+    private ArrayList<Topping> toppingSorts = new ArrayList<>();
 
-    public OrderLine(Sandwich sandwich){
+    public OrderLine(Sandwich sandwich) {
         setSandwich(sandwich);
-        setSandwichname(sandwich.getName());
+        setSandwichName(sandwich.getName());
     }
-    public double getPrice(){
+
+    public double getPrice() {
         double total = sandwich.getPrice();
-        for (Topping topping: toppingssort) { total += topping.getPrice(); }
+        for (Topping topping : toppingSorts) {
+            total += topping.getPrice();
+        }
         return total;
     }
-    public String getSandwichname() {
-        return sandwichname;
+
+    public String getSandwichName() {
+        return sandwichName;
     }
 
-    public HashMap<String, Integer> getToppingsAsStringMap(){
+
+    public HashMap<String, Integer> getToppingsAsStringMap() {
         HashMap<String, Integer> topping = new HashMap<>();
-        for (Topping toppingsort: getToppingssort()) {
-            if (topping.containsKey(toppingsort.toString())) {
-                topping.put(toppingsort.toString(), topping.get(toppingsort.toString()) + 1);
+        for (Topping toppingSort : getToppingSorts()) {
+            if (topping.containsKey(toppingSort.toString())) {
+                topping.put(toppingSort.toString(), topping.get(toppingSort.toString()) + 1);
             } else {
-                topping.put(toppingsort.toString(), 1);
+                topping.put(toppingSort.toString(), 1);
             }
         }
         return topping;
     }
 
-    public void setSandwichname(String sandwichname) {
-        this.sandwichname = sandwichname;
+    public void setSandwichName(String sandwichName) {
+        this.sandwichName = sandwichName;
     }
 
-    public String getToppingnames() {
-        return toppingnames;
+    public String getToppingNames() {
+        return toppingNames;
     }
 
-    public void setToppingnames(ArrayList<String> toppingnames) {
-        this.toppingnames = toppingnames.toString();
+    public void setToppingNames(ArrayList<String> toppingNames) {
+        this.toppingNames = toppingNames.toString();
     }
 
     public void addTopping(Topping topping) {
-        toppingnames +=  topping.getName() + ", ";
-        this.toppingssort.add(topping);
-        this.toppingnames = toppingnames.replaceFirst(" ", ",");
-        this.toppingnames = toppingnames.substring(0,toppingnames.length()-2) + " ";
+        toppingNames += topping.getName() + ", ";
+        this.toppingSorts.add(topping);
+        this.toppingNames = toppingNames.replaceFirst(" ", ",");
+        this.toppingNames = toppingNames.substring(0, toppingNames.length() - 2) + " ";
     }
 
     public Sandwich getSandwich() {
@@ -66,16 +70,16 @@ public class OrderLine {
         this.sandwich = sandwich;
     }
 
-    public ArrayList<Topping> getToppingssort() {
-        return toppingssort;
+    public ArrayList<Topping> getToppingSorts() {
+        return toppingSorts;
     }
 
-    public void setToppingssort(ArrayList<Topping> toppingssort) {
-        this.toppingssort = toppingssort;
+    public void setToppingSorts(ArrayList<Topping> toppingSorts) {
+        this.toppingSorts = toppingSorts;
     }
 
     @Override
     public String toString() {
-        return sandwichname + ": " + getToppingsAsStringMap() ;
+        return sandwichName + ": " + getToppingsAsStringMap();
     }
 }

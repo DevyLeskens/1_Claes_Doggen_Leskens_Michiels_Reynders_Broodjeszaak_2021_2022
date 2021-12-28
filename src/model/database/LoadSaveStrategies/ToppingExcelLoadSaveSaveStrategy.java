@@ -1,7 +1,6 @@
 package model.database.LoadSaveStrategies;
 
 import model.database.ExcelLoadSaveTemplate;
-import model.domain.Sandwich;
 import model.domain.Topping;
 
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ public class ToppingExcelLoadSaveSaveStrategy extends ExcelLoadSaveTemplate<Stri
 
     @Override
     public Topping makeObject(ArrayList<String> tokens) {
-        return new Topping(tokens.get(0),Double.parseDouble(tokens.get(1)),Integer.parseInt(tokens.get(2)),Integer.parseInt(tokens.get(3)));
+        return new Topping(tokens.get(0), Double.parseDouble(tokens.get(1)), Integer.parseInt(tokens.get(2)), Integer.parseInt(tokens.get(3)));
     }
 
     @Override
@@ -25,10 +24,11 @@ public class ToppingExcelLoadSaveSaveStrategy extends ExcelLoadSaveTemplate<Stri
 
     @Override
     public TreeMap<String, Topping> load() {
-       try {
-           return super.load();
-       }catch (Exception ignored){ }
-       return null;
+        try {
+            return super.load();
+        } catch (Exception ignored) {
+        }
+        return null;
     }
 
     @Override

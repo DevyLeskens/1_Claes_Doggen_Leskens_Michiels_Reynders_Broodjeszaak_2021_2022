@@ -9,12 +9,12 @@ public class StateIsTerminated extends OrderState {
     }
 
     @Override
-    public void pay(){
+    public void pay() {
         order.setOrderState(order.getStateIsPayed());
     }
 
     @Override
-    public void cancelOrder(){
+    public void cancelOrder() {
         order.setOrderState(order.getStateIsCanceled());
     }
 }

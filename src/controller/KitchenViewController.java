@@ -6,7 +6,6 @@ import model.OrderFacade;
 import model.database.SandwichDatabase;
 import model.database.ToppingDatabase;
 import view.KitchenPane.KitchenView;
-import view.adminPane.AdminView;
 
 import java.util.HashMap;
 
@@ -32,16 +31,16 @@ public class KitchenViewController implements Observer {
     }
 
     @Override
-    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int orderCount, boolean orderisinspected, HashMap<String, HashMap<String, Integer>> ordersdone, HashMap<String, Integer> peek){
+    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int countOrder, boolean orderIsInspected, HashMap<String, HashMap<String, Integer>> orderDone, HashMap<String, Integer> peek) {
         System.out.println(toppingDatabase.toString() + " " + sandwichDatabase.toString() + " " + order.toString());
-        kitchenView.update(orderCount, orderisinspected,peek);
+        kitchenView.update(countOrder, orderIsInspected,peek);
     }
 
     public void startPreparation() {
         orderFacade.startPreparation();
     }
 
-    public void Done() {
-        orderFacade.Done();
+    public void done() {
+        orderFacade.done();
     }
 }

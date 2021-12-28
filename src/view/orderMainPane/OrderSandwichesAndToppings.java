@@ -15,7 +15,6 @@ import view.orderMainPane.DetailsListAndButton.OrderDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 
 
 public class OrderSandwichesAndToppings extends VBox {
@@ -41,7 +40,7 @@ public class OrderSandwichesAndToppings extends VBox {
     }
 
     public void setSandwichesButtons() {
-        for (Sandwich sandwich : OrderFacade.getInstance().getSandwichDatabase().getSandwichsorts().values()) {
+        for (Sandwich sandwich : OrderFacade.getInstance().getSandwichDatabase().getSandwichSorts().values()) {
             Button sandwichType = new Button(sandwich.getName());
             sandwichButtons.add(sandwichType);
             //css
@@ -58,13 +57,13 @@ public class OrderSandwichesAndToppings extends VBox {
 
             sandwichType.setOnAction(event -> {
                 orderViewController.addOrderLine(sandwich.getName());
-                OrderView.updatelabel();
+                OrderView.updateLabel();
             });
         }
     }
 
     public void setToppingsButtons() {
-        for (Topping topping : OrderFacade.getInstance().getToppingDatabase().getToppingsorts().values()) {
+        for (Topping topping : OrderFacade.getInstance().getToppingDatabase().getToppingSorts().values()) {
             Button toppingButton = new Button(topping.getName());
             toppingButtons.add(toppingButton);
             //css
@@ -91,19 +90,22 @@ public class OrderSandwichesAndToppings extends VBox {
             }
         }
     }
-    public void updateStatusToppingButtons(HashMap<String, Integer> stockListTopings) {
-        for (Button toppingButton: toppingButtons) {
-            if (stockListTopings.get(toppingButton.getText()) <= 0) {
+
+    public void updateStatusToppingButtons(HashMap<String, Integer> stockListToppings) {
+        for (Button toppingButton : toppingButtons) {
+            if (stockListToppings.get(toppingButton.getText()) <= 0) {
                 toppingButton.setDisable(true);
             }
         }
     }
-    public static void setSelectedColumnId(int newselectedColumnId) {
-        selectedColumnId = newselectedColumnId;
+
+    public static void setSelectedColumnId(int newSelectedColumnId) {
+        selectedColumnId = newSelectedColumnId;
     }
+
     public static int getSelectedColumnId() {
         OrderLine orderLine = (OrderLine) OrderDetails.tableView.getSelectionModel().getSelectedItem();
-        OrderSandwichesAndToppings.setSelectedColumnId(OrderDetails.getIdOfTable(orderLine ,  (Collection<OrderLine>) OrderDetails.tableView.getItems()));
+        OrderSandwichesAndToppings.setSelectedColumnId(OrderDetails.getIdOfTable(orderLine, (Collection<OrderLine>) OrderDetails.tableView.getItems()));
         return selectedColumnId;
     }
 

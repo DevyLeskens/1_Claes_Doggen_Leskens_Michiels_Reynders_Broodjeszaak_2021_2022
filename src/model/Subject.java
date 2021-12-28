@@ -5,11 +5,10 @@ import controller.Observer;
 
 public interface Subject {
 
+    void registerObserver(OrderEvent orderevent, Observer o);
 
-    public void registerObserver(OrderEvent orderevent, Observer o);
+    void removeObserver(OrderEvent orderEvent, Observer o);
 
-    public void removeObserver(OrderEvent orderEvent, Observer o);
-
-    public void notifyObservers(OrderEvent orderEvent);
+    void notifyObservers(OrderEvent orderEvent);
 
 }

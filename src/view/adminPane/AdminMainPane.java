@@ -2,16 +2,13 @@ package view.adminPane;
 
 
 import controller.AdminViewController;
-import javafx.geometry.Insets;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import model.OrderFacade;
 
 public class AdminMainPane extends BorderPane {
-	public AdminMainPane(AdminViewController adminViewController){
-	    TabPane tabPane = new TabPane();
+    public AdminMainPane(AdminViewController adminViewController) {
+        TabPane tabPane = new TabPane();
         //Tab spelVerloopTab = new Tab("Spelverloop");
         HBox panes = new HBox();
         panes.getChildren().add(new SandwichOverviewPane(adminViewController));
@@ -32,5 +29,5 @@ public class AdminMainPane extends BorderPane {
         tabPane.getTabs().add(statistiekTab);
         tabPane.getTabs().add(instellingTab);
         this.setCenter(tabPane);
-	}
+    }
 }

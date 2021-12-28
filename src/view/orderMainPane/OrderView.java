@@ -1,13 +1,11 @@
 package view.orderMainPane;
 
-import controller.AdminViewController;
 import controller.OrderViewController;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
@@ -16,8 +14,6 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.OrderLine;
-import model.states.StateInWait;
-import view.adminPane.AdminMainPane;
 import view.orderMainPane.DetailsListAndButton.OrderDetails;
 
 import javax.swing.*;
@@ -28,7 +24,7 @@ import java.util.List;
 
 public class OrderView {
 
-    public int ordercount;
+    public int orderCount;
     public static VBox vBox = new VBox();
     private Stage stage = new Stage();
     public static int sandwichCount = 0;
@@ -53,7 +49,7 @@ public class OrderView {
         Group root = new Group();
         Scene scene = new Scene(root, 720, 650);
 
-        vBox.setBackground(new Background(new BackgroundFill(Color.SNOW,new CornerRadii(0),new Insets(0))));
+        vBox.setBackground(new Background(new BackgroundFill(Color.SNOW, new CornerRadii(0), new Insets(0))));
         countSandwiches.setFont(Font.font("Verdana", 15));
         countSandwiches.setPadding(new Insets(5, 0, 5, 10));
         vBox.getChildren().addAll(orderHeader, orderSandwichesAndToppings, countSandwiches, orderDetails, orderFooter);
@@ -61,8 +57,8 @@ public class OrderView {
         vBox.prefWidthProperty().bind(scene.widthProperty());
         root.getChildren().add(vBox);
 
-        ArrayList<String> dontchange = new ArrayList<>(Arrays.asList("New order"));
-        changeallbuttons(vBox, true, dontchange);
+        ArrayList<String> dontChange = new ArrayList<>(Arrays.asList("New order"));
+        changeAllButtons(vBox, true, dontChange);
 
         stage.setScene(scene);
         stage.sizeToScene();
@@ -72,51 +68,57 @@ public class OrderView {
     }
 
     public void increaseOrderCount() {
-        ordercount++;
+        orderCount++;
     }
+
     public int getOrderCount() {
-        return ordercount;
+        return orderCount;
     }
+
     public void decreaseOrderCount() {
-        ordercount--;
+        orderCount--;
     }
 
 
-    public static void changeallbuttons(Parent parent, boolean state, ArrayList<String> dontchange) {
+    public static void changeAllButtons(Parent parent, boolean state, ArrayList<String> dontChange) {
         for (Node node : parent.getChildrenUnmodifiable()) {
-            if (node instanceof Button){
+            if (node instanceof Button) {
                 node.setDisable(state);
             }
-            if(node instanceof Button && dontchange.contains(((Button) node).getText())){
+            if (node instanceof Button && dontChange.contains(((Button) node).getText())) {
                 node.setDisable(!state);
             }
             if (node instanceof Parent)
-                changeallbuttons((Parent)node,state,dontchange);
+                changeAllButtons((Parent) node, state, dontChange);
         }
     }
 
 
-    public static void resetlabel(){
+    public static void resetLabel() {
         sandwichCount = 0;
         countSandwiches.setText("Sandwich count: " + sandwichCount);
     }
-    public void errorBox(String infoMessage, String titleBar)
-    {
+
+    public void errorBox(String infoMessage, String titleBar) {
         JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
-        
+
     }
-    public static void updatelabel(){
+
+    public static void updateLabel() {
         sandwichCount++;
         countSandwiches.setText("Sandwich count: " + sandwichCount);
     }
+
     public void updateOrderLines(List<OrderLine> orderLines, double amount) {
         orderDetails.fillTable(orderLines);
         OrderFooter.updateAmount(amount);
     }
+
     public void updateStatusSandwichesButtons(HashMap<String, Integer> stockListSandwiches) {
         orderSandwichesAndToppings.updateStatusSandwichButtons(stockListSandwiches);
     }
-    public void updateStatusToppingButtons(HashMap<String, Integer> stockListTopings){
-        orderSandwichesAndToppings.updateStatusToppingButtons(stockListTopings);
+
+    public void updateStatusToppingButtons(HashMap<String, Integer> stockListToppings) {
+        orderSandwichesAndToppings.updateStatusToppingButtons(stockListToppings);
     }
 }
