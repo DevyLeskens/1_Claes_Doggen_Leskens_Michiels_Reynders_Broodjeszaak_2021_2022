@@ -44,17 +44,7 @@ public class ToppingDatabase {
     }
     // dummy methode
     public void save(){
-        try {
-            FileWriter myWriter = new FileWriter("src/bestanden/sandwiches.xls");
-            for (Topping topping: toppingsorts.values()) {
-                myWriter.write(topping.getName() + "," + topping.getPrice()+ "," + topping.getStock() + "," + topping.getSold());
-            }
-            myWriter.close();
-            System.out.println("Successfully wrote to the file.");
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
+
     }
 
     @Override

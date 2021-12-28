@@ -66,6 +66,9 @@ public class OrderViewController implements Observer {
     public ArrayList<String> getDiscounts(){
         return orderFacade.getDiscounts();
     }
+    public DiscountStrategyEnum[] getDiscountsEnum(){
+        return orderFacade.getDiscountsEnum();
+    }
     public List<OrderLine> getOrderLines() {
         return orderFacade.getOrderLines();
     }

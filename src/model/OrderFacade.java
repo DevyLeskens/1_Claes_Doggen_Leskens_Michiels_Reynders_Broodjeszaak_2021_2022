@@ -140,6 +140,9 @@ public class OrderFacade implements Subject {
     public ArrayList<String> getDiscounts() {
         return DiscountStrategyEnum.getDiscounts();
     }
+    public DiscountStrategyEnum[] getDiscountsEnum() {
+        return DiscountStrategyEnum.values();
+    }
     public LoadSaveStrategyEnum[] getLoadTypes(){
         return LoadSaveStrategyEnum.values();
     }

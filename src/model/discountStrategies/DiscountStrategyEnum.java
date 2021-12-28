@@ -22,11 +22,12 @@ public enum DiscountStrategyEnum {
     public String getName() { return name; }
     public String getLocation() { return location; }
 
+    public static DiscountStrategyEnum getEnumFromString(String name){
+        for (DiscountStrategyEnum discount: DiscountStrategyEnum.values()) {
+            if(discount.getName().equals(name)){return discount;}
+        }return null;
+    }
     public static ArrayList<String>getDiscounts(){
         return Arrays.stream(DiscountStrategyEnum.values()).map(DiscountStrategyEnum::toString).collect(Collectors.toCollection(ArrayList::new));
-    }
-    @Override
-    public String toString() {
-        return getName();
     }
 }

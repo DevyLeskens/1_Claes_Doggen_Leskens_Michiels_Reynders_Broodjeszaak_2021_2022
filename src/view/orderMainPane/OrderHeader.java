@@ -31,12 +31,12 @@ public class OrderHeader extends BorderPane {
         choiceBox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT)));
         choiceBox.setMinSize(100, 53);
         //css
-        ArrayList<String> discounts = orderViewController.getDiscounts();
-        for (String discount: orderViewController.getDiscounts()) {
+        DiscountStrategyEnum[] discounts = orderViewController.getDiscountsEnum();
+        for (DiscountStrategyEnum discount: orderViewController.getDiscountsEnum()) {
             choiceBox.getItems().add(discount);
         }
         // properties
-        choiceBox.setValue(orderViewController.getPreferredDiscountStrategy());
+        choiceBox.setValue(DiscountStrategyEnum.getEnumFromString(orderViewController.getPreferredDiscountStrategy()));
         newOrder.setOnAction(event -> {
             updateFollownr();
             ArrayList<String> dontchange = new ArrayList<>(Arrays.asList("New order", "To kitchen" , "Pay" ));
