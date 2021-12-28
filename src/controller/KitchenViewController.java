@@ -6,21 +6,26 @@ import model.OrderFacade;
 import model.database.SandwichDatabase;
 import model.database.ToppingDatabase;
 import view.KitchenPane.KitchenView;
+import view.adminPane.AdminView;
 
 import java.util.HashMap;
 
 public class KitchenViewController implements Observer {
 
-    OrderFacade orderFacade = OrderFacade.getInstance();
-    KitchenView kitchenView = new KitchenView(this);
+    OrderFacade orderFacade;
+    KitchenView kitchenView;
 
-    public KitchenViewController() {
+    public KitchenViewController(OrderFacade orderfacade) {
+        this.orderFacade=orderfacade;
         orderFacade.registerObserver(OrderEvent.START_PREPARATION, this);
         orderFacade.registerObserver(OrderEvent.ORDER_TO_KITCHEN, this);
         orderFacade.registerObserver(OrderEvent.ORDER_IS_DONE, this);
 
     }
 
+    public void setKitchenView(KitchenView kitchenView) {
+        this.kitchenView = kitchenView;
+    }
 
     public int getOrderCount(){
         return orderFacade.getOrderCount();

@@ -35,6 +35,10 @@ public class Order{
         this.orderState = orderState;
     }
 
+    public int getFollownr() {
+        return follownr;
+    }
+
     public List<OrderLine> getOrderLines() {
         return orderLines;
     }

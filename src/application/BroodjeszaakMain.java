@@ -23,7 +23,7 @@ public class BroodjeszaakMain extends Application {
         AdminViewController adminViewController = new AdminViewController(orderFacade);
         AdminView adminView = new AdminView(adminViewController);
 
-        KitchenViewController kitchenViewController = new KitchenViewController();
+        KitchenViewController kitchenViewController = new KitchenViewController(orderFacade);
         KitchenView kitchenView = new KitchenView(kitchenViewController);
 
         OrderViewController orderViewController = new OrderViewController(orderFacade);

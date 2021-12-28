@@ -29,6 +29,7 @@ public class KitchenView {
 	private Label countOrders = new Label();
 
 	public KitchenView(KitchenViewController kitchenViewController){
+		kitchenViewController.setKitchenView(this);
 		countOrders.setText("Count of orders in waiting line: None" );
 		stage.setTitle("KITCHEN VIEW");
 		stage.initStyle(StageStyle.UTILITY);
@@ -53,6 +54,7 @@ public class KitchenView {
 	}
 	public void update(int countorder, boolean orderisinspected, HashMap<String, Integer> order){
 		countOrders.setText("Count of orders in waiting line: " + countorder);
+
 		Buttons.update(countorder, orderisinspected, order);
 
 	}
