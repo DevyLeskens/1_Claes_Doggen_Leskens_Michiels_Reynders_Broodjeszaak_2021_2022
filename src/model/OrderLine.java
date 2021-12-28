@@ -4,6 +4,7 @@ import model.domain.Sandwich;
 import model.domain.Topping;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.TooManyListenersException;
 
 public class OrderLine {
@@ -24,6 +25,17 @@ public class OrderLine {
     }
     public String getSandwichname() {
         return sandwichname;
+    }
+    public HashMap<String, Integer> getToppingsAsStringMap(){
+        HashMap<String, Integer> topping = new HashMap<>();
+        for (Topping toppingsort: getToppingssort()) {
+            if (topping.containsKey(toppingsort.toString())) {
+                topping.put(toppingsort.toString(), topping.get(toppingsort.toString()) + 1);
+            } else {
+                topping.put(toppingsort.toString(), 1);
+            }
+        }
+        return topping;
     }
 
     public void setSandwichname(String sandwichname) {
@@ -63,11 +75,6 @@ public class OrderLine {
 
     @Override
     public String toString() {
-        return "OrderLine{" +
-                "sandwichname='" + sandwichname + '\'' +
-                ", toppingnames=" + toppingnames +
-                ", sandwich=" + sandwich +
-                ", toppingssort=" + toppingssort +
-                '}';
+        return sandwichname + ": " + getToppingsAsStringMap() ;
     }
 }

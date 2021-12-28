@@ -1,0 +1,8 @@
+######################################
+#
+# Configuration SandwichShop
+#
+# ######################################
+
+ProductFormatReader=Excel
+preferredDiscountStrategy=No discount
