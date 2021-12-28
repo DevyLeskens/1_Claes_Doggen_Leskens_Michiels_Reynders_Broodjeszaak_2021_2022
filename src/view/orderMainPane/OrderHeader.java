@@ -1,6 +1,7 @@
 package view.orderMainPane;
 
 import controller.OrderViewController;
+import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -26,15 +27,12 @@ public class OrderHeader extends BorderPane {
         newOrder.setFont(Font.font("Verdana", 25));
         newOrder.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT)));
         followNumberLabel.setFont(Font.font("Verdana", 20));
-        choiceBox.setValue("Add cheapest sandwich");
         choiceBox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT)));
         choiceBox.setMinSize(100, 53);
         //css
-        DiscountStrategyEnum[] discounts = orderViewController.getDiscountsEnum();
-        for (DiscountStrategyEnum discount: orderViewController.getDiscountsEnum()) {
-            choiceBox.getItems().add(discount);
-        }
+        choiceBox.setItems(FXCollections.observableArrayList(orderViewController.getDiscountsEnum()));
         // properties
+        System.out.println(DiscountStrategyEnum.getEnumFromString(orderViewController.getPreferredDiscountStrategy()));
         choiceBox.setValue(DiscountStrategyEnum.getEnumFromString(orderViewController.getPreferredDiscountStrategy()));
         newOrder.setOnAction(event -> {
             updateFollowNumber();

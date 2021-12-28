@@ -24,10 +24,8 @@ public class ToppingExcelLoadSaveSaveStrategy extends ExcelLoadSaveTemplate<Stri
 
     @Override
     public TreeMap<String, Topping> load() {
-        try {
-            return super.load();
-        } catch (Exception ignored) {
-        }
+        try { return super.load();
+        } catch (Exception ignored) { }
         return null;
     }
 

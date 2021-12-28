@@ -19,7 +19,7 @@ public class SandwichOverviewPane extends GridPane {
         label.setFont(new Font(20));
         this.add(label, 0, 0, 1, 1);
         OverviewPane.refresh(adminViewController.getSandwichDatabase(), sandwichStock);
-        OverviewPane.setEqualColumns(new String[]{"name", "price", "stock"}, sandwichStock);
+        OverviewPane.setEqualColumns(new String[]{"Name", "price", "stock"}, sandwichStock);
         sandwichStock.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         this.add(sandwichStock, 0, 1, 1, 1);
     }

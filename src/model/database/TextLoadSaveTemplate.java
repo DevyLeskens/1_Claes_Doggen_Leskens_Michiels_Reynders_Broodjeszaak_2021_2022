@@ -4,6 +4,7 @@ import model.database.LoadSaveStrategies.LoadSaveStrategyEnum;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.TreeMap;
 
@@ -29,7 +30,19 @@ public abstract class TextLoadSaveTemplate<K, V> {
         }
         return returnMap;
     }
-
+    protected void save(TreeMap<K, V> database){
+        try {
+            FileWriter writer = new FileWriter("src/bestanden/sandwichesCopy.txt");
+            for (V product : database.values()) {
+                writer.write(product.toString());
+            }
+            writer.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
     protected abstract V makeObject(String[] tokens);
 
     protected abstract K getKey(String[] tokens);

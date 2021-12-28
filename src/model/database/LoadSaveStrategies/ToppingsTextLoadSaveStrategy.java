@@ -1,6 +1,8 @@
 package model.database.LoadSaveStrategies;
 
+import model.database.SandwichDatabase;
 import model.database.TextLoadSaveTemplate;
+import model.database.ToppingDatabase;
 import model.domain.Topping;
 
 import java.util.TreeMap;
@@ -24,15 +26,13 @@ public class ToppingsTextLoadSaveStrategy extends TextLoadSaveTemplate<String, T
 
     @Override
     public void save() {
-
+        super.save(ToppingDatabase.getInstance().getToppingSorts());
     }
 
     @Override
     public TreeMap<String, Topping> load() {
-        try {
-            return super.load();
-        } catch (Exception ignored) {
-        }
+        try { return super.load();
+        } catch (Exception ignored) { }
         return null;
     }
 

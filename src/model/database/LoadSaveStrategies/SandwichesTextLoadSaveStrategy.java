@@ -1,6 +1,8 @@
 package model.database.LoadSaveStrategies;
 
+import model.database.SandwichDatabase;
 import model.database.TextLoadSaveTemplate;
+import model.database.ToppingDatabase;
 import model.domain.Sandwich;
 
 import java.util.TreeMap;
@@ -23,15 +25,13 @@ public class SandwichesTextLoadSaveStrategy extends TextLoadSaveTemplate<String,
 
     @Override
     public TreeMap<String, Sandwich> load() {
-        try {
-            return super.load();
-        } catch (Exception ignored) {
-        }
+        try { return super.load();
+        } catch (Exception ignored) { }
         return null;
     }
 
     @Override
     public void save() {
-
+        super.save(SandwichDatabase.getInstance().getSandwichSorts());
     }
 }

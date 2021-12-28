@@ -35,19 +35,7 @@ public abstract class ExcelLoadSaveTemplate<K, V> {
         }
         return returnMap;
     }
-    protected void save(TreeMap<K, V> database){
-        try {
-            FileWriter writer = new FileWriter("src/bestanden/sandwiches.txt");
-            for (V product : database.values()) {
-                writer.write(product.toString());
-            }
-            writer.close();
-            System.out.println("Successfully wrote to the file.");
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-    }
+
 
     protected abstract V makeObject(ArrayList<String> tokens);
 

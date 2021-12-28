@@ -31,6 +31,11 @@ public enum DiscountStrategyEnum {
         }return null;
     }
     public static ArrayList<String>getDiscounts(){
-        return Arrays.stream(DiscountStrategyEnum.values()).map(DiscountStrategyEnum::toString).collect(Collectors.toCollection(ArrayList::new));
+        return Arrays.stream(DiscountStrategyEnum.values()).map(DiscountStrategyEnum::getName).collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

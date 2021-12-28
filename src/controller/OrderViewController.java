@@ -129,6 +129,10 @@ public class OrderViewController implements Observer {
         orderFacade.pay();
     }
 
+    public ArrayList<String> getAllDiscounts(){
+        return orderFacade.getDiscounts();
+    }
+
     public void endOrder(DiscountStrategyEnum selectedItem) {
         calculateDiscount(selectedItem);
         orderFacade.endOrder();

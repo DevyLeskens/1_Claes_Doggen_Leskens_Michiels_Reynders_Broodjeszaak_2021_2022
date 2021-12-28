@@ -1,7 +1,6 @@
 package model.domain;
 
 
-import java.sql.PreparedStatement;
 import java.util.Objects;
 
 public abstract class Product {
@@ -10,10 +9,8 @@ public abstract class Product {
     public double price;
     public int stock;
     public int sold;
-    private int keyCount;
 
     public Product(String name, double price, int stock, int sold) {
-        setKeyCount(1);
         setName(name);
         setPrice(price);
         setStock(stock);
@@ -64,10 +61,6 @@ public abstract class Product {
         this.sold = sold;
     }
 
-    public void setKeyCount(int keyCount) {
-        this.keyCount = keyCount;
-    }
-
     public void updateStock() {
         if (stock > 0) {
             stock--;
@@ -75,27 +68,18 @@ public abstract class Product {
             throw new IllegalArgumentException("There is currently no stock available.");
         }
     }
-    public Product  productIncremented(){
-        keyCount++;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return keyCount +  " x " + name;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Double.compare(product.price, price) == 0 && stock == product.stock && sold == product.sold && keyCount == product.keyCount && Objects.equals(name, product.name);
+        return Double.compare(product.price, price) == 0 && stock == product.stock && sold == product.sold && Objects.equals(name, product.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, price, stock, sold, keyCount);
+        return Objects.hash(name, price, stock, sold);
     }
 
 }

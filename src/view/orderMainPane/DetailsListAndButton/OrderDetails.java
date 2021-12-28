@@ -35,7 +35,7 @@ public class OrderDetails extends BorderPane {
     public void fillTable(List<OrderLine> orderLines) {
         refresh(orderLines);
         if (tableView.getColumns().size() == 0) {
-            this.setEqualColumns(new String[]{"sandwichName", "toppingNames"}, tableView);
+            this.setEqualColumns(new String[]{"sandwichname", "toppingnames"}, tableView);
         }
     }
 
