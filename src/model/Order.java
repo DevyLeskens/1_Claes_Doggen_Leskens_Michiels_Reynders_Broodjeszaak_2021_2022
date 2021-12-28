@@ -7,6 +7,7 @@ import model.domain.Topping;
 import model.states.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Order{
@@ -41,6 +42,18 @@ public class Order{
         orderState.deleteSandwich();
         orderLines.remove(id);
 
+    }
+    public HashMap<String , Integer> giverorderashashmap(){
+        HashMap<String , Integer> order = new HashMap<>();
+        for (OrderLine orderline: getOrderLines()) {
+            if (order.containsKey(orderline.toString())) {
+                order.put(orderline.toString(), order.get(orderline.toString()) + 1);
+            } else {
+                order.put(orderline.toString(), 1);
+            }
+
+        }
+        return order;
     }
     public void addIdenticalSandwich(int id){
         orderState.addIdenticalSandwich();

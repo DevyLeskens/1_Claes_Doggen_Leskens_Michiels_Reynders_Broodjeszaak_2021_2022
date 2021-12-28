@@ -8,6 +8,8 @@ import javafx.scene.layout.VBox;
 import model.Order;
 import model.OrderLine;
 
+import java.util.HashMap;
+
 public class OrderDetails extends VBox {
 
     Label follownr = new Label("Follownr order:" + "- Count sandwiches: ");
@@ -19,7 +21,7 @@ public class OrderDetails extends VBox {
         this.setMinHeight(120);
     }
 
-    public static void update(Order order, boolean isinspected){
+    public static void update(HashMap<String, Integer> order, boolean isinspected){
         if(order == null || !isinspected){
             details.setText("");
         }else {

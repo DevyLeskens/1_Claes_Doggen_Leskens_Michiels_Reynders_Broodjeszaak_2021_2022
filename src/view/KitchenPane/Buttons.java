@@ -9,6 +9,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import model.Order;
 
+import java.util.HashMap;
+
 public class Buttons extends BorderPane {
     private static Button next = new Button("Next order");
     private static Button orderFinished = new Button("Order finished");
@@ -37,7 +39,7 @@ public class Buttons extends BorderPane {
         });
 
     }
-    public static void update(int countorder, boolean orderisinspected, Order order){
+    public static void update(int countorder, boolean orderisinspected, HashMap<String, Integer> order){
 
         next.setDisable(countorder < 1 || orderisinspected);
         orderFinished.setDisable(!orderisinspected);

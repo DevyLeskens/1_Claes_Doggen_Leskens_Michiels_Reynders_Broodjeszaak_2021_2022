@@ -14,12 +14,6 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import model.discountStrategies.DiscountStrategyEnum;
-import view.adminPane.AdminView;
-import view.orderMainPane.OrderView;
-
-import java.util.List;
-import java.util.Set;
-
 
 
 public class AdminViewController implements Observer {
@@ -46,7 +40,7 @@ public class AdminViewController implements Observer {
     }
 
     @Override
-    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int countrorder, boolean orderisinspected, HashMap<String, HashMap<String, Integer>> orderdone, Order peek) {
+    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int countrorder, boolean orderisinspected, HashMap<String, HashMap<String, Integer>> orderdone, HashMap<String, Integer> peek) {
         System.out.println(toppingDatabase.toString() + " " + sandwichDatabase.toString() + " " + order.toString());
         orderFacade.addOrderlineToDone();
         adminView.update();

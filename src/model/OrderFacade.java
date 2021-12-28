@@ -1,5 +1,6 @@
 package model;
 
+import model.database.LoadSaveStrategies.LoadSaveStrategyEnum;
 import model.database.SandwichDatabase;
 import model.database.ToppingDatabase;
 import model.discountStrategies.DiscountStrategyEnum;
@@ -16,6 +17,10 @@ public class OrderFacade implements Subject {
 
     private boolean Orderisinspected;
     private static int follownr = 0;
+
+    private List<Enum> loads;
+    private int orderCount = 0;
+
     private static OrderFacade orderFacade;
     private ToppingDatabase toppingDatabase;
     private SandwichDatabase sandwichDatabase;
@@ -83,7 +88,7 @@ public class OrderFacade implements Subject {
     @Override
     public void notifyObservers(OrderEvent orderEvent) {
         for (Observer observer : observers.get(orderEvent)) {
-            observer.update(toppingDatabase, sandwichDatabase, order, getOrderCount(), isOrderisinspected() , doneorders, kitchenQueue.peek());
+            observer.update(toppingDatabase, sandwichDatabase, order, getOrderCount(), isOrderisinspected() , doneorders, kitchenQueue.size() != 0 ? kitchenQueue.peek().giverorderashashmap() : null);
         }
     }
     public void addOrderline(String sandwichName) {
@@ -113,6 +118,7 @@ public class OrderFacade implements Subject {
         return order.getOrderLines();
     }
 
+
     public HashMap<String, Integer> getStockListSandwiches() {
         return sandwichDatabase.getStockListSandwiches();
     }
@@ -136,6 +142,9 @@ public class OrderFacade implements Subject {
     }
     public DiscountStrategyEnum[] getDiscounts() {
         return DiscountStrategyEnum.values();
+    }
+    public LoadSaveStrategyEnum[] getLoadTypes(){
+        return LoadSaveStrategyEnum.values();
     }
 
 
@@ -194,5 +203,9 @@ public class OrderFacade implements Subject {
     public int getOrderCount() {
         return kitchenQueue.size();
     }
+    public HashMap<String , Integer> giverorderashashmap(Order order){
+        return order.giverorderashashmap();
+    }
+
 }
 

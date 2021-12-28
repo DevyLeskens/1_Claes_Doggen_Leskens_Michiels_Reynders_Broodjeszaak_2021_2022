@@ -19,6 +19,8 @@ import model.Order;
 import model.OrderFacade;
 import model.OrderLine;
 
+import java.util.HashMap;
+
 
 public class KitchenView {
 	private KitchenViewController kitchenViewController;
@@ -49,7 +51,7 @@ public class KitchenView {
 		countOrders.setFont(Font.font("Verdana", 20));
 		countOrders.setPadding(new Insets(5,5,5,10));
 	}
-	public void update(int countorder, boolean orderisinspected, Order order){
+	public void update(int countorder, boolean orderisinspected, HashMap<String, Integer> order){
 		countOrders.setText("Count of orders in waiting line: " + countorder);
 		Buttons.update(countorder, orderisinspected, order);
 

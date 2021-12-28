@@ -27,7 +27,7 @@ public class KitchenViewController implements Observer {
     }
 
     @Override
-    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int orderCount, boolean orderisinspected, HashMap<String, HashMap<String, Integer>> ordersdone, Order peek){
+    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int orderCount, boolean orderisinspected, HashMap<String, HashMap<String, Integer>> ordersdone, HashMap<String, Integer> peek){
         System.out.println(toppingDatabase.toString() + " " + sandwichDatabase.toString() + " " + order.toString());
         kitchenView.update(orderCount, orderisinspected,peek);
     }

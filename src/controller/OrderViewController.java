@@ -117,7 +117,7 @@ public class OrderViewController implements Observer {
 
     }
     @Override
-    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int ordercount, boolean orderisinspected, HashMap<String, HashMap<String, Integer>> orderdone, Order peek) {
+    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int ordercount, boolean orderisinspected, HashMap<String, HashMap<String, Integer>> orderdone, HashMap<String, Integer> peek) {
         System.out.println("NotifyObserversReport:\n----------------------\n - " + order.toString() + "\n - " +
                 sandwichDatabase.toString() + "\n - " + toppingDatabase.toString() + "\n");
     }
