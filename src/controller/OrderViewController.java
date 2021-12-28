@@ -83,7 +83,7 @@ public class OrderViewController implements Observer {
             updateOrderLines();
         }
         catch (OrderStateException e){
-            errorBox("Can not cancel this order");
+            errorBox("Can not cancel order");
         }
 
     }
@@ -103,11 +103,10 @@ public class OrderViewController implements Observer {
             orderFacade.addIdenticalSandwich(id);
             updateOrderLines();
         }catch (OrderStateException e){
-            errorBox("Can not add empty sandwich");
+            errorBox("Can not add order");
         }
 
     }
-
     public int getfollownr() {
        return orderFacade.getfollownr();
     }
@@ -116,7 +115,7 @@ public class OrderViewController implements Observer {
             orderFacade.deleteSandwich(id);
             updateOrderLines();
         }catch (OrderStateException e){
-            errorBox("Can not delete an empty sandwich");
+            errorBox("can not delete order");
         }
 
     }
