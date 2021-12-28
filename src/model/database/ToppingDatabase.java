@@ -1,5 +1,6 @@
 package model.database;
 
+import model.Settings;
 import model.database.LoadSaveStrategies.LoadSaveStrategyEnum;
 import model.database.LoadSaveStrategies.LoadSaveStrategyFactory;
 import model.domain.Topping;
@@ -37,7 +38,7 @@ public class ToppingDatabase {
 
     public void load() {
         try {
-            this.toppingsorts = LoadSaveStrategyFactory.createLoadSaveStrategy(LoadSaveStrategyEnum.EXCEL_TOPPING).load();
+            this.toppingsorts = LoadSaveStrategyFactory.createLoadSaveStrategy(Settings.getProductFormatReaderSettings() == "excel" ? LoadSaveStrategyEnum.EXCEL_TOPPING : LoadSaveStrategyEnum.TEXT_TOPPING).load();
 
         } catch (Exception e){ System.out.println(e.getMessage()); }
     }

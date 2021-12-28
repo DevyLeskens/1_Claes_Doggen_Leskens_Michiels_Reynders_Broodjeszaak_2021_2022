@@ -1,5 +1,6 @@
 package model.database;
 
+import model.Settings;
 import model.database.LoadSaveStrategies.LoadSaveStrategyEnum;
 import model.database.LoadSaveStrategies.LoadSaveStrategyFactory;
 import model.domain.Sandwich;
@@ -39,7 +40,7 @@ public class SandwichDatabase {
 
     public void load() {
         try {
-            this.sandwichsorts = LoadSaveStrategyFactory.createLoadSaveStrategy(LoadSaveStrategyEnum.EXCEL_SANDWICH).load();
+            this.sandwichsorts = LoadSaveStrategyFactory.createLoadSaveStrategy(Settings.getProductFormatReaderSettings() == "excel" ? LoadSaveStrategyEnum.EXCEL_SANDWICH : LoadSaveStrategyEnum.TEXT_SANDWICH ).load();
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

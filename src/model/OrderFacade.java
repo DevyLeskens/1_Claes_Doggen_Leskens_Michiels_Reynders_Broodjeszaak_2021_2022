@@ -4,7 +4,6 @@ import model.database.LoadSaveStrategies.LoadSaveStrategyEnum;
 import model.database.SandwichDatabase;
 import model.database.ToppingDatabase;
 import model.discountStrategies.DiscountStrategyEnum;
-import model.domain.Product;
 import model.domain.Sandwich;
 
 import controller.Observer;
@@ -18,8 +17,6 @@ public class OrderFacade implements Subject {
     private boolean Orderisinspected;
     private static int follownr = 0;
 
-    private List<Enum> loads;
-    private int orderCount = 0;
 
     private static OrderFacade orderFacade;
     private ToppingDatabase toppingDatabase;
@@ -140,8 +137,8 @@ public class OrderFacade implements Subject {
     public int getfollownr() {
         return follownr;
     }
-    public DiscountStrategyEnum[] getDiscounts() {
-        return DiscountStrategyEnum.values();
+    public ArrayList<String> getDiscounts() {
+        return DiscountStrategyEnum.getDiscounts();
     }
     public LoadSaveStrategyEnum[] getLoadTypes(){
         return LoadSaveStrategyEnum.values();

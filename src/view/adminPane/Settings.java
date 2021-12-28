@@ -16,6 +16,8 @@ import model.database.LoadSaveStrategies.LoadSaveStrategyEnum;
 import model.discountStrategies.DiscountStrategyEnum;
 import view.orderMainPane.OrderHeader;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class Settings extends VBox {
@@ -24,22 +26,16 @@ public class Settings extends VBox {
     Label discount = new Label("Select which item you want to see first");
     ChoiceBox<String> fileStructure = new ChoiceBox<>(FXCollections.observableArrayList( "excel","Text"));
     Button saveButton = new Button("save");
-
-
-
-    ChoiceBox itemFirst = new ChoiceBox();
+    ChoiceBox<String> itemFirst;
     public Settings(AdminViewController adminViewController){
-        DiscountStrategyEnum[] discounts = adminViewController.getAllDiscounts();
-        for (DiscountStrategyEnum discount: discounts) {
-            itemFirst.getItems().add(discount);
-        }
-        itemFirst.setValue(discounts[0]);
+        itemFirst = new ChoiceBox<>(FXCollections.observableArrayList(adminViewController.getAllDiscounts()));
+        System.out.println(adminViewController.getPreferredDiscountStrategy());
+        itemFirst.setValue(adminViewController.getPreferredDiscountStrategy());
 
         saveButton.setOnAction(event -> {
-            adminViewController.savePreferences((DiscountStrategyEnum) itemFirst.getSelectionModel().getSelectedItem(), fileStructure.getSelectionModel().getSelectedItem());
-
+            adminViewController.savePreferences(fileStructure.getSelectionModel().getSelectedItem(), itemFirst.getSelectionModel().getSelectedItem().toString());
         });
-        fileStructure.setValue("excel");
+        fileStructure.setValue(adminViewController.getProductFormatReader());
         //panes
         BorderPane fileReading = new BorderPane();
         fileReading.setLeft(select);

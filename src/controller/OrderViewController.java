@@ -1,15 +1,13 @@
 package controller;
 
-import model.Order;
-import model.OrderEvent;
-import model.OrderFacade;
-import model.OrderLine;
+import model.*;
 import model.database.SandwichDatabase;
 import model.database.ToppingDatabase;
 import model.discountStrategies.DiscountStrategyEnum;
 import model.states.OrderStateException;
 import view.orderMainPane.OrderView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -65,7 +63,7 @@ public class OrderViewController implements Observer {
     public void calculateDiscount(DiscountStrategyEnum discount){
         orderView.updateOrderLines(getOrderLines() , orderFacade.getDiscountAmount(discount));
     }
-    public DiscountStrategyEnum[] getDiscounts(){
+    public ArrayList<String> getDiscounts(){
         return orderFacade.getDiscounts();
     }
     public List<OrderLine> getOrderLines() {
@@ -94,7 +92,9 @@ public class OrderViewController implements Observer {
     }
 
 
-
+    public String getPreferredDiscountStrategy(){
+        return Settings.getPreferredDiscountStrategySettings();
+    }
     public void addIdenticalSandwich(int id) {
         try{
             orderFacade.addIdenticalSandwich(id);

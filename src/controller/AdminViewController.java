@@ -3,6 +3,7 @@ package controller;
 import model.Order;
 import model.OrderEvent;
 import model.OrderFacade;
+import model.Settings;
 import model.database.LoadSaveStrategies.LoadSaveStrategyEnum;
 import model.database.SandwichDatabase;
 import model.database.ToppingDatabase;
@@ -10,10 +11,10 @@ import model.domain.Sandwich;
 import model.domain.Topping;
 import view.adminPane.AdminView;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-
-import model.discountStrategies.DiscountStrategyEnum;
+import java.util.HashSet;
 
 
 public class AdminViewController implements Observer {
@@ -32,7 +33,7 @@ public class AdminViewController implements Observer {
     public OrderFacade getOrderFacade() {
         return orderFacade;
     }
-    public DiscountStrategyEnum[] getAllDiscounts(){
+    public ArrayList<String> getAllDiscounts(){
         return orderFacade.getDiscounts();
     }
     public LoadSaveStrategyEnum[] getLoadTypes() {
@@ -60,9 +61,15 @@ public class AdminViewController implements Observer {
 
 
 
-    public void savePreferences(DiscountStrategyEnum selectedItem, String selectedItem1) {
-        OrderViewController orderViewController;
-
+    public void savePreferences(String format, String discount) {
+        Settings.setProperties(format , discount);
     }
+    public String getPreferredDiscountStrategy(){
+       return Settings.getPreferredDiscountStrategySettings();
+    }
+    public String getProductFormatReader(){
+        return Settings.getProductFormatReaderSettings();
+    }
+
 
 }
