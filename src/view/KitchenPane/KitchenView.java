@@ -51,7 +51,6 @@ public class KitchenView {
 	}
 	public void update(int countorder, boolean orderisinspected, HashMap<OrderLine, Integer> order){
 		countOrders.setText("Count of orders in waiting line: " + countorder);
-
 		Buttons.update(countorder, orderisinspected, order);
 
 	}

@@ -20,7 +20,6 @@ public class KitchenViewController implements Observer {
         orderFacade.registerObserver(OrderEvent.START_PREPARATION, this);
         orderFacade.registerObserver(OrderEvent.ORDER_TO_KITCHEN, this);
         orderFacade.registerObserver(OrderEvent.ORDER_IS_DONE, this);
-
     }
 
     public void setKitchenView(KitchenView kitchenView) {

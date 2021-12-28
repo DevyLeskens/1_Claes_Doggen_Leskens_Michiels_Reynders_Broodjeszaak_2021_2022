@@ -185,9 +185,9 @@ public class OrderFacade implements Subject {
     }
     public void Done() {
         setOrderisinspected(false);
-        notifyObservers(OrderEvent.ORDER_IS_DONE);
         Order deletedorder = kitchenQueue.remove();
         deletedorder.orderIsDone();
+        notifyObservers(OrderEvent.ORDER_IS_DONE);
     }
     public Order getTopOfQueue() {
         return kitchenQueue.peek();
