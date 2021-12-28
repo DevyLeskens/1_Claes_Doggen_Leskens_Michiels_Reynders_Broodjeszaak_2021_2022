@@ -5,6 +5,6 @@ import model.Order;
 public class DiscountCheapestSandwichFree implements DiscountStrategy {
 
     public double calcDiscount(Order order) {
-        return order.getCheapestOrderLine();
+        return order.getCheapestOrderline();
     }
 }

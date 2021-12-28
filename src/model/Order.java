@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Order {
+public class Order{
 
     private DiscountStrategy discountStrategy = new DiscountTenPercent();
     private OrderState orderState;
     private ArrayList<OrderLine> orderLines;
-    private int followNumber;
+    private int follownr;
 
     private StateInWait stateInWait = new StateInWait(this);
     private StateInOrder stateInOrder = new StateInOrder(this);
@@ -25,62 +25,55 @@ public class Order {
     private StateIsPrepared stateIsPrepared = new StateIsPrepared(this);
     private StateIsCanceled stateIsCanceled = new StateIsCanceled(this);
 
-    public Order() {
+    public Order()  {
         orderLines = new ArrayList<>();
         setOrderState(stateInWait);
-        this.followNumber = OrderFacade.getNextFollowNumberAndIncrease();
+        this.follownr = OrderFacade.getNextfollownrAndIncrease();
     }
-
     public void setOrderState(OrderState orderState) {
         this.orderState = orderState;
     }
 
-    public int getFollowNumber() {
-        return followNumber;
+    public int getFollownr() {
+        return follownr;
     }
 
     public List<OrderLine> getOrderLines() {
         return orderLines;
     }
-
-    public void deleteSandwich(int id) {
+    public void deleteSandwich(int id){
         orderState.deleteSandwich();
         orderLines.remove(id);
 
     }
-
-    public HashMap<HashMap<String, Integer>, Integer> giveOrderAsHashMap() {
-        HashMap<String, Integer> order = new HashMap<>();
-        for (OrderLine orderline : getOrderLines()) {
-            if (order.containsKey(orderline.getToppingsAsStringMap())) {
-                order.put(orderline.getToppingsAsStringMap(), order.get(orderline.getToppingsAsStringMap()) + 1);
+    public HashMap<OrderLine, Integer> giverorderashashmap(){
+        HashMap<OrderLine, Integer> order = new HashMap<>();
+        for (OrderLine orderline: getOrderLines()) {
+            if (order.containsKey(orderline)) {
+                order.put(orderline, order.get(orderline) + 1);
             } else {
-                order.put(orderline.getToppingsAsStringMap(), 1);
+                order.put(orderline , 1);
             }
-
         }
         return order;
     }
-
-    public void addIdenticalSandwich(int id) {
+    public void addIdenticalSandwich(int id){
         orderState.addIdenticalSandwich();
         orderLines.add(orderLines.get(id));
     }
-
     public void addOrderLine(Sandwich sandwich) {
         orderState.addSandwich();
         this.orderLines.add(new OrderLine(sandwich));
     }
-
-    public void addTopping(int sandwichId, Topping topping) {
+    public void addTopping(int sandwichid, Topping topping) {
         orderState.addTopping();
-        orderLines.get(sandwichId).addTopping(topping);
+        orderLines.get(sandwichid).addTopping(topping);
     }
-
     public void toKitchen() {
         System.out.println(orderState);
         orderState.sendToKitchen();
     }
+
 
 
     @Override
@@ -130,38 +123,33 @@ public class Order {
         return stateIsCanceled;
     }
 
-    public void reset() {
+    public void reset(){
         orderState.cancelOrder();
         this.orderLines = new ArrayList<>();
     }
-
-    public double getTotalPrice() {
+    public double getTotalPrice(){
         double total = 0;
-        for (OrderLine orderline : orderLines) {
-            total += orderline.getPrice();
+        for (OrderLine orderline:orderLines) {
+           total += orderline.getPrice();
         }
         return total;
     }
-
-    public double getTotalPriceWithDiscount(DiscountStrategyEnum discount) {
+    public double getTotalPriceWithDiscount(DiscountStrategyEnum discount){
         setDiscountStrategy(DiscountFactory.createLoadSaveStrategy(discount.getLocation()));
         return getTotalPrice() - discountStrategy.calcDiscount(this);
     }
-
     public void setDiscountStrategy(DiscountStrategy discountStrategy) {
         this.discountStrategy = discountStrategy;
     }
-
-    public double getCheapestOrderLine() {
+    public double getCheapestOrderline(){
         double cheapest = orderLines.get(0).getPrice();
-        for (OrderLine orderLine : orderLines) {
-            if (orderLine.getPrice() < cheapest) {
-                cheapest = orderLine.getPrice();
+        for (OrderLine orderLine:orderLines){
+            if(orderLine.getPrice() < cheapest){
+                cheapest=orderLine.getPrice();
             }
         }
         return cheapest;
     }
-
     public void pay() {
         orderState.pay();
     }

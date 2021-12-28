@@ -5,40 +5,42 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import model.OrderLine;
 
 import java.util.*;
 
 public class OrderDetails extends VBox {
     KitchenViewController kitchenViewController;
-    static Label followNumber;
-    static int sandwichCount;
+    static Label follownumber;
+    static int sandwichcount;
     static VBox sandwiches = new VBox();
-    static HBox detailsOfOrder = new HBox();
-    Label followNr = new Label("Follownr order:" + followNumber + "- Count sandwiches: " + sandwichCount);
-    private static Label details = new Label("sandwich details");
+    static HBox detailsOforder = new HBox();
+    Label follownr = new Label("Follownr order:" + follownumber + "- Count sandwiches: " + sandwichcount);
+    private static Label details = new Label("details broodje");
 
     public OrderDetails(KitchenViewController kitchenViewController) {
         this.kitchenViewController = kitchenViewController;
-        this.getChildren().addAll(followNr, details, detailsOfOrder);
+        this.getChildren().addAll(follownr, details, detailsOforder);
         this.setPadding(new Insets(5, 0, 20, 10));
         this.setMinHeight(120);
 
     }
 
 
-    public static void update(HashMap<String, Integer> order, boolean isInspected) {
-        if (order == null || !isInspected) {
+    public static void update(HashMap<OrderLine, Integer> order, boolean isinspected) {
+        if (order == null || !isinspected) {
             details.setText("");
         } else {
-            details.setText((order).toString());
-
+            details.setText(OrderDetails.orderToString(order));
         }
     }
 
-    public static String toString(HashMap<String, Integer> order){
-        for (String key:order.keySet()) {
-
+    private static String orderToString(HashMap<OrderLine, Integer> order){
+        StringBuilder lol = new StringBuilder();
+        for (Map.Entry<OrderLine, Integer> entry:order.entrySet()) {
+              lol.append(entry.getValue()).append(" x ").append(entry.getKey()).append("\n");
         }
+        return lol.toString();
     }
 
 

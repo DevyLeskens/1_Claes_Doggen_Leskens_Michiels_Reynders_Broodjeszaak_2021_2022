@@ -5,61 +5,58 @@ import model.domain.Topping;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
+import java.util.TooManyListenersException;
 
 public class OrderLine {
     private double price;
-    private String sandwichName;
-    private String toppingNames = "";
+    private String sandwichname;
+    private String toppingnames = "";
     private Sandwich sandwich;
-    private ArrayList<Topping> toppingSorts = new ArrayList<>();
+    private ArrayList<Topping> toppingssort = new ArrayList<>();
 
-    public OrderLine(Sandwich sandwich) {
+    public OrderLine(Sandwich sandwich){
         setSandwich(sandwich);
-        setSandwichName(sandwich.getName());
+        setSandwichname(sandwich.getName());
     }
-
-    public double getPrice() {
+    public double getPrice(){
         double total = sandwich.getPrice();
-        for (Topping topping : toppingSorts) {
-            total += topping.getPrice();
-        }
+        for (Topping topping: toppingssort) { total += topping.getPrice(); }
         return total;
     }
-
-    public String getSandwichName() {
-        return sandwichName;
+    public String getSandwichname() {
+        return sandwichname;
     }
 
-
-    public HashMap<String, Integer> getToppingsAsStringMap() {
+    public HashMap<String, Integer> getToppingsAsStringMap(){
         HashMap<String, Integer> topping = new HashMap<>();
-        for (Topping toppingSort : getToppingSorts()) {
-            if (topping.containsKey(toppingSort.toString())) {
-                topping.put(toppingSort.toString(), topping.get(toppingSort.toString()) + 1);
+        for (Topping toppingsort: getToppingssort()) {
+            if (topping.containsKey(toppingsort.toString())) {
+                topping.put(toppingsort.toString(), topping.get(toppingsort.toString()) + 1);
             } else {
-                topping.put(toppingSort.toString(), 1);
+                topping.put(toppingsort.toString(), 1);
             }
         }
         return topping;
     }
 
-    public void setSandwichName(String sandwichName) {
-        this.sandwichName = sandwichName;
+    public void setSandwichname(String sandwichname) {
+        this.sandwichname = sandwichname;
     }
 
-    public String getToppingNames() {
-        return toppingNames;
+    public String getToppingnames() {
+        return toppingnames;
     }
 
-    public void setToppingNames(ArrayList<String> toppingNames) {
-        this.toppingNames = toppingNames.toString();
+    public void setToppingnames(ArrayList<String> toppingnames) {
+        this.toppingnames = toppingnames.toString();
     }
 
     public void addTopping(Topping topping) {
-        toppingNames += topping.getName() + ", ";
-        this.toppingSorts.add(topping);
-        this.toppingNames = toppingNames.replaceFirst(" ", ",");
-        this.toppingNames = toppingNames.substring(0, toppingNames.length() - 2) + " ";
+        toppingnames +=  topping.getName() + ", ";
+        this.toppingssort.add(topping);
+        this.toppingnames = toppingnames.replaceFirst(" ", ",");
+        this.toppingnames = toppingnames.substring(0,toppingnames.length()-2) + " ";
     }
 
     public Sandwich getSandwich() {
@@ -70,16 +67,29 @@ public class OrderLine {
         this.sandwich = sandwich;
     }
 
-    public ArrayList<Topping> getToppingSorts() {
-        return toppingSorts;
+    public ArrayList<Topping> getToppingssort() {
+        return toppingssort;
     }
 
-    public void setToppingSorts(ArrayList<Topping> toppingSorts) {
-        this.toppingSorts = toppingSorts;
+    public void setToppingssort(ArrayList<Topping> toppingssort) {
+        this.toppingssort = toppingssort;
     }
 
     @Override
     public String toString() {
-        return sandwichName + ": " + getToppingsAsStringMap();
+        return sandwichname + " : " + (toppingssort.size() != 0 ? getToppingsAsStringMap().toString().replace("{", "").replace("}", " "): "Geen toppings");
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderLine orderLine = (OrderLine) o;
+        return Double.compare(orderLine.price, price) == 0 && Objects.equals(sandwichname, orderLine.sandwichname) && Objects.equals(toppingnames, orderLine.toppingnames) && Objects.equals(sandwich, orderLine.sandwich) && Objects.equals(toppingssort, orderLine.toppingssort);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(price, sandwichname, toppingnames, sandwich, toppingssort);
     }
 }

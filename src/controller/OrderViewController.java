@@ -13,118 +13,114 @@ import java.util.List;
 
 public class OrderViewController implements Observer {
 
+
     private OrderView orderView;
     private final OrderFacade orderFacade = OrderFacade.getInstance();
+
 
     public OrderViewController(OrderFacade orderFacade) {
         orderFacade.registerObserver(OrderEvent.ADD_SANDWICH, this);
     }
 
+
+
     public void setView(OrderView view) {
         this.orderView = view;
     }
 
+
     public OrderFacade getOrderFacade() {
         return orderFacade;
     }
-
-    public void errorBox(String infoMessage) {
-        orderView.errorBox(infoMessage, "Action not permitted");
-    }
+    public void errorBox(String infoMessage) {orderView.errorBox(infoMessage,"Action not permitted");}
 
     public void addOrderLine(String sandwichName) {
-        try {
-            orderFacade.addOrderLine(sandwichName);
+        try{
+            orderFacade.addOrderline(sandwichName);
             updateOrderLines();
             updateStatusSandwichesButtons();
-        } catch (OrderStateException e) {
+        }
+        catch (OrderStateException e){
             errorBox("You can not add this order.");
         }
     }
 
-    public void toKitchen() {
+    public void toKitchen(){
         orderFacade.toKitchen();
         updateOrderLines();
     }
-
-    public void addTopping(int id, String toppingName) {
+    public void addTopping(int id, String toppingName){
         try {
             orderFacade.addTopping(id, toppingName);
             updateOrderLines();
             updateStatusToppingButtons();
-        } catch (OrderStateException e) {
+        }
+        catch (OrderStateException e){
             errorBox("You first have to add a sandwich.");
         }
 
     }
-
-    public void calculateDiscount(DiscountStrategyEnum discount) {
-        orderView.updateOrderLines(getOrderLines(), orderFacade.getDiscountAmount(discount));
+    public void calculateDiscount(DiscountStrategyEnum discount){
+        orderView.updateOrderLines(getOrderLines() , orderFacade.getDiscountAmount(discount));
     }
-
-    public ArrayList<String> getDiscounts() {
+    public ArrayList<String> getDiscounts(){
         return orderFacade.getDiscounts();
     }
     public DiscountStrategyEnum[] getDiscountsEnum(){
         return orderFacade.getDiscountsEnum();
     }
-
     public List<OrderLine> getOrderLines() {
         return orderFacade.getOrderLines();
     }
 
     public void updateOrderLines() {
-        orderView.updateOrderLines(getOrderLines(), orderFacade.getAmount());
+        orderView.updateOrderLines(getOrderLines() , orderFacade.getAmount());
     }
 
-    public void cancelOrder() {
-        try {
+    public void cancelOrder(){
+        try{
             orderFacade.cancelOrder();
             updateOrderLines();
-        } catch (OrderStateException e) {
-            errorBox("Unable to cancel this order");
+        }
+        catch (OrderStateException e){
+            errorBox("Kan deze order niet annuleren");
         }
 
     }
-
     public void updateStatusSandwichesButtons() {
         orderView.updateStatusSandwichesButtons(orderFacade.getStockListSandwiches());
     }
-
-    public void updateStatusToppingButtons() {
+    public void updateStatusToppingButtons(){
         orderView.updateStatusToppingButtons(orderFacade.getStockListToppings());
     }
 
-    public String getPreferredDiscountStrategy() {
+
+    public String getPreferredDiscountStrategy(){
         return Settings.getPreferredDiscountStrategySettings();
     }
-
     public void addIdenticalSandwich(int id) {
-        try {
+        try{
             orderFacade.addIdenticalSandwich(id);
             updateOrderLines();
-        } catch (OrderStateException e) {
-            errorBox("Cannot add identical sandwich");
+        }catch (OrderStateException e){
+            errorBox("Kan identieke broodje niet toevoegen");
         }
 
     }
-
-    public int getFollowNumber() {
-        return orderFacade.getFollowNumber();
+    public int getfollownr() {
+       return orderFacade.getfollownr();
     }
-
-    public void deleteSandwich(int id) {
-        try {
+    public void deleteSandwich(int id){
+        try{
             orderFacade.deleteSandwich(id);
             updateOrderLines();
-        } catch (OrderStateException e) {
-            errorBox("Cannot remove sandwich");
+        }catch (OrderStateException e){
+            errorBox("Kan broodje niet verwijderen");
         }
 
     }
-
     @Override
-    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int countOrder, boolean orderIsInspected, HashMap<String, HashMap<String, Integer>> orderDone, HashMap<String, Integer> peek) {
+    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int ordercount, boolean orderisinspected, HashMap<String, HashMap<String, Integer>> orderdone, HashMap<OrderLine, Integer> peek) {
         System.out.println("NotifyObserversReport:\n----------------------\n - " + order.toString() + "\n - " +
                 sandwichDatabase.toString() + "\n - " + toppingDatabase.toString() + "\n");
     }

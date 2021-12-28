@@ -1,9 +1,6 @@
 package controller;
 
-import model.Order;
-import model.OrderEvent;
-import model.OrderFacade;
-import model.Settings;
+import model.*;
 import model.database.LoadSaveStrategies.LoadSaveStrategyEnum;
 import model.database.SandwichDatabase;
 import model.database.ToppingDatabase;
@@ -40,9 +37,9 @@ public class AdminViewController implements Observer {
     }
 
     @Override
-    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int countOrder, boolean orderIsInspected, HashMap<String, HashMap<String, Integer>> orderDone, HashMap<String, Integer> peek) {
+    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int countrorder, boolean orderisinspected, HashMap<String, HashMap<String, Integer>> orderdone, HashMap<OrderLine, Integer> peek) {
         System.out.println(toppingDatabase.toString() + " " + sandwichDatabase.toString() + " " + order.toString());
-        orderFacade.addOrderLineToDone();
+        orderFacade.addOrderlineToDone();
         adminView.update();
     }
 
@@ -55,8 +52,10 @@ public class AdminViewController implements Observer {
     }
 
     public HashMap<String , HashMap<String , Integer>> getSoldOrders() {
-        return orderFacade.getDoneOrders();
+        return orderFacade.getdoneorders();
     }
+
+
 
     public void savePreferences(String format, String discount) {
         Settings.setProperties(format , discount);

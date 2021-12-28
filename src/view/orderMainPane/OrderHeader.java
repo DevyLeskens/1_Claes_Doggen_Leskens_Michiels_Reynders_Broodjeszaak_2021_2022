@@ -55,6 +55,6 @@ public class OrderHeader extends BorderPane {
     }
 
     public void updateFollowNumber() {
-        followNumberLabel.setText("Follownr: " + orderViewController.getFollowNumber());
+        followNumberLabel.setText("Follownr: " + orderViewController.getfollownr());
     }
 }

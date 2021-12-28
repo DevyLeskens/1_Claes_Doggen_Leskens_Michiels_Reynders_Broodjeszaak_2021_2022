@@ -3,6 +3,7 @@ package controller;
 import model.Order;
 import model.OrderEvent;
 import model.OrderFacade;
+import model.OrderLine;
 import model.database.SandwichDatabase;
 import model.database.ToppingDatabase;
 import view.KitchenPane.KitchenView;
@@ -31,16 +32,16 @@ public class KitchenViewController implements Observer {
     }
 
     @Override
-    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int countOrder, boolean orderIsInspected, HashMap<String, HashMap<String, Integer>> orderDone, HashMap<String, Integer> peek) {
+    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int orderCount, boolean orderisinspected, HashMap<String, HashMap<String, Integer>> ordersdone, HashMap<OrderLine, Integer> peek){
         System.out.println(toppingDatabase.toString() + " " + sandwichDatabase.toString() + " " + order.toString());
-        kitchenView.update(countOrder, orderIsInspected,peek);
+        kitchenView.update(orderCount, orderisinspected,peek);
     }
 
     public void startPreparation() {
         orderFacade.startPreparation();
     }
 
-    public void done() {
-        orderFacade.done();
+    public void Done() {
+        orderFacade.Done();
     }
 }
