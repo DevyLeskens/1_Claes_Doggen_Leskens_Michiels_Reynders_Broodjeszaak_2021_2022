@@ -21,7 +21,7 @@ public class OrderDetails extends VBox {
     public OrderDetails(KitchenViewController kitchenViewController) {
         this.kitchenViewController = kitchenViewController;
         this.getChildren().addAll(follownr, details, detailsOforder);
-        this.setPadding(new Insets(0, 0, 20, 10));
+        this.setPadding(new Insets(5, 0, 20, 10));
         this.setMinHeight(120);
 
     }

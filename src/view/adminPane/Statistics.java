@@ -60,6 +60,7 @@ public class Statistics extends VBox {
                 String sandwichCount = String.valueOf(product.getValue());
                 Label soldCount = new Label(sandwichCount);
                 borderPane.setLeft(sandwichtype);
+                sandwichtype.setFont(Font.font("Verdana",20));
                 borderPane.setRight(soldCount);
                 borderPane.setPadding(new Insets(5, 0, 5, 10));
                 borderPane.setMinSize(150, 20);

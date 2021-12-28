@@ -22,6 +22,7 @@ import java.util.List;
 
 public class Settings extends VBox {
     AdminViewController adminViewController;
+    Label intro = new Label("In here you can change your preferences for using the app.");
     Label select = new Label("Select here which type of file structure");
     Label discount = new Label("Select which item you want to see first");
     ChoiceBox<String> fileStructure = new ChoiceBox<>(FXCollections.observableArrayList( "excel","Text"));
@@ -37,6 +38,11 @@ public class Settings extends VBox {
         });
         fileStructure.setValue(adminViewController.getProductFormatReader());
         //panes
+        BorderPane introw = new BorderPane();
+        introw.setCenter(intro);
+        introw.setBackground(new Background(new BackgroundFill(Color.DARKSEAGREEN, new CornerRadii(0), new Insets(0))));
+        intro.setFont(Font.font("Verdana", 15));
+        introw.setPadding(new Insets(10,10,10,10));
         BorderPane fileReading = new BorderPane();
         fileReading.setLeft(select);
         fileReading.setRight(fileStructure);
@@ -44,7 +50,7 @@ public class Settings extends VBox {
         BorderPane discountSelect = new BorderPane();
         discountSelect.setLeft(discount);
         discountSelect.setRight(itemFirst);
-        discountSelect.setPadding(new Insets(0,10,207,20));
+        discountSelect.setPadding(new Insets(0,10,168,20));
         BorderPane savebutton = new BorderPane();
         savebutton.setCenter(saveButton);
         savebutton.setPadding(new Insets(10,10,5,10));
@@ -57,7 +63,7 @@ public class Settings extends VBox {
         select.setFont(Font.font("Verdana", 20));
         discount.setFont(Font.font("Verdana", 20));
         //add all to root
-        this.getChildren().addAll( fileReading , discountSelect, savebutton);
+        this.getChildren().addAll( introw, fileReading , discountSelect, savebutton);
 
     }
 }

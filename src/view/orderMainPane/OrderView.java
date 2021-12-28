@@ -103,6 +103,7 @@ public class OrderView {
     public void errorBox(String infoMessage, String titleBar)
     {
         JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
+        
     }
     public static void updatelabel(){
         sandwichCount++;
