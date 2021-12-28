@@ -19,7 +19,11 @@ public enum LoadSaveStrategyEnum {
         this.file = file;
     }
 
-    public String getNaam() { return naam; }
+    public String getName() { return naam; }
     public String getLocatie() { return locatie; }
     public File getFile() { return file; }
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

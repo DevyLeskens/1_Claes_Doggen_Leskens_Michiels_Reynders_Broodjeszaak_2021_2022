@@ -17,9 +17,15 @@ public class AdminMainPane extends BorderPane {
         panes.getChildren().add(new SandwichOverviewPane(adminViewController));
         panes.getChildren().add(new ToppingOverviewPane(adminViewController));
         VBox stats = new VBox();
+
         stats.getChildren().add(new Statistics(adminViewController));
+
+        stats.getChildren().add(new Statistics(adminViewController));
+        VBox settings = new VBox();
+        settings.getChildren().add(new Settings(adminViewController));
+
         Tab broodjesTab = new Tab("Broodjes/Beleg",panes);
-        Tab instellingTab = new Tab("Instellingen");
+        Tab instellingTab = new Tab("Instellingen", settings);
         Tab statistiekTab = new Tab("Statistieken", stats);
         //tabPane.getTabs().add(spelVerloopTab);
 
