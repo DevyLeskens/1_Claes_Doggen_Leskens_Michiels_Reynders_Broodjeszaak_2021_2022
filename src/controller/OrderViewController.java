@@ -103,7 +103,7 @@ public class OrderViewController implements Observer {
             orderFacade.addIdenticalSandwich(id);
             updateOrderLines();
         }catch (OrderStateException e){
-            errorBox("Can not add identical sandwich");
+            errorBox("Can not add empty sandwich");
         }
 
     }
@@ -116,7 +116,7 @@ public class OrderViewController implements Observer {
             orderFacade.deleteSandwich(id);
             updateOrderLines();
         }catch (OrderStateException e){
-            errorBox("Can not delete sandwich");
+            errorBox("Can not delete an empty sandwich");
         }
 
     }
