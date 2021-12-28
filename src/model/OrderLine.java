@@ -26,6 +26,7 @@ public class OrderLine {
     public String getSandwichname() {
         return sandwichname;
     }
+
     public HashMap<String, Integer> getToppingsAsStringMap(){
         HashMap<String, Integer> topping = new HashMap<>();
         for (Topping toppingsort: getToppingssort()) {

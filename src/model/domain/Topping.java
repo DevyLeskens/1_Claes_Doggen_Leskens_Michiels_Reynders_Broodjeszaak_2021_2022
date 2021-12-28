@@ -12,11 +12,6 @@ public class Topping extends Product {
 
     @Override
     public String toString() {
-        return "Topping{" +
-                "name='" + name + '\'' +
-                ", price=" + price +
-                ", stock=" + stock +
-                ", sold=" + sold +
-                '}';
+        return name;
     }
 }

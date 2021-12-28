@@ -47,13 +47,13 @@ public class Order{
         orderLines.remove(id);
 
     }
-    public HashMap<String , Integer> giverorderashashmap(){
+    public HashMap<HashMap<String, Integer> , Integer> giverorderashashmap(){
         HashMap<String , Integer> order = new HashMap<>();
         for (OrderLine orderline: getOrderLines()) {
-            if (order.containsKey(orderline.toString())) {
-                order.put(orderline.toString(), order.get(orderline.toString()) + 1);
+            if (order.containsKey(orderline.getToppingsAsStringMap())) {
+                order.put(orderline.getToppingsAsStringMap(), order.get(orderline.getToppingsAsStringMap()) + 1));
             } else {
-                order.put(orderline.toString(), 1);
+                order.put(orderline.getToppingsAsStringMap(), 1);
             }
 
         }

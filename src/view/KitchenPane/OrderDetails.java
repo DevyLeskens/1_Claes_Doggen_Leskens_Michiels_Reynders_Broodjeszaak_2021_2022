@@ -36,6 +36,11 @@ public class OrderDetails extends VBox {
         }
     }
 
+    public static String toString(HashMap<String, Integer> order){
+        for (String key:order.keySet()) {
+
+        }
+    }
 
 
 
