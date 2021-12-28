@@ -41,7 +41,6 @@ public class ToppingDatabase {
     public void load() {
         try {
             this.toppingSorts = LoadSaveStrategyFactory.createLoadSaveStrategy(Settings.getProductFormatReaderSettings() == "excel" ? LoadSaveStrategyEnum.EXCEL_TOPPING : LoadSaveStrategyEnum.TEXT_TOPPING).load();
-
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -49,7 +48,11 @@ public class ToppingDatabase {
 
     // dummy methode
     public void save(){
-
+        try {
+         LoadSaveStrategyFactory.createLoadSaveStrategy(Settings.getProductFormatReaderSettings() == "excel" ? LoadSaveStrategyEnum.EXCEL_TOPPING : LoadSaveStrategyEnum.TEXT_TOPPING).save();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override

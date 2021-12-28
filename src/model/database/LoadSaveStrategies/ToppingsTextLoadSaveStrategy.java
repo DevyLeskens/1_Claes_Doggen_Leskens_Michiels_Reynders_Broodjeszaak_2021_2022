@@ -26,7 +26,7 @@ public class ToppingsTextLoadSaveStrategy extends TextLoadSaveTemplate<String, T
 
     @Override
     public void save() {
-        super.save(ToppingDatabase.getInstance().getToppingSorts());
+        super.save(ToppingDatabase.getInstance().getToppingSorts(), "toppingscopy");
     }
 
     @Override

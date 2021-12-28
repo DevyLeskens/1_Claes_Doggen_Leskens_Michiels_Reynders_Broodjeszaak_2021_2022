@@ -172,6 +172,9 @@ public class OrderFacade implements Subject {
         kitchenQueue.add(order);
         order.toKitchen();
         notifyObservers(OrderEvent.ORDER_TO_KITCHEN);
+        updatebase();
+        sandwichDatabase.save();
+        toppingDatabase.save();
         order = new Order();
     }
     public void startPreparation() {
@@ -204,6 +207,13 @@ public class OrderFacade implements Subject {
     public HashMap<OrderLine, Integer> giverorderashashmap(Order order){
         return order.giverorderashashmap();
     }
-
+    public void updatebase(){
+        for (OrderLine orderline: order.getOrderLines()) {
+            this.sandwichDatabase.getSandwichSorts().get(orderline.getSandwichname()).increamentSold();
+            for (Topping topping:orderline.getToppingssort()) {
+                this.toppingDatabase.getToppingSorts().get(topping.getName()).increamentSold();
+            }
+        }
+    }
 }
 

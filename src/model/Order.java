@@ -70,7 +70,6 @@ public class Order{
         orderLines.get(sandwichid).addTopping(topping);
     }
     public void toKitchen() {
-        System.out.println(orderState);
         orderState.sendToKitchen();
     }
 
@@ -127,6 +126,7 @@ public class Order{
         orderState.cancelOrder();
         this.orderLines = new ArrayList<>();
     }
+
     public double getTotalPrice(){
         double total = 0;
         for (OrderLine orderline:orderLines) {
@@ -134,13 +134,16 @@ public class Order{
         }
         return total;
     }
+
     public double getTotalPriceWithDiscount(DiscountStrategyEnum discount){
         setDiscountStrategy(DiscountFactory.createLoadSaveStrategy(discount.getLocation()));
         return getTotalPrice() - discountStrategy.calcDiscount(this);
     }
+
     public void setDiscountStrategy(DiscountStrategy discountStrategy) {
         this.discountStrategy = discountStrategy;
     }
+
     public double getCheapestOrderline(){
         double cheapest = orderLines.get(0).getPrice();
         for (OrderLine orderLine:orderLines){
@@ -150,6 +153,7 @@ public class Order{
         }
         return cheapest;
     }
+
     public void pay() {
         orderState.pay();
     }

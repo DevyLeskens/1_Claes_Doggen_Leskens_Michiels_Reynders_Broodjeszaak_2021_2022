@@ -32,11 +32,19 @@ public abstract class Product {
         return price;
     }
 
+    public String getWriteFormat(){
+        return this.getName() + "," + this.getPrice() + "," + this.getStock() + "," + this.getSold();
+    }
+
     public void setPrice(double price) {
         if (price < 0) {
             throw new DomainException("Price can not be negative");
         }
         this.price = price;
+    }
+
+    public void increamentSold(){
+        sold++;
     }
 
     public int getStock() {

@@ -1,6 +1,7 @@
 package model.database;
 
 import model.database.LoadSaveStrategies.LoadSaveStrategyEnum;
+import model.domain.Product;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -30,11 +31,11 @@ public abstract class TextLoadSaveTemplate<K, V> {
         }
         return returnMap;
     }
-    protected void save(TreeMap<K, V> database){
+    protected void save(TreeMap<K, V> database, String name){
         try {
-            FileWriter writer = new FileWriter("src/bestanden/sandwichesCopy.txt");
-            for (V product : database.values()) {
-                writer.write(product.toString());
+            FileWriter writer = new FileWriter("src/bestanden/" + name + ".txt");
+            for (V product:database.values()) {
+                writer.write(((Product) product).getWriteFormat() + "\n");
             }
             writer.close();
             System.out.println("Successfully wrote to the file.");

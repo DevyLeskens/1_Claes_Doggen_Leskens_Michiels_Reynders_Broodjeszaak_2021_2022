@@ -1,5 +1,7 @@
 package model.database;
 
+import model.Order;
+import model.OrderLine;
 import model.Settings;
 import model.database.LoadSaveStrategies.LoadSaveStrategyEnum;
 import model.database.LoadSaveStrategies.LoadSaveStrategyFactory;
@@ -44,15 +46,9 @@ public class SandwichDatabase {
 
     public void save() {
         try {
-            FileWriter myWriter = new FileWriter("src/bestanden/sandwiches.xls");
-            for (Sandwich sandwich : sandwichSorts.values()) {
-                myWriter.write(sandwich.getName() + "," + sandwich.getPrice() + "," + sandwich.getStock() + "," + sandwich.getSold());
-            }
-            myWriter.close();
-            System.out.println("Successfully wrote to the file.");
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+            LoadSaveStrategyFactory.createLoadSaveStrategy(Settings.getProductFormatReaderSettings() == "excel" ? LoadSaveStrategyEnum.EXCEL_SANDWICH : LoadSaveStrategyEnum.TEXT_SANDWICH).save();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 

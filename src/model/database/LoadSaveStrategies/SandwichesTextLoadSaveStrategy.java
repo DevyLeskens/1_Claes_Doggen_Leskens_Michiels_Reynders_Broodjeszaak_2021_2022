@@ -32,6 +32,6 @@ public class SandwichesTextLoadSaveStrategy extends TextLoadSaveTemplate<String,
 
     @Override
     public void save() {
-        super.save(SandwichDatabase.getInstance().getSandwichSorts());
+        super.save(SandwichDatabase.getInstance().getSandwichSorts(), "sandwichescopy");
     }
 }
