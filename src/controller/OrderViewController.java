@@ -48,7 +48,6 @@ public class OrderViewController implements Observer {
     }
 
     public void toKitchen(){
-        orderFacade.increaseOrderCount();
         orderFacade.toKitchen();
         updateOrderLines();
     }
@@ -118,7 +117,7 @@ public class OrderViewController implements Observer {
 
     }
     @Override
-    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int ordercount, HashMap<String, HashMap<String, Integer>> orderdone) {
+    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int ordercount, boolean orderisinspected, HashMap<String, HashMap<String, Integer>> orderdone, Order peek) {
         System.out.println("NotifyObserversReport:\n----------------------\n - " + order.toString() + "\n - " +
                 sandwichDatabase.toString() + "\n - " + toppingDatabase.toString() + "\n");
     }

@@ -55,6 +55,7 @@ public class Order{
         orderLines.get(sandwichid).addTopping(topping);
     }
     public void toKitchen() {
+        System.out.println(orderState);
         orderState.sendToKitchen();
     }
 
@@ -143,10 +144,12 @@ public class Order{
     }
 
     public void startPreparation() {
+        System.out.println(orderState);
         orderState.startPreparation();
     }
 
     public void orderIsDone() {
+        System.out.println(orderState);
         orderState.done();
     }
 }

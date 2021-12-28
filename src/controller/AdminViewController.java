@@ -31,7 +31,7 @@ public class AdminViewController implements Observer {
     }
 
     @Override
-    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int countrorder, HashMap<String, HashMap<String, Integer>> orderdone) {
+    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int countrorder, boolean orderisinspected, HashMap<String, HashMap<String, Integer>> orderdone, Order peek) {
         System.out.println(toppingDatabase.toString() + " " + sandwichDatabase.toString() + " " + order.toString());
         orderFacade.addOrderlineToDone();
         adminView.update();

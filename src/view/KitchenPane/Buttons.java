@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import model.Order;
 
 public class Buttons extends BorderPane {
     private static Button next = new Button("Next order");
@@ -29,13 +30,18 @@ public class Buttons extends BorderPane {
         next.setDisable(true);
 
         next.setOnAction(event -> {
-            kitchenViewController.inPreparation();
+            kitchenViewController.startPreparation();
         });
         orderFinished.setOnAction(event -> {
-            kitchenViewController.orderIsDone();
-            orderFinished.setDisable(true);
-            next.setDisable(false);
+            kitchenViewController.Done();
         });
+
+    }
+    public static void update(int countorder, boolean orderisinspected, Order order){
+
+        next.setDisable(countorder < 1 || orderisinspected);
+        orderFinished.setDisable(!orderisinspected);
+        OrderDetails.update(order, orderisinspected);
 
     }
 

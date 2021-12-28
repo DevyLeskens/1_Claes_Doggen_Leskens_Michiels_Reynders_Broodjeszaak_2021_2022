@@ -19,7 +19,13 @@ public class OrderDetails extends VBox {
         this.setMinHeight(120);
     }
 
-    public static void update(Order order){
-        details.setText(order.toString());
+    public static void update(Order order, boolean isinspected){
+        if(order == null || !isinspected){
+            details.setText("");
+        }else {
+            details.setText((order).toString());
+        }
+
     }
+
 }

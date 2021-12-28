@@ -24,9 +24,10 @@ public class KitchenView {
 	private KitchenViewController kitchenViewController;
 	private Stage stage = new Stage();
 	public  VBox vBox = new VBox();
-	private Label countOrders  = new Label("Count of orders in waiting line: None" );
+	private Label countOrders = new Label();
 
 	public KitchenView(KitchenViewController kitchenViewController){
+		countOrders.setText("Count of orders in waiting line: None" );
 		stage.setTitle("KITCHEN VIEW");
 		stage.initStyle(StageStyle.UTILITY);
 		stage.setX(880);
@@ -48,12 +49,10 @@ public class KitchenView {
 		countOrders.setFont(Font.font("Verdana", 20));
 		countOrders.setPadding(new Insets(5,5,5,10));
 	}
-	public void update(int countorder, Boolean isNull, Boolean isOne){
+	public void update(int countorder, boolean orderisinspected, Order order){
 		countOrders.setText("Count of orders in waiting line: " + countorder);
-	}
-
-	public void showorder(Order order) {
-        OrderDetails.update(order);
+		Buttons.update(countorder, orderisinspected, order);
 
 	}
+
 }

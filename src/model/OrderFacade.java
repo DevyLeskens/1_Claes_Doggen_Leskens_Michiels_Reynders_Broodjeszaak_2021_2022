@@ -14,8 +14,8 @@ import java.util.*;
 public class OrderFacade implements Subject {
 
 
+    private boolean Orderisinspected;
     private static int follownr = 0;
-    private int orderCount = 0;
     private static OrderFacade orderFacade;
     private ToppingDatabase toppingDatabase;
     private SandwichDatabase sandwichDatabase;
@@ -64,12 +64,7 @@ public class OrderFacade implements Subject {
         this.order.reset();
     }
 
-    public void toKitchen(){
-        kitchenQueue.add(order);
-        order.toKitchen();
-        order = new Order();
-        notifyObservers(OrderEvent.ORDER_TO_KITCHEN);
-    }
+
 
     public Order getOrder() {
         return order;
@@ -88,7 +83,7 @@ public class OrderFacade implements Subject {
     @Override
     public void notifyObservers(OrderEvent orderEvent) {
         for (Observer observer : observers.get(orderEvent)) {
-            observer.update(toppingDatabase, sandwichDatabase, order, orderCount, doneorders);
+            observer.update(toppingDatabase, sandwichDatabase, order, getOrderCount(), isOrderisinspected() , doneorders, kitchenQueue.peek());
         }
     }
     public void addOrderline(String sandwichName) {
@@ -143,15 +138,7 @@ public class OrderFacade implements Subject {
         return DiscountStrategyEnum.values();
     }
 
-    public void increaseOrderCount() {
-        orderCount++;
-    }
-    public int getOrderCount() {
-        return orderCount;
-    }
-    public void decreaseOrderCount() {
-        orderCount--;
-    }
+
     public void addOrderlineToDone(){
         for (OrderLine orderline:order.getOrderLines()) {
             doneorders.get("Sandwiches").put(orderline.getSandwichname() , doneorders.get("Sandwiches").get(orderline.getSandwichname()) + 1);
@@ -172,22 +159,40 @@ public class OrderFacade implements Subject {
     public HashMap<String , HashMap<String , Integer>> getdoneorders() {
         return doneorders;
     }
-
-    public Order inPreparation() {
-        Order order = kitchenQueue.remove();
+    public void toKitchen(){
+        kitchenQueue.add(order);
+        order.toKitchen();
+        notifyObservers(OrderEvent.ORDER_TO_KITCHEN);
+        order = new Order();
+    }
+    public void startPreparation() {
+        setOrderisinspected(true);
+        Order order = kitchenQueue.peek();
         order.startPreparation();
         notifyObservers(OrderEvent.START_PREPARATION);
-        decreaseOrderCount();
-        return order;
     }
-
+    public void Done() {
+        Order deletedorder = kitchenQueue.remove();
+        setOrderisinspected(false);
+        deletedorder.orderIsDone();
+        notifyObservers(OrderEvent.ORDER_IS_DONE);
+    }
     public Order getTopOfQueue() {
         return kitchenQueue.peek();
     }
 
-    public void orderIsDone() {
-        decreaseOrderCount();
-        order.orderIsDone();
+
+
+    public boolean isOrderisinspected() {
+        return Orderisinspected;
+    }
+
+    public void setOrderisinspected(boolean orderisinspected) {
+        Orderisinspected = orderisinspected;
+    }
+
+    public int getOrderCount() {
+        return kitchenQueue.size();
     }
 }
 

@@ -17,6 +17,8 @@ public class KitchenViewController implements Observer {
     public KitchenViewController() {
         orderFacade.registerObserver(OrderEvent.START_PREPARATION, this);
         orderFacade.registerObserver(OrderEvent.ORDER_TO_KITCHEN, this);
+        orderFacade.registerObserver(OrderEvent.ORDER_IS_DONE, this);
+
     }
 
 
@@ -25,22 +27,16 @@ public class KitchenViewController implements Observer {
     }
 
     @Override
-    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int orderCount, HashMap<String, HashMap<String, Integer>> orderdone){
+    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int orderCount, boolean orderisinspected, HashMap<String, HashMap<String, Integer>> ordersdone, Order peek){
         System.out.println(toppingDatabase.toString() + " " + sandwichDatabase.toString() + " " + order.toString());
-        kitchenView.update(orderCount , orderFacade.getOrderCount() == 0, orderFacade.getOrderCount() == 1);
+        kitchenView.update(orderCount, orderisinspected,peek);
     }
 
-    public void showorder(Order peek){
-        kitchenView.showorder(peek);
+    public void startPreparation() {
+        orderFacade.startPreparation();
     }
 
-    public void inPreparation() {
-        kitchenView.showorder(orderFacade.inPreparation());
-        showorder(orderFacade.getTopOfQueue());
-    }
-
-    public void orderIsDone() {
-        orderFacade.orderIsDone();
-        orderFacade.decreaseOrderCount();
+    public void Done() {
+        orderFacade.Done();
     }
 }
