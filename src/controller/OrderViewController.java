@@ -83,7 +83,7 @@ public class OrderViewController implements Observer {
             updateOrderLines();
         }
         catch (OrderStateException e){
-            errorBox("Kan deze order niet annuleren");
+            errorBox("Can not cancel this order");
         }
 
     }
@@ -103,10 +103,11 @@ public class OrderViewController implements Observer {
             orderFacade.addIdenticalSandwich(id);
             updateOrderLines();
         }catch (OrderStateException e){
-            errorBox("Kan identieke broodje niet toevoegen");
+            errorBox("Can not add identical sandwich");
         }
 
     }
+
     public int getfollownr() {
        return orderFacade.getfollownr();
     }
@@ -115,7 +116,7 @@ public class OrderViewController implements Observer {
             orderFacade.deleteSandwich(id);
             updateOrderLines();
         }catch (OrderStateException e){
-            errorBox("Kan broodje niet verwijderen");
+            errorBox("Can not delete sandwich");
         }
 
     }
