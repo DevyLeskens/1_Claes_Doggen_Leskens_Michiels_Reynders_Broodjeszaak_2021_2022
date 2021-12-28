@@ -12,7 +12,6 @@ import view.orderMainPane.OrderView;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 public class OrderViewController implements Observer {
 
@@ -25,9 +24,7 @@ public class OrderViewController implements Observer {
         orderFacade.registerObserver(OrderEvent.ADD_SANDWICH, this);
     }
 
-    public void increaseOrderCount() {
-       orderFacade.increaseOrderCount();
-    }
+
 
     public void setView(OrderView view) {
         this.orderView = view;
@@ -51,8 +48,7 @@ public class OrderViewController implements Observer {
     }
 
     public void toKitchen(){
-
-        increaseOrderCount();
+        orderFacade.increaseOrderCount();
         orderFacade.toKitchen();
         updateOrderLines();
     }
@@ -122,7 +118,7 @@ public class OrderViewController implements Observer {
 
     }
     @Override
-    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int ordercount, HashMap<String , HashMap<String , Integer>> orderdone) {
+    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int ordercount, HashMap<String, HashMap<String, Integer>> orderdone) {
         System.out.println("NotifyObserversReport:\n----------------------\n - " + order.toString() + "\n - " +
                 sandwichDatabase.toString() + "\n - " + toppingDatabase.toString() + "\n");
     }

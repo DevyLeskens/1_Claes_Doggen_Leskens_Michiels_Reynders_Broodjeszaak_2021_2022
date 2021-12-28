@@ -11,11 +11,15 @@ import model.OrderLine;
 public class OrderDetails extends VBox {
 
     Label follownr = new Label("Follownr order:" + "- Count sandwiches: ");
-    Label sandwiches = new Label("details broodje");
+    private static Label details = new Label("details broodje");
 
     public OrderDetails(KitchenViewController kitchenViewController){
-        this.getChildren().addAll(follownr, sandwiches);
+        this.getChildren().addAll(follownr, details);
         this.setPadding(new Insets(0,0,20,10));
         this.setMinHeight(120);
+    }
+
+    public static void update(Order order){
+        details.setText(order.toString());
     }
 }

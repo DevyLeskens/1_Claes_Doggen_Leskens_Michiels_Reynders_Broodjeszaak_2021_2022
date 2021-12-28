@@ -141,4 +141,12 @@ public class Order{
     public void endOrder() {
         orderState.terminate();
     }
+
+    public void startPreparation() {
+        orderState.startPreparation();
+    }
+
+    public void orderIsDone() {
+        orderState.done();
+    }
 }

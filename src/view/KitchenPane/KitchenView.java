@@ -5,6 +5,7 @@ import controller.OrderViewController;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -22,8 +23,8 @@ import model.OrderLine;
 public class KitchenView {
 	private KitchenViewController kitchenViewController;
 	private Stage stage = new Stage();
-	public static VBox vBox = new VBox();
-	private Label countOrders  =new Label("Count of orders in waiting line: None" );
+	public  VBox vBox = new VBox();
+	private Label countOrders  = new Label("Count of orders in waiting line: None" );
 
 	public KitchenView(KitchenViewController kitchenViewController){
 		stage.setTitle("KITCHEN VIEW");
@@ -47,7 +48,12 @@ public class KitchenView {
 		countOrders.setFont(Font.font("Verdana", 20));
 		countOrders.setPadding(new Insets(5,5,5,10));
 	}
-	public void update(int countorder){
+	public void update(int countorder, Boolean isNull, Boolean isOne){
 		countOrders.setText("Count of orders in waiting line: " + countorder);
+	}
+
+	public void showorder(Order order) {
+        OrderDetails.update(order);
+
 	}
 }

@@ -145,7 +145,6 @@ public class OrderFacade implements Subject {
 
     public void increaseOrderCount() {
         orderCount++;
-        notifyObservers(OrderEvent.ORDER_TO_KITCHEN);
     }
     public int getOrderCount() {
         return orderCount;
@@ -172,6 +171,23 @@ public class OrderFacade implements Subject {
 
     public HashMap<String , HashMap<String , Integer>> getdoneorders() {
         return doneorders;
+    }
+
+    public Order inPreparation() {
+        Order order = kitchenQueue.remove();
+        order.startPreparation();
+        notifyObservers(OrderEvent.START_PREPARATION);
+        decreaseOrderCount();
+        return order;
+    }
+
+    public Order getTopOfQueue() {
+        return kitchenQueue.peek();
+    }
+
+    public void orderIsDone() {
+        decreaseOrderCount();
+        order.orderIsDone();
     }
 }
 

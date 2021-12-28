@@ -38,5 +38,6 @@ public class AdminView {
     public void update() {
 		Statistics.setData(adminViewController);
 		OverviewPane.update(adminViewController);
+
     }
 }
