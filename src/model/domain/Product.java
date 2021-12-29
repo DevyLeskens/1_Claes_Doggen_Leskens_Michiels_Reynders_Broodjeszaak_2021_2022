@@ -90,4 +90,8 @@ public abstract class Product {
         return Objects.hash(name, price, stock, sold);
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
 }

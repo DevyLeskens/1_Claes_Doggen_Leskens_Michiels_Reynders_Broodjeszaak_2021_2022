@@ -13,35 +13,26 @@ import java.util.*;
 
 public class OrderFacade implements Subject {
 
-
-    private boolean Orderisinspected;
-    private static int follownr = 0;
-
-
     private static OrderFacade orderFacade;
-    private ToppingDatabase toppingDatabase;
-    private SandwichDatabase sandwichDatabase;
-    private Order order;
-    private final HashMap<String , HashMap<String , Integer>> doneorders = new HashMap<>();
+    private boolean Orderisinspected;
+    private int follownr = 0;
+    private Order order = new Order(getfollownr());;
+
+    private final HashMap<String , HashMap<String , Integer>> doneorders = new HashMap<String,  HashMap<String , Integer>>(){{ put("Toppings",new HashMap<>() );put("Sandwiches",new HashMap<>());}};
     private final Map<OrderEvent, List<Observer>> observers = new HashMap<>();
     private final Queue<Order> kitchenQueue = new LinkedList();
 
+    private SandwichDatabase sandwichDatabase;
+    private ToppingDatabase toppingDatabase;
+
     private OrderFacade() {
+
         this.toppingDatabase = ToppingDatabase.getInstance();
         this.sandwichDatabase = SandwichDatabase.getInstance();
-        this.order = new Order();
 
-        for (OrderEvent orderEvent : OrderEvent.values()) {
-            observers.put(orderEvent, new ArrayList<>());
-        }
-        doneorders.put("Toppings", new HashMap<>());
-        doneorders.put("Sandwiches", new HashMap<>());
-        for (Topping topping : toppingDatabase.getToppingSorts().values()) {
-            doneorders.get("Toppings").put(topping.getName(), 0);
-        }
-        for (Sandwich sandwich : sandwichDatabase.getSandwichSorts().values()) {
-            doneorders.get("Sandwiches").put(sandwich.getName(), 0);
-        }
+        Arrays.asList(OrderEvent.values()).forEach(orderEvent -> observers.put(orderEvent, new ArrayList<>()));
+        toppingDatabase.getToppingSorts().values().forEach(topping -> doneorders.get("Toppings").put(topping.getName(), 0));
+        sandwichDatabase.getSandwichSorts().values().forEach(sandwich ->  doneorders.get("Sandwiches").put(sandwich.getName(), 0));
     }
 
     /* ----------- singleton-------------*/
@@ -52,47 +43,37 @@ public class OrderFacade implements Subject {
         return orderFacade;
     }
 
-    public ToppingDatabase getToppingDatabase() {
-        return toppingDatabase;
-    }
-
-    public SandwichDatabase getSandwichDatabase() {
-        return sandwichDatabase;
-    }
-
-    public void cancelOrder(){
-        this.sandwichDatabase.reset();
-        this.toppingDatabase.reset();
-        this.order.reset();
-    }
-
-
-
-    public Order getOrder() {
-        return order;
-    }
 
     @Override
     public void registerObserver(OrderEvent orderEvent, Observer observer) {
         observers.get(orderEvent).add(observer);
     }
-
     @Override
     public void removeObserver(OrderEvent orderEvent, Observer o) {
         observers.get(orderEvent).remove(o);
     }
-
     @Override
     public void notifyObservers(OrderEvent orderEvent) {
         for (Observer observer : observers.get(orderEvent)) {
-            observer.update(toppingDatabase, sandwichDatabase, order, getOrderCount(), isOrderisinspected() , doneorders, kitchenQueue.size() != 0 ? kitchenQueue.peek().giverorderashashmap() : null);
+            observer.update(toppingDatabase, sandwichDatabase, order, getOrderCount(), isOrderisinspected() , doneorders, getorderashashmap());
         }
     }
+
     public void addOrderline(String sandwichName) {
         Sandwich sandwich = sandwichDatabase.getSandwich(sandwichName);
         sandwich.updateStock();
         order.addOrderLine(sandwich);
         notifyObservers(OrderEvent.ADD_SANDWICH);
+    }
+    public void addIdenticalSandwich(int id){
+        if(order.getOrderLines().size() > 0) {
+            order.addIdenticalSandwich(id);
+        }
+        notifyObservers(OrderEvent.ADD_IDENTICAL_SANDWICH);
+    }
+    public void deleteSandwich(int id){
+        order.deleteSandwich(id);
+        notifyObservers(OrderEvent.DELETE_SANDWICH);
     }
     public void addTopping(int id, String toppingName){
         Topping topping = toppingDatabase.getTopping(toppingName);
@@ -100,73 +81,16 @@ public class OrderFacade implements Subject {
         order.addTopping(id ,topping);
         notifyObservers(OrderEvent.Add_TOPPING);
     }
-    public void addIdenticalSandwich(int id){
-       if(order.getOrderLines().size() > 0) {
-           order.addIdenticalSandwich(id);
-       }
-       notifyObservers(OrderEvent.ADD_IDENTICAL_SANDWICH);
+    public void cancelOrder(){
+        this.sandwichDatabase.reset();
+        this.toppingDatabase.reset();
+        this.order.reset();
     }
-    public void deleteSandwich(int id){
-       order.deleteSandwich(id);
-       notifyObservers(OrderEvent.DELETE_SANDWICH);
-    }
-
-    public List<OrderLine> getOrderLines() {
-        return order.getOrderLines();
-    }
-
-
-    public HashMap<String, Integer> getStockListSandwiches() {
-        return sandwichDatabase.getStockListSandwiches();
-    }
-    public HashMap<String, Integer> getStockListToppings() {
-        return toppingDatabase.getStockListToppings();
-    }
-    public double getAmount(){
-        return order.getTotalPrice();
-    }
-
-    public double getDiscountAmount(DiscountStrategyEnum discount){
-        return order.getTotalPriceWithDiscount(discount);
-    }
-
-    public static int getNextfollownrAndIncrease() {
-        follownr++;
-        return follownr;
-    }
-    public int getfollownr() {
-        return follownr;
-    }
-    public ArrayList<String> getDiscounts() {
-        return DiscountStrategyEnum.getDiscounts();
-    }
-    public DiscountStrategyEnum[] getDiscountsEnum() {
-        return DiscountStrategyEnum.values();
-    }
-    public LoadSaveStrategyEnum[] getLoadTypes(){
-        return LoadSaveStrategyEnum.values();
-    }
-
-
-    public void addOrderlineToDone(){
-        for (OrderLine orderline:order.getOrderLines()) {
-            doneorders.get("Sandwiches").put(orderline.getSandwichname() , doneorders.get("Sandwiches").get(orderline.getSandwichname()) + 1);
-            for(Topping topping: orderline.getToppingssort()){
-                doneorders.get("Toppings").put(topping.getName() , doneorders.get("Toppings").get(topping.getName()) + 1);
-            };
-        }
-    }
-
-    public void pay() {
-        order.pay();
-    }
-
     public void endOrder() {
         order.endOrder();
     }
-
-    public HashMap<String , HashMap<String , Integer>> getdoneorders() {
-        return doneorders;
+    public void pay() {
+        order.pay();
     }
     public void toKitchen(){
         kitchenQueue.add(order);
@@ -175,7 +99,8 @@ public class OrderFacade implements Subject {
         updatebase();
         sandwichDatabase.save();
         toppingDatabase.save();
-        order = new Order();
+        follownr++;
+        order = new Order(getfollownr());
     }
     public void startPreparation() {
         setOrderisinspected(true);
@@ -189,31 +114,86 @@ public class OrderFacade implements Subject {
         deletedorder.orderIsDone();
         notifyObservers(OrderEvent.ORDER_IS_DONE);
     }
+
+    public int getfollownr() {
+        return follownr;
+    }
+    public int getOrderCount() {
+        return kitchenQueue.size();
+    }
+
+    public double getAmount(){
+        return order.getTotalPrice();
+    }
+    public double getDiscountAmount(DiscountStrategyEnum discount){
+        return order.getTotalPriceWithDiscount(discount);
+    }
+
+
+    public Order getOrder() {
+        return order;
+    }
     public Order getTopOfQueue() {
         return kitchenQueue.peek();
     }
 
-    public boolean isOrderisinspected() {
-        return Orderisinspected;
+    public ToppingDatabase getToppingDatabase() {
+        return toppingDatabase;
+    }
+    public SandwichDatabase getSandwichDatabase() {
+        return sandwichDatabase;
+    }
+
+
+    public ArrayList<String> getDiscounts() {
+        return DiscountStrategyEnum.getDiscounts();
+    }
+    public ArrayList<OrderLine> getOrderLines() {
+        return order.getOrderLines();
+    }
+
+
+    public HashMap<String , HashMap<String , Integer>> getdoneorders() {
+        return doneorders;
+    }
+    public HashMap<OrderLine, Integer> getorderashashmap(){
+        return kitchenQueue.size() != 0 ? kitchenQueue.peek().giverorderashashmap(): null;
+    }
+    public HashMap<String, Integer> getStockListSandwiches() {
+        return sandwichDatabase.getStockListSandwiches();
+    }
+    public HashMap<String, Integer> getStockListToppings() {
+        return toppingDatabase.getStockListToppings();
+    }
+
+
+    public DiscountStrategyEnum[] getDiscountsEnum() {
+        return DiscountStrategyEnum.values();
+    }
+    public LoadSaveStrategyEnum[] getLoadTypes(){
+        return LoadSaveStrategyEnum.values();
     }
 
     public void setOrderisinspected(boolean orderisinspected) {
         Orderisinspected = orderisinspected;
     }
-
-    public int getOrderCount() {
-        return kitchenQueue.size();
+    public boolean isOrderisinspected() {
+        return Orderisinspected;
     }
-    public HashMap<OrderLine, Integer> giverorderashashmap(Order order){
-        return order.giverorderashashmap();
+
+    public void addOrderlineToDone(){
+        for (OrderLine orderline:order.getOrderLines()) {
+            doneorders.get("Sandwiches").put(orderline.getSandwichname(), doneorders.get("Sandwiches").get(orderline.getSandwichname()) + 1);
+            orderline.getToppingssort().forEach(topping -> doneorders.get("Toppings").put(topping.getName(), doneorders.get("Toppings").get(topping.getName()) + 1));
+        }
     }
     public void updatebase(){
         for (OrderLine orderline: order.getOrderLines()) {
             this.sandwichDatabase.getSandwichSorts().get(orderline.getSandwichname()).increamentSold();
-            for (Topping topping:orderline.getToppingssort()) {
-                this.toppingDatabase.getToppingSorts().get(topping.getName()).increamentSold();
-            }
+            orderline.getToppingssort().forEach(topping ->  this.toppingDatabase.getToppingSorts().get(topping.getName()).increamentSold());
         }
     }
+
 }
+
 

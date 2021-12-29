@@ -14,8 +14,6 @@ public class AdminMainPane extends BorderPane {
         panes.getChildren().add(new SandwichOverviewPane(adminViewController));
         panes.getChildren().add(new ToppingOverviewPane(adminViewController));
         VBox stats = new VBox();
-
-
         stats.getChildren().add(new Statistics(adminViewController));
         VBox settings = new VBox();
         settings.getChildren().add(new Settings(adminViewController));

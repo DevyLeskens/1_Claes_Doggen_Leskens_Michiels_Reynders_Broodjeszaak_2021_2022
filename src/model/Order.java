@@ -4,10 +4,12 @@ import model.discountStrategies.*;
 import model.domain.Sandwich;
 import model.domain.Topping;
 import model.states.*;
+import model.vanillaplusfunctions.DefaultIntDict;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+
 
 public class Order{
 
@@ -25,10 +27,10 @@ public class Order{
     private StateIsPrepared stateIsPrepared = new StateIsPrepared(this);
     private StateIsCanceled stateIsCanceled = new StateIsCanceled(this);
 
-    public Order()  {
+    public Order(int follownr)  {
         orderLines = new ArrayList<>();
         setOrderState(stateInWait);
-        this.follownr = OrderFacade.getNextfollownrAndIncrease();
+        this.follownr = follownr;
     }
     public void setOrderState(OrderState orderState) {
         this.orderState = orderState;
@@ -38,7 +40,7 @@ public class Order{
         return follownr;
     }
 
-    public List<OrderLine> getOrderLines() {
+    public ArrayList<OrderLine> getOrderLines() {
         return orderLines;
     }
     public void deleteSandwich(int id){
@@ -47,13 +49,9 @@ public class Order{
 
     }
     public HashMap<OrderLine, Integer> giverorderashashmap(){
-        HashMap<OrderLine, Integer> order = new HashMap<>();
+        DefaultIntDict<OrderLine, Integer> order = new DefaultIntDict<>(0);
         for (OrderLine orderline: getOrderLines()) {
-            if (order.containsKey(orderline)) {
-                order.put(orderline, order.get(orderline) + 1);
-            } else {
-                order.put(orderline , 1);
-            }
+            order.put(orderline, order.safeGet(orderline) + 1);
         }
         return order;
     }

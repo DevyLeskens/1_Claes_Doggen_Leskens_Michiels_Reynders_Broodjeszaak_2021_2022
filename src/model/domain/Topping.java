@@ -29,9 +29,6 @@ public class Topping extends Product {
         return new Topping(name, price, stock, sold);
     }
 
-    @Override
-    public String toString() {
-        return keyCount +  " x " + name;
-    }
+
 
 }
