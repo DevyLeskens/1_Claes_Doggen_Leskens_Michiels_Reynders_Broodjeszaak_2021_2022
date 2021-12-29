@@ -21,15 +21,18 @@ public class OrderDetails extends BorderPane {
     public static TableView tableView;
 
     public OrderDetails(OrderViewController orderViewController) {
+
+        //css
         this.tableView = new TableView<>();
         this.setPadding(new Insets(5, 5, 15, 10));
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         tableView.setMinWidth(350);
         tableView.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT)));
         tableView.setEffect(new DropShadow(10, Color.BLACK));
+
+        //add to root
         this.setLeft(tableView);
         this.setRight(new OrderDetailsListAndButton(orderViewController));
-
     }
 
     public void fillTable(List<OrderLine> orderLines) {
@@ -64,5 +67,4 @@ public class OrderDetails extends BorderPane {
         }
         return 0;
     }
-
 }

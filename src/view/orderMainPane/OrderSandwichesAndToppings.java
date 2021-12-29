@@ -34,15 +34,15 @@ public class OrderSandwichesAndToppings extends VBox {
         //css
         this.setBackground(new Background(new BackgroundFill(Color.DARKSEAGREEN, new CornerRadii(0), new Insets(0))));
         this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        //css
+        //add to root
         this.getChildren().addAll(sandwiches, toppings);
-
     }
 
     public void setSandwichesButtons() {
         for (Sandwich sandwich : OrderFacade.getInstance().getSandwichDatabase().getSandwichSorts().values()) {
             Button sandwichType = new Button(sandwich.getName());
             sandwichButtons.add(sandwichType);
+
             //css
             sandwichType.setMinWidth(105);
             sandwichType.setMinHeight(40);
@@ -52,9 +52,11 @@ public class OrderSandwichesAndToppings extends VBox {
             sandwiches.setVgap(10);
             sandwiches.setPadding(new Insets(10, 10, 10, 10));
             sandwiches.setEffect(new DropShadow(2, Color.BLACK));
-            //css
+
+            //add to root
             sandwiches.getChildren().add(sandwichType);
 
+            //action
             sandwichType.setOnAction(event -> {
                 orderViewController.addOrderLine(sandwich.getName());
                 OrderView.updateLabel();
@@ -75,11 +77,10 @@ public class OrderSandwichesAndToppings extends VBox {
             toppings.setVgap(10);
             toppings.setPadding(new Insets(10, 10, 30, 10));
             toppings.setEffect(new DropShadow(2, Color.BLACK));
-            //css
+            //add to root
             toppings.getChildren().add(toppingButton);
 
             toppingButton.setOnAction(event -> orderViewController.addTopping(OrderSandwichesAndToppings.getSelectedColumnId(), topping.getName()));
-
         }
     }
 
@@ -108,6 +109,4 @@ public class OrderSandwichesAndToppings extends VBox {
         OrderSandwichesAndToppings.setSelectedColumnId(OrderDetails.getIdOfTable(orderLine, (Collection<OrderLine>) OrderDetails.tableView.getItems()));
         return selectedColumnId;
     }
-
-
 }

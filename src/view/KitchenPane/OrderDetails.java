@@ -20,12 +20,14 @@ public class OrderDetails extends VBox {
 
     public OrderDetails(KitchenViewController kitchenViewController) {
         this.kitchenViewController = kitchenViewController;
+
+        //add to root
         this.getChildren().addAll(follownr, details, detailsOforder);
+
+        //css
         this.setPadding(new Insets(5, 0, 20, 10));
         this.setMinHeight(120);
-
     }
-
 
     public static void update(HashMap<OrderLine, Integer> order, boolean isinspected) {
         if (order == null || !isinspected) {
@@ -49,10 +51,6 @@ public class OrderDetails extends VBox {
         }
         return displayedorder.toString();
     }
-
-
-
-
 }
 
 

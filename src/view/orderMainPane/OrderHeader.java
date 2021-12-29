@@ -21,19 +21,24 @@ public class OrderHeader extends BorderPane {
     private static ChoiceBox choiceBox = new ChoiceBox();
 
     public OrderHeader(OrderViewController orderViewController) {
-        //css
         this.orderViewController = orderViewController;
+
+        //css
         newOrder.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, new CornerRadii(5), new Insets(0))));
         newOrder.setFont(Font.font("Verdana", 25));
         newOrder.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT)));
         followNumberLabel.setFont(Font.font("Verdana", 20));
         choiceBox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT)));
         choiceBox.setMinSize(100, 53);
-        //css
+        this.setPadding(new Insets(5, 10, 7, 10));
+
+        //choicebox
         choiceBox.setItems(FXCollections.observableArrayList(orderViewController.getDiscountsEnum()));
         // properties
         System.out.println(DiscountStrategyEnum.getEnumFromString(orderViewController.getPreferredDiscountStrategy()));
         choiceBox.setValue(DiscountStrategyEnum.getEnumFromString(orderViewController.getPreferredDiscountStrategy()));
+
+        //action
         newOrder.setOnAction(event -> {
             updateFollowNumber();
             ArrayList<String> dontChange = new ArrayList<>(Arrays.asList("New order", "To kitchen", "Pay"));
@@ -41,7 +46,8 @@ public class OrderHeader extends BorderPane {
             newOrder.setDisable(true);
         });
 
-        this.setPadding(new Insets(5, 10, 7, 10));
+
+        //add to root
         this.setLeft(newOrder);
         this.setCenter(followNumberLabel);
         this.setRight(choiceBox);

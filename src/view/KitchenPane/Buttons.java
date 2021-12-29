@@ -17,8 +17,12 @@ public class Buttons extends BorderPane {
 
     public Buttons(KitchenViewController kitchenViewController){
         this.kitchenViewController = kitchenViewController;
+
+        //add to root
         this.setLeft(next);
         this.setRight(orderFinished);
+
+        //css
         this.setPadding(new Insets(5,10,5,10));
         this.setBackground(new Background(new BackgroundFill(Color.DARKSEAGREEN, new CornerRadii(5), new Insets(0))));
         next.setFont(Font.font("Verdana",20));
@@ -30,6 +34,7 @@ public class Buttons extends BorderPane {
         orderFinished.setDisable(true);
         next.setDisable(true);
 
+        //action to buttons
         next.setOnAction(event -> {
             kitchenViewController.startPreparation();
         });
@@ -39,11 +44,9 @@ public class Buttons extends BorderPane {
 
     }
     public static void update(int countorder, boolean orderisinspected, HashMap<OrderLine, Integer> order){
-
         next.setDisable(countorder < 1 || orderisinspected);
         orderFinished.setDisable(!orderisinspected);
         OrderDetails.update(order, orderisinspected);
-
     }
 
 
