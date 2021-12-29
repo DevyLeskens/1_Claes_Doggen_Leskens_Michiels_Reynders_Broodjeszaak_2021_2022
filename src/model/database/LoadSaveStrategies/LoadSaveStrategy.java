@@ -5,6 +5,5 @@ import java.util.TreeMap;
 public interface LoadSaveStrategy<K, V> {
 
     TreeMap<K, V> load();
-
-    void save();
+    void save(TreeMap<K,V> map);
 }

@@ -5,6 +5,8 @@ import model.database.LoadSaveStrategies.LoadSaveStrategyEnum;
 import model.database.LoadSaveStrategies.LoadSaveStrategyFactory;
 import model.domain.Sandwich;
 
+import java.util.TreeMap;
+
 public class SandwichDatabase extends ProductDatabase<String, Sandwich> {
 
 
@@ -32,9 +34,9 @@ public class SandwichDatabase extends ProductDatabase<String, Sandwich> {
         }
     }
 
-    public void save() {
+    public void save(TreeMap<String,Sandwich> map) {
         try {
-            LoadSaveStrategyFactory.createLoadSaveStrategy(Settings.getProductFormatReaderSettings() + " sandwich").save();
+            LoadSaveStrategyFactory.createLoadSaveStrategy(Settings.getProductFormatReaderSettings() + " sandwich").save(map);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

@@ -23,7 +23,7 @@ public class SandwichesTextLoadSaveStrategy extends TextLoadSaveTemplate<String,
     @Override
     public TreeMap<String, Sandwich> load() { return super.load(); }
     @Override
-    public void save() { super.save(); }
+    public void save(TreeMap<String,Sandwich> map) { super.save(); }
     @Override
     public String getKey(String[] tokens) { return tokens[0]; }
     @Override

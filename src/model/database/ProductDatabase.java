@@ -18,7 +18,7 @@ public abstract class ProductDatabase<K , V> {
     }
 
     public abstract void load();
-    public abstract void save();
+    public abstract void save(TreeMap<K,V> map);
 
     public void setDatabase(TreeMap<String, V> database) {
         this.database = database;

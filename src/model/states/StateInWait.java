@@ -14,6 +14,6 @@ public class StateInWait extends OrderState {
 
     @Override
     public void cancelOrder() {
-        order.setOrderState(order.getStateIsCanceled());
+        order.setOrderState(order.getStateInWait());
     }
 }

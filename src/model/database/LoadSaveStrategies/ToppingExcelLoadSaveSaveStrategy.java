@@ -1,7 +1,9 @@
 package model.database.LoadSaveStrategies;
 
+import model.OrderFacade;
 import model.Settings;
 import model.database.ExcelLoadSaveTemplate;
+import model.database.ToppingDatabase;
 import model.domain.DomainException;
 import model.domain.Topping;
 
@@ -11,7 +13,7 @@ import java.util.TreeMap;
 
 public class ToppingExcelLoadSaveSaveStrategy extends ExcelLoadSaveTemplate<String, Topping> implements LoadSaveStrategy<String, Topping> {
 
-    public ToppingExcelLoadSaveSaveStrategy(LoadSaveStrategyEnum loadSaveStrategyEnum) {
+    public ToppingExcelLoadSaveSaveStrategy() {
         try { setReader((Objects.requireNonNull(LoadSaveStrategyEnum.getEnumFromString(Settings.getProductFormatReaderSettings() + " Topping"))).getFile());
         }catch (Exception e){ throw new DomainException("Tis weer kapot eh"); }
 
@@ -36,8 +38,10 @@ public class ToppingExcelLoadSaveSaveStrategy extends ExcelLoadSaveTemplate<Stri
         return null;
     }
 
-    @Override
-    public void save() {
 
+
+    @Override
+    public void save(TreeMap<String , Topping> map) {
+       super.save(map);
     }
 }

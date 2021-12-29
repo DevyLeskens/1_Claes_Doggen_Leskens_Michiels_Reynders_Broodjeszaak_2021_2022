@@ -15,6 +15,6 @@ public class StateIsTerminated extends OrderState {
 
     @Override
     public void cancelOrder() {
-        order.setOrderState(order.getStateIsCanceled());
+        order.setOrderState(order.getStateInWait());
     }
 }

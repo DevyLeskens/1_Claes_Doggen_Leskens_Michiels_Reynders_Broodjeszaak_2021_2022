@@ -1,7 +1,9 @@
 package model.database.LoadSaveStrategies;
 
+import model.OrderFacade;
 import model.Settings;
 import model.database.ExcelLoadSaveTemplate;
+import model.database.SandwichDatabase;
 import model.domain.DomainException;
 import model.domain.Sandwich;
 
@@ -15,8 +17,12 @@ import java.util.TreeMap;
 public class SandwichExcelLoadSaveSaveStrategy extends ExcelLoadSaveTemplate<String, Sandwich> implements LoadSaveStrategy<String, Sandwich> {
 
     public SandwichExcelLoadSaveSaveStrategy() {
-        try { setReader((Objects.requireNonNull(LoadSaveStrategyEnum.getEnumFromString(Settings.getProductFormatReaderSettings() + " Sandwich"))).getFile());
-        }catch (Exception e){ throw new DomainException("Tis weer kapot eh"); }
+        try { setReader((Objects.requireNonNull(
+                LoadSaveStrategyEnum.getEnumFromString(Settings.getProductFormatReaderSettings() + " Sandwich"))).getFile());
+        }catch (Exception e){
+            throw new DomainException("Tis weer kapot eh");
+        }
+
     }
 
     @Override
@@ -39,7 +45,7 @@ public class SandwichExcelLoadSaveSaveStrategy extends ExcelLoadSaveTemplate<Str
     }
 
     @Override
-    public void save() {
-
+    public void save(TreeMap<String,Sandwich> map) {
+        super.save(map);
     }
 }

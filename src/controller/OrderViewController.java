@@ -26,7 +26,7 @@ public class OrderViewController implements Observer {
     }
 
     public void errorBox(String infoMessage) {
-        orderView.errorBox(infoMessage, "Action not permitted");
+        orderView.errorBox(infoMessage);
     }
 
     public void addOrderLine(String sandwichName) {
@@ -35,15 +35,19 @@ public class OrderViewController implements Observer {
             updateOrderLines();
             updateStatusSandwichesButtons();
         } catch (OrderStateException e) {
-            errorBox("You can not add this order.");
+            errorBox("adding is prohibited");
         }
     }
 
     public void toKitchen() {
-        orderFacade.toKitchen();
-        updateOrderLines();
-    }
+        try {
+            orderFacade.toKitchen();
+            updateOrderLines();
+        } catch (OrderStateException e) {
+            errorBox("To kitchen is prohibited atm");
+        }
 
+    }
     public void addTopping(int id, String toppingName) {
         try {
             orderFacade.addTopping(id, toppingName);
@@ -51,6 +55,35 @@ public class OrderViewController implements Observer {
             updateStatusToppingButtons();
         } catch (OrderStateException e) {
             errorBox("You first have to add a sandwich.");
+        }
+
+    }
+    public void cancelOrder() {
+        try {
+            orderFacade.cancelOrder();
+            updateOrderLines();
+        } catch (OrderStateException e) {
+            errorBox("Can not cancel order");
+        }
+
+    }
+    public void addIdenticalSandwich(int id) {
+        try {
+            orderFacade.addIdenticalSandwich(id);
+            updateOrderLines();
+        } catch (OrderStateException e) {
+            errorBox("Can not add order");
+        }catch (OrdelineException e){
+             errorBox(e.getMessage());
+        }
+
+    }
+    public void deleteSandwich(int id) {
+        try {
+            orderFacade.deleteSandwich(id);
+            updateOrderLines();
+        } catch (OrderStateException e) {
+            errorBox("can not delete order");
         }
 
     }
@@ -75,15 +108,7 @@ public class OrderViewController implements Observer {
         orderView.updateOrderLines(getOrderLines(), orderFacade.getAmount());
     }
 
-    public void cancelOrder() {
-        try {
-            orderFacade.cancelOrder();
-            updateOrderLines();
-        } catch (OrderStateException e) {
-            errorBox("Can not cancel order");
-        }
 
-    }
 
     public void updateStatusSandwichesButtons() {
         orderView.updateStatusSandwichesButtons(orderFacade.getStockListSandwiches());
@@ -105,29 +130,11 @@ public class OrderViewController implements Observer {
         return Settings.getPreferredDiscountStrategySettings();
     }
 
-    public void addIdenticalSandwich(int id) {
-        try {
-            orderFacade.addIdenticalSandwich(id);
-            updateOrderLines();
-        } catch (OrderStateException e) {
-            errorBox("Can not add order");
-        }
-
-    }
-
     public int getFollowNr() {
         return orderFacade.getFollowNr();
     }
 
-    public void deleteSandwich(int id) {
-        try {
-            orderFacade.deleteSandwich(id);
-            updateOrderLines();
-        } catch (OrderStateException e) {
-            errorBox("can not delete order");
-        }
 
-    }
 
     @Override
     public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int orderCount, boolean orderIsInspected, HashMap<OrderLine, Integer> peek, int followNr) {

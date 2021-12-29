@@ -18,7 +18,7 @@ public class OrderLine {
     public OrderLine() {
     }
 
-    public String getSandwichName() {
+    public String getSandwichname() {
         return sandwichName;
     }
 
@@ -40,7 +40,7 @@ public class OrderLine {
 
 
     // wordt gebruikt door tabel in Orderview 'filltables'
-    public String getToppingNames() {
+    public String getToppingnames() {
         StringBuilder string = new StringBuilder(" ");
         this.getToppingsAsStringMap().forEach((key, value) -> string.append(value).append(" x ").append(key).append(", "));
         return string.substring(0, string.length() > 2 ? string.length() - 2 : string.length() - 1);
@@ -48,20 +48,21 @@ public class OrderLine {
 
     public HashMap<String, Integer> getToppingsAsStringMap() {
         HashMap<String, Integer> toppings = new HashMap<>();
-        for (Topping toppingSort : getToppingsSort()) {
-            toppings.put(toppingSort.toString(), toppings.computeIfAbsent(toppingSort.toString(), k -> 0) + 1);
-        }
-        return toppings;
+        getToppingsSort().forEach( toppingSort -> toppings.put(toppingSort.toString(), toppings.computeIfAbsent(toppingSort.toString(), k -> 0) + 1));
+        return  toppings;
+    }
+    public HashMap<Topping, Integer> getToppingsAsProductMap() {
+        HashMap<Topping, Integer> toppings = new HashMap<>();
+        getToppingsSort().forEach( toppingSort -> toppings.put(toppingSort, toppings.computeIfAbsent(toppingSort, k -> 0) + 1));
+        return  toppings;
     }
 
     public void setSandwichName(String sandwichName) {
         this.sandwichName = sandwichName;
     }
-
     public void setSandwich(Sandwich sandwich) {
         this.sandwich = sandwich;
     }
-
     public void addTopping(Topping topping) {
         this.toppingsSort.add(topping);
     }

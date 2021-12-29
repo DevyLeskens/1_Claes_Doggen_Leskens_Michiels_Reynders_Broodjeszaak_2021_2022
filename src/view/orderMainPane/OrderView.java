@@ -6,6 +6,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
@@ -106,8 +107,11 @@ public class OrderView {
         countSandwiches.setText("Sandwich count: " + sandwichCount);
     }
 
-    public void errorBox(String infoMessage, String titleBar) {
-        JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
+    public void errorBox(String infoMessage) {
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setHeaderText("Action not permitted");
+        errorAlert.setContentText(infoMessage);
+        errorAlert.showAndWait();
     }
 
     public static void updateLabel() {

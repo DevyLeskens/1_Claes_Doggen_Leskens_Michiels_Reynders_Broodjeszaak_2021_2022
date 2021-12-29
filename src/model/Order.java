@@ -9,6 +9,7 @@ import model.states.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 public class Order {
@@ -24,7 +25,6 @@ public class Order {
     private StateInWaitingLine stateInWaitingLine = new StateInWaitingLine(this);
     private StateInPreparation stateInPreparation = new StateInPreparation(this);
     private StateIsPrepared stateIsPrepared = new StateIsPrepared(this);
-    private StateIsCanceled stateIsCanceled = new StateIsCanceled(this);
 
     public Order(int followNr) {
         orderLines = new ArrayList<>();
@@ -60,9 +60,6 @@ public class Order {
         return stateIsPrepared;
     }
 
-    public StateIsCanceled getStateIsCanceled() {
-        return stateIsCanceled;
-    }
 
     public int getFollowNr() {
         return followNr;
@@ -95,6 +92,7 @@ public class Order {
     }
 
     public void addOrderLine(Sandwich sandwich) {
+        if(sandwich.getStock() < 1){ throw new OrdelineException(sandwich.getName() + " is uit stock!");}
         orderState.addSandwich();
         this.orderLines.add(new OrderLine(sandwich));
     }
@@ -105,11 +103,13 @@ public class Order {
     }
 
     public void addIdenticalSandwich(int id) {
+        checkifAddisPossible(orderLines.get(id));
         orderState.addIdenticalSandwich();
         orderLines.add(orderLines.get(id));
     }
 
     public void addTopping(int sandwichId, Topping topping) {
+        if(topping.getStock() == 0){ throw new OrdelineException(topping.getName() + " is uit stock!");}
         orderState.addTopping();
         orderLines.get(sandwichId).addTopping(topping);
     }
@@ -134,6 +134,12 @@ public class Order {
         orderState.done();
     }
 
+    public void checkifAddisPossible(OrderLine orderLine){
+        if(orderLine.getSandwich().getStock() == 0){ throw new OrdelineException(orderLine.getSandwichname() + " is uit stock!");}
+        for (Map.Entry<Topping, Integer> orderline: orderLine.getToppingsAsProductMap().entrySet()) {
+            if(orderline.getKey().getStock() < orderline.getValue()){ throw new OrdelineException(orderline.getKey().getName() + " is uit stock!");}
+        }
+    }
     public void reset() {
         orderState.cancelOrder();
         this.orderLines = new ArrayList<>();

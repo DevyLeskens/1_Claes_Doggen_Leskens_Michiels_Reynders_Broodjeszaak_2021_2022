@@ -41,7 +41,7 @@ public class OrderDetails extends VBox {
         StringBuilder displayedorder = new StringBuilder();
         for (Map.Entry<OrderLine, Integer> entry:order.entrySet()) {
             displayedorder.append(entry.getValue()).append(" x ").append(entry.getKey().getSandwich()).append(":");
-            if(entry.getKey().getToppingssort().size() != 0){
+            if(entry.getKey().getToppingsSort().size() != 0){
             for (Map.Entry<String, Integer> ordeline : entry.getKey().getToppingsAsStringMap().entrySet()) {
                 displayedorder.append(ordeline.getValue()).append(" x ").append(ordeline.getKey()).append(", ");
             }}else {

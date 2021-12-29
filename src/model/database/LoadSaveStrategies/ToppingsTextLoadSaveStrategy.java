@@ -4,6 +4,7 @@ import model.Settings;
 import model.database.TextLoadSaveTemplate;
 import model.database.ToppingDatabase;
 import model.domain.DomainException;
+import model.domain.Sandwich;
 import model.domain.Topping;
 
 import java.io.BufferedReader;
@@ -25,7 +26,7 @@ public class ToppingsTextLoadSaveStrategy extends TextLoadSaveTemplate<String, T
         return null;
     }
     @Override
-    public void save() {
+    public void save(TreeMap<String, Topping> map) {
         super.save();
     }
 
@@ -38,5 +39,5 @@ public class ToppingsTextLoadSaveStrategy extends TextLoadSaveTemplate<String, T
     public String getKey(String[] tokens) {
         return tokens[0];
     }
-    
+
 }

@@ -29,16 +29,18 @@ public class ToppingDatabase extends ProductDatabase<String , Topping> {
 
     public void load() {
         try {
-            setDatabase(LoadSaveStrategyFactory.createLoadSaveStrategy(Settings.getProductFormatReaderSettings() + " Topping").load());
+            setDatabase(LoadSaveStrategyFactory.createLoadSaveStrategy(Settings.getProductFormatReaderSettings() + " topping").load());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
+
+
     // dummy methode
-    public void save(){
+    public void save(TreeMap<String,Topping> map){
         try {
-         LoadSaveStrategyFactory.createLoadSaveStrategy(Settings.getProductFormatReaderSettings() + " Topping").save();
+         LoadSaveStrategyFactory.createLoadSaveStrategy(Settings.getProductFormatReaderSettings() + " topping").save(map);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
