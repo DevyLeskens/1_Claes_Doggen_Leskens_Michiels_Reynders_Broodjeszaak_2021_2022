@@ -21,7 +21,7 @@ public class AdminMainPane extends BorderPane {
         HBox panes = new HBox();
         panes.getChildren().add(new SandwichOverviewPane(adminViewController));
         panes.getChildren().add(new ToppingOverviewPane(adminViewController));
-        Tab broodjesTab = new Tab("Sandwiches/Toppings",headerAndPane);
+        Tab broodjesTab = new Tab("Sandwiches/Toppings", headerAndPane);
         tabPane.getTabs().add(broodjesTab);
 
         //header
@@ -32,8 +32,8 @@ public class AdminMainPane extends BorderPane {
         toppings.setFont(Font.font("Verdana", 20));
         header.setLeft(sandwiches);
         header.setRight(toppings);
-        sandwiches.setPadding(new Insets(5,0,10,0));
-        toppings.setPadding(new Insets(5,0,10,0));
+        sandwiches.setPadding(new Insets(5, 0, 10, 0));
+        toppings.setPadding(new Insets(5, 0, 10, 0));
         header.setBackground(new Background(new BackgroundFill(Color.DARKSEAGREEN, new CornerRadii(0), new Insets(0))));
         header.setPadding(new Insets(0, 110, 0, 95));
 
@@ -42,7 +42,7 @@ public class AdminMainPane extends BorderPane {
         footer.setBackground(new Background(new BackgroundFill(Color.DARKSEAGREEN, new CornerRadii(0), new Insets(0))));
         footer.setMinHeight(30);
         footer.setCenter(footerText);
-        footerText.setFont(Font.font("Verdana",15));
+        footerText.setFont(Font.font("Verdana", 15));
 
         //Stat page
         VBox stats = new VBox();

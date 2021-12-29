@@ -22,17 +22,25 @@ public enum DiscountStrategyEnum {
     public String getName() {
         return name;
     }
-    public DiscountStrategy getStrategy(){ return discountType;}
+
+    public DiscountStrategy getStrategy() {
+        return discountType;
+    }
+
     public String getLocation() {
         return location;
     }
 
-    public static DiscountStrategyEnum getEnumFromString(String name){
-        for (DiscountStrategyEnum discount: DiscountStrategyEnum.values()) {
-            if(discount.getName().equals(name)){return discount;}
-        }return null;
+    public static DiscountStrategyEnum getEnumFromString(String name) {
+        for (DiscountStrategyEnum discount : DiscountStrategyEnum.values()) {
+            if (discount.getName().equals(name)) {
+                return discount;
+            }
+        }
+        return null;
     }
-    public static ArrayList<String>getDiscounts(){
+
+    public static ArrayList<String> getDiscounts() {
         return Arrays.stream(DiscountStrategyEnum.values()).map(DiscountStrategyEnum::getName).collect(Collectors.toCollection(ArrayList::new));
     }
 

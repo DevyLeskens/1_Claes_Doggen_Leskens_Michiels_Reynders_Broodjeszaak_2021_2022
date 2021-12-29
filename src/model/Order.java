@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class Order{
+public class Order {
 
     private OrderState orderState;
     private ArrayList<OrderLine> orderLines;
-    private int follownr = 0;
+    private int followNr = 0;
 
     private StateInWait stateInWait = new StateInWait(this);
     private StateInOrder stateInOrder = new StateInOrder(this);
@@ -26,72 +26,115 @@ public class Order{
     private StateIsPrepared stateIsPrepared = new StateIsPrepared(this);
     private StateIsCanceled stateIsCanceled = new StateIsCanceled(this);
 
-    public Order(int follownr)  {
+    public Order(int followNr) {
         orderLines = new ArrayList<>();
         setOrderState(stateInWait);
-        this.follownr = follownr;
+        this.followNr = followNr;
     }
 
     public StateInOrder getStateInOrder() {
         return stateInOrder;
     }
+
     public StateIsTerminated getStateIsTerminated() {
         return stateIsTerminated;
     }
+
     public StateInWait getStateInWait() {
         return stateInWait;
     }
+
     public StateIsPayed getStateIsPayed() {
         return stateIsPayed;
     }
+
     public StateInWaitingLine getStateInWaitingLine() {
         return stateInWaitingLine;
     }
+
     public StateInPreparation getStateInPreparation() {
         return stateInPreparation;
     }
+
     public StateIsPrepared getStateIsPrepared() {
         return stateIsPrepared;
     }
+
     public StateIsCanceled getStateIsCanceled() {
         return stateIsCanceled;
     }
 
-    public int getFollownr() { return follownr; }
-    public double getTotalPrice(){ return orderLines.stream().mapToDouble(OrderLine::getPrice).sum(); }
-    public ArrayList<OrderLine> getOrderLines() { return orderLines; }
-    public double getTotalPriceWithDiscount(DiscountStrategyEnum discount){ return getTotalPrice() - discount.getStrategy().calcDiscount(this); }
-    public double getCheapestOrderline(){ return orderLines.stream().mapToDouble(OrderLine::getPrice).min().orElseThrow(DomainException::new); }
-    public HashMap<OrderLine, Integer> giverorderashashmap(){
+    public int getFollowNr() {
+        return followNr;
+    }
+
+    public double getTotalPrice() {
+        return orderLines.stream().mapToDouble(OrderLine::getPrice).sum();
+    }
+
+    public ArrayList<OrderLine> getOrderLines() {
+        return orderLines;
+    }
+
+    public double getTotalPriceWithDiscount(DiscountStrategyEnum discount) {
+        return getTotalPrice() - discount.getStrategy().calcDiscount(this);
+    }
+
+    public double getCheapestOrderLine() {
+        return orderLines.stream().mapToDouble(OrderLine::getPrice).min().orElseThrow(DomainException::new);
+    }
+
+    public HashMap<OrderLine, Integer> giveOrderAsHashMap() {
         HashMap<OrderLine, Integer> order = new HashMap<>();
-        getOrderLines().forEach(orderline -> order.put(orderline, order.computeIfAbsent(orderline , k -> 0) + 1));
+        getOrderLines().forEach(orderLine -> order.put(orderLine, order.computeIfAbsent(orderLine, k -> 0) + 1));
         return order;
     }
 
-    public void setOrderState(OrderState orderState) { this.orderState = orderState; }
+    public void setOrderState(OrderState orderState) {
+        this.orderState = orderState;
+    }
+
     public void addOrderLine(Sandwich sandwich) {
         orderState.addSandwich();
         this.orderLines.add(new OrderLine(sandwich));
     }
-    public void deleteOrderLine(int id){
+
+    public void deleteOrderLine(int id) {
         orderState.deleteSandwich();
         orderLines.remove(id);
     }
-    public void addIdenticalSandwich(int id){
+
+    public void addIdenticalSandwich(int id) {
         orderState.addIdenticalSandwich();
         orderLines.add(orderLines.get(id));
     }
-    public void addTopping(int sandwichid, Topping topping) {
-        orderState.addTopping();
-        orderLines.get(sandwichid).addTopping(topping);
-    }
-    public void endOrder() { orderState.terminate(); }
-    public void pay() { orderState.pay(); }
-    public void toKitchen() { orderState.sendToKitchen(); }
-    public void startPreparation() { orderState.startPreparation(); }
-    public void orderIsDone() { orderState.done(); }
 
-    public void reset(){
+    public void addTopping(int sandwichId, Topping topping) {
+        orderState.addTopping();
+        orderLines.get(sandwichId).addTopping(topping);
+    }
+
+    public void endOrder() {
+        orderState.terminate();
+    }
+
+    public void pay() {
+        orderState.pay();
+    }
+
+    public void toKitchen() {
+        orderState.sendToKitchen();
+    }
+
+    public void startPreparation() {
+        orderState.startPreparation();
+    }
+
+    public void orderIsDone() {
+        orderState.done();
+    }
+
+    public void reset() {
         orderState.cancelOrder();
         this.orderLines = new ArrayList<>();
     }
