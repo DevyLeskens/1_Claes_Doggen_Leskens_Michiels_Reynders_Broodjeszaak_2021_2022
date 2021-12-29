@@ -57,7 +57,7 @@ public class Settings extends VBox {
 
         //save button
         PauseTransition transition = new PauseTransition(Duration.seconds(0.5));
-        transition.setOnFinished(event -> this.saveButton.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, new CornerRadii(0), new Insets(0)))));
+        transition.setOnFinished(event -> this.saveButton.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, new CornerRadii(5), new Insets(0)))));
         BorderPane saveButton = new BorderPane();
         saveButton.setCenter(this.saveButton);
         saveButton.setPadding(new Insets(10, 10, 5, 10));

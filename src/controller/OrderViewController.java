@@ -24,7 +24,6 @@ public class OrderViewController implements Observer {
         orderFacade.registerObserver(OrderEvent.ORDER_TO_KITCHEN, this);
         orderFacade.registerObserver(OrderEvent.CANCEL_ORDER, this);
         orderFacade.registerObserver(OrderEvent.DELETE_SANDWICH, this);
-
     }
 
     public void setView(OrderView view) {
