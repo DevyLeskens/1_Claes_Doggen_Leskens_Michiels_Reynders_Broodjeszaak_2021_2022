@@ -1,6 +1,6 @@
 ham,0.45,5,0
 cheese,0.40,5,0
-salad,0.20,10,0
+lettuce,0.20,10,0
 tomato,0.35,10,0
 feta,0.50,10,0
 cucumber,0.30,10,0
