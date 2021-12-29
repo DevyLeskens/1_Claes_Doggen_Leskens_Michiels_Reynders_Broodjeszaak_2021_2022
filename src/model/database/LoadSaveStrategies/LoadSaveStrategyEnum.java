@@ -1,5 +1,7 @@
 package model.database.LoadSaveStrategies;
 
+import model.discountStrategies.DiscountStrategyEnum;
+
 import java.io.File;
 
 public enum LoadSaveStrategyEnum {
@@ -17,6 +19,12 @@ public enum LoadSaveStrategyEnum {
         this.name = name;
         this.location = location;
         this.file = file;
+    }
+
+    public static LoadSaveStrategyEnum getEnumFromString(String name){
+        for (LoadSaveStrategyEnum discount: LoadSaveStrategyEnum.values()) {
+            if(discount.getName().equalsIgnoreCase(name)){return discount;}
+        }return null;
     }
 
     public String getName() {

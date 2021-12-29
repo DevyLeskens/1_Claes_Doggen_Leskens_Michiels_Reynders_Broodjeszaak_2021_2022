@@ -17,21 +17,8 @@ public abstract class ProductDatabase<K , V> {
         load();
     }
 
-    public void load() {
-        try {
-            this.database = LoadSaveStrategyFactory.createLoadSaveStrategy(Settings.getProductFormatReaderSettings() == "excel" ? LoadSaveStrategyEnum.EXCEL_SANDWICH : LoadSaveStrategyEnum.TEXT_SANDWICH).load();
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-    public void save() {
-        try {
-            LoadSaveStrategyFactory.createLoadSaveStrategy(Settings.getProductFormatReaderSettings() == "excel" ? LoadSaveStrategyEnum.EXCEL_SANDWICH : LoadSaveStrategyEnum.TEXT_SANDWICH).save();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
+    public abstract void load();
+    public abstract void save();
 
     public void setDatabase(TreeMap<String, V> database) {
         this.database = database;
@@ -50,6 +37,7 @@ public abstract class ProductDatabase<K , V> {
         }
         return stockList;
     }
+
     public HashMap<String, Integer> getSoldList() {
         HashMap<String, Integer> stockList = new HashMap<>();
         for (V product: getDatabase().values()) {

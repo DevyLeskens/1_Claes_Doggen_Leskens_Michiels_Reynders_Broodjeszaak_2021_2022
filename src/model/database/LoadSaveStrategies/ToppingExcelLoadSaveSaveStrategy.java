@@ -1,15 +1,20 @@
 package model.database.LoadSaveStrategies;
 
+import model.Settings;
 import model.database.ExcelLoadSaveTemplate;
+import model.domain.DomainException;
 import model.domain.Topping;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.TreeMap;
 
 public class ToppingExcelLoadSaveSaveStrategy extends ExcelLoadSaveTemplate<String, Topping> implements LoadSaveStrategy<String, Topping> {
 
     public ToppingExcelLoadSaveSaveStrategy(LoadSaveStrategyEnum loadSaveStrategyEnum) {
-        super(loadSaveStrategyEnum);
+        try { setReader((Objects.requireNonNull(LoadSaveStrategyEnum.getEnumFromString(Settings.getProductFormatReaderSettings() + " Topping"))).getFile());
+        }catch (Exception e){ throw new DomainException("Tis weer kapot eh"); }
+
     }
 
     @Override

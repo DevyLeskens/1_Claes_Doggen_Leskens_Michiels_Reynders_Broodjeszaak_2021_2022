@@ -1,7 +1,7 @@
 cheese,0.4,5,0
-cucumber,0.3,8,2
-feta,0.5,8,2
+cucumber,0.3,9,1
+feta,0.5,9,1
 ham,0.45,5,0
-olive,0.25,9,1
-salad,0.2,9,1
+olive,0.25,10,0
+salad,0.2,10,0
 tomato,0.35,10,0

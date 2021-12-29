@@ -43,7 +43,7 @@ public class OrderDetails extends VBox {
             displayedorder.append(entry.getValue()).append(" x ").append(entry.getKey().getSandwich()).append(":");
             if(entry.getKey().getToppingssort().size() != 0){
             for (Map.Entry<String, Integer> ordeline : entry.getKey().getToppingsAsStringMap().entrySet()) {
-                displayedorder.append(", ").append(ordeline.getValue()).append(" x ").append(ordeline.getKey());
+                displayedorder.append(ordeline.getValue()).append(" x ").append(ordeline.getKey()).append(", ");
             }}else {
                 displayedorder.append(" ZONDER toppings!");
             }

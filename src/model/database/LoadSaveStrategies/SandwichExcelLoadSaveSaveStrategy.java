@@ -1,15 +1,22 @@
 package model.database.LoadSaveStrategies;
 
+import model.Settings;
 import model.database.ExcelLoadSaveTemplate;
+import model.domain.DomainException;
 import model.domain.Sandwich;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.TreeMap;
 
 public class SandwichExcelLoadSaveSaveStrategy extends ExcelLoadSaveTemplate<String, Sandwich> implements LoadSaveStrategy<String, Sandwich> {
 
-    public SandwichExcelLoadSaveSaveStrategy(LoadSaveStrategyEnum loadSaveStrategyEnum) {
-        super(loadSaveStrategyEnum);
+    public SandwichExcelLoadSaveSaveStrategy() {
+        try { setReader((Objects.requireNonNull(LoadSaveStrategyEnum.getEnumFromString(Settings.getProductFormatReaderSettings() + " Sandwich"))).getFile());
+        }catch (Exception e){ throw new DomainException("Tis weer kapot eh"); }
     }
 
     @Override

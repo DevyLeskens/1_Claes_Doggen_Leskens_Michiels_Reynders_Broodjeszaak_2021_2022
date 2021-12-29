@@ -2,12 +2,11 @@ package model.database.LoadSaveStrategies;
 
 public class LoadSaveStrategyFactory {
 
-    public static LoadSaveStrategy createLoadSaveStrategy(LoadSaveStrategyEnum filetypeEnum) {
-        String className = filetypeEnum.getLocation();
+    public static LoadSaveStrategy createLoadSaveStrategy(String naam) {
         LoadSaveStrategy fileInterface = null;
         try {
-            Class dbClass = Class.forName(className);
-            Object dbObject = dbClass.getConstructor(LoadSaveStrategyEnum.class).newInstance(filetypeEnum);
+            Class dbClass = Class.forName(LoadSaveStrategyEnum.getEnumFromString(naam).getLocation());
+            Object dbObject = dbClass.getConstructor().newInstance();
             fileInterface = (LoadSaveStrategy) dbObject;
         } catch (Exception ignored) {
         }

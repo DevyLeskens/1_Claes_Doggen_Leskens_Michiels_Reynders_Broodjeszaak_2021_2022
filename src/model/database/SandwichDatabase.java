@@ -33,8 +33,7 @@ public class SandwichDatabase extends ProductDatabase<String, Sandwich> {
 
     public void load() {
         try {
-            setDatabase(LoadSaveStrategyFactory.createLoadSaveStrategy(Settings.getProductFormatReaderSettings() == "excel" ? LoadSaveStrategyEnum.EXCEL_SANDWICH : LoadSaveStrategyEnum.TEXT_SANDWICH).load());
-
+            setDatabase(LoadSaveStrategyFactory.createLoadSaveStrategy(Settings.getProductFormatReaderSettings() + " sandwich").load());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -42,7 +41,7 @@ public class SandwichDatabase extends ProductDatabase<String, Sandwich> {
 
     public void save() {
         try {
-            LoadSaveStrategyFactory.createLoadSaveStrategy(Settings.getProductFormatReaderSettings() == "excel" ? LoadSaveStrategyEnum.EXCEL_SANDWICH : LoadSaveStrategyEnum.TEXT_SANDWICH).save();
+            LoadSaveStrategyFactory.createLoadSaveStrategy(Settings.getProductFormatReaderSettings() + " sandwich").save();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

@@ -29,7 +29,7 @@ public class ToppingDatabase extends ProductDatabase<String , Topping> {
 
     public void load() {
         try {
-            this.setDatabase(LoadSaveStrategyFactory.createLoadSaveStrategy(Settings.getProductFormatReaderSettings() == "excel" ? LoadSaveStrategyEnum.EXCEL_TOPPING : LoadSaveStrategyEnum.TEXT_TOPPING).load());
+            setDatabase(LoadSaveStrategyFactory.createLoadSaveStrategy(Settings.getProductFormatReaderSettings() + " Topping").load());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -38,7 +38,7 @@ public class ToppingDatabase extends ProductDatabase<String , Topping> {
     // dummy methode
     public void save(){
         try {
-         LoadSaveStrategyFactory.createLoadSaveStrategy(Settings.getProductFormatReaderSettings() == "excel" ? LoadSaveStrategyEnum.EXCEL_TOPPING : LoadSaveStrategyEnum.TEXT_TOPPING).save();
+         LoadSaveStrategyFactory.createLoadSaveStrategy(Settings.getProductFormatReaderSettings() + " Topping").save();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
