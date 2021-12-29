@@ -1,6 +1,5 @@
 package model.database.LoadSaveStrategies;
 
-import model.database.SandwichDatabase;
 import model.database.TextLoadSaveTemplate;
 import model.database.ToppingDatabase;
 import model.domain.Topping;
@@ -26,7 +25,7 @@ public class ToppingsTextLoadSaveStrategy extends TextLoadSaveTemplate<String, T
 
     @Override
     public void save() {
-        super.save(ToppingDatabase.getInstance().getToppingSorts(), "toppingscopy");
+        super.save(ToppingDatabase.getInstance().getDatabase(), "toppingscopy");
     }
 
     @Override

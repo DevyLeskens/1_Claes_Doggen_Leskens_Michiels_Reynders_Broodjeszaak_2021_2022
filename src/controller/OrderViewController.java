@@ -3,13 +3,13 @@ package controller;
 import model.*;
 import model.database.SandwichDatabase;
 import model.database.ToppingDatabase;
+import model.discountStrategies.DiscountStrategy;
 import model.discountStrategies.DiscountStrategyEnum;
 import model.states.OrderStateException;
 import view.orderMainPane.OrderView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class OrderViewController implements Observer {
 
@@ -22,16 +22,7 @@ public class OrderViewController implements Observer {
         orderFacade.registerObserver(OrderEvent.ADD_SANDWICH, this);
     }
 
-
-
-    public void setView(OrderView view) {
-        this.orderView = view;
-    }
-
-
-    public OrderFacade getOrderFacade() {
-        return orderFacade;
-    }
+    public void setView(OrderView view) { this.orderView = view; }
     public void errorBox(String infoMessage) {orderView.errorBox(infoMessage,"Action not permitted");}
 
     public void addOrderLine(String sandwichName) {
@@ -63,6 +54,7 @@ public class OrderViewController implements Observer {
     public void calculateDiscount(DiscountStrategyEnum discount){
         orderView.updateOrderLines(getOrderLines() , orderFacade.getDiscountAmount(discount));
     }
+
     public ArrayList<String> getDiscounts(){
         return orderFacade.getDiscounts();
     }
@@ -72,7 +64,6 @@ public class OrderViewController implements Observer {
     public ArrayList<OrderLine> getOrderLines() {
         return orderFacade.getOrderLines();
     }
-
     public void updateOrderLines() {
         orderView.updateOrderLines(getOrderLines() , orderFacade.getAmount());
     }
@@ -93,11 +84,14 @@ public class OrderViewController implements Observer {
     public void updateStatusToppingButtons(){
         orderView.updateStatusToppingButtons(orderFacade.getStockListToppings());
     }
-
-
+    public void updateBase(){
+        orderFacade.updatebase();
+    }
+    public OrderFacade getOrderFacade() { return orderFacade; }
     public String getPreferredDiscountStrategy(){
         return Settings.getPreferredDiscountStrategySettings();
     }
+
     public void addIdenticalSandwich(int id) {
         try{
             orderFacade.addIdenticalSandwich(id);
@@ -108,7 +102,7 @@ public class OrderViewController implements Observer {
 
     }
     public int getfollownr() {
-       return orderFacade.getfollownr();
+       return orderFacade.getFollownr();
     }
     public void deleteSandwich(int id){
         try{
@@ -120,7 +114,7 @@ public class OrderViewController implements Observer {
 
     }
     @Override
-    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int ordercount, boolean orderisinspected, HashMap<String, HashMap<String, Integer>> orderdone, HashMap<OrderLine, Integer> peek) {
+    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int ordercount, boolean orderisinspected, HashMap<OrderLine, Integer> peek, int follownr) {
         System.out.println("NotifyObserversReport:\n----------------------\n - " + order.toString() + "\n - " +
                 sandwichDatabase.toString() + "\n - " + toppingDatabase.toString() + "\n");
     }

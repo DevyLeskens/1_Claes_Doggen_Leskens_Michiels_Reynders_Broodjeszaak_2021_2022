@@ -22,25 +22,25 @@ public class KitchenViewController implements Observer {
         orderFacade.registerObserver(OrderEvent.ORDER_IS_DONE, this);
     }
 
-    public void setKitchenView(KitchenView kitchenView) {
-        this.kitchenView = kitchenView;
-    }
-
+    // TODO getter voor ordernumber
     public int getOrderCount(){
         return orderFacade.getOrderCount();
     }
 
-    @Override
-    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int orderCount, boolean orderisinspected, HashMap<String, HashMap<String, Integer>> ordersdone, HashMap<OrderLine, Integer> peek){
-        System.out.println(toppingDatabase.toString() + " " + sandwichDatabase.toString() + " " + order.toString());
-        kitchenView.update(orderCount, orderisinspected,peek);
+    public void setKitchenView(KitchenView kitchenView) {
+        this.kitchenView = kitchenView;
     }
-
     public void startPreparation() {
         orderFacade.startPreparation();
     }
-
     public void Done() {
         orderFacade.Done();
     }
+
+    @Override
+      public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int orderCount, boolean orderisinspected, HashMap<OrderLine, Integer> peek, int follownr){
+        System.out.println(toppingDatabase.toString() + " " + sandwichDatabase.toString() + " " + order.toString());
+        kitchenView.update(follownr,orderCount, orderisinspected,peek, this);
+    }
+
 }

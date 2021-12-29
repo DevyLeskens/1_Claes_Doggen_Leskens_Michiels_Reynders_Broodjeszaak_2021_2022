@@ -5,22 +5,24 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public enum DiscountStrategyEnum {
-    DISCOUNT_NONE("No discount", "model.discountStrategies.DiscountNone"),
-    DISCOUNT_TEN_PERCENT("10% discount", "model.discountStrategies.DiscountTenPercent"),
-    DISCOUNT_CHEAPEST_SANDWICH_FREE("Cheapest sandwich for free", "model.discountStrategies.DiscountCheapestSandwichFree");
+    DISCOUNT_NONE("No discount", "model.discountStrategies.DiscountNone", new DiscountNone()),
+    DISCOUNT_TEN_PERCENT("10% discount", "model.discountStrategies.DiscountTenPercent", new DiscountTenPercent()),
+    DISCOUNT_CHEAPEST_SANDWICH_FREE("Cheapest sandwich for free", "model.discountStrategies.DiscountCheapestSandwichFree", new DiscountTenPercent());
 
+    private final DiscountStrategy discountType;
     private final String name;
     private final String location;
 
-    DiscountStrategyEnum(String name, String location) {
+    DiscountStrategyEnum(String name, String location, DiscountStrategy discountType) {
         this.name = name;
         this.location = location;
+        this.discountType = discountType;
     }
 
     public String getName() {
         return name;
     }
-
+    public DiscountStrategy getStrategy(){ return discountType;}
     public String getLocation() {
         return location;
     }

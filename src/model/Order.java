@@ -1,10 +1,10 @@
 package model;
 
 import model.discountStrategies.*;
+import model.domain.DomainException;
 import model.domain.Sandwich;
 import model.domain.Topping;
 import model.states.*;
-import model.vanillaplusfunctions.DefaultIntDict;
 
 
 import java.util.ArrayList;
@@ -13,10 +13,9 @@ import java.util.HashMap;
 
 public class Order{
 
-    private DiscountStrategy discountStrategy = new DiscountTenPercent();
     private OrderState orderState;
     private ArrayList<OrderLine> orderLines;
-    private int follownr;
+    private int follownr = 0;
 
     private StateInWait stateInWait = new StateInWait(this);
     private StateInOrder stateInOrder = new StateInOrder(this);
@@ -32,141 +31,74 @@ public class Order{
         setOrderState(stateInWait);
         this.follownr = follownr;
     }
-    public void setOrderState(OrderState orderState) {
-        this.orderState = orderState;
+
+    public StateInOrder getStateInOrder() {
+        return stateInOrder;
+    }
+    public StateIsTerminated getStateIsTerminated() {
+        return stateIsTerminated;
+    }
+    public StateInWait getStateInWait() {
+        return stateInWait;
+    }
+    public StateIsPayed getStateIsPayed() {
+        return stateIsPayed;
+    }
+    public StateInWaitingLine getStateInWaitingLine() {
+        return stateInWaitingLine;
+    }
+    public StateInPreparation getStateInPreparation() {
+        return stateInPreparation;
+    }
+    public StateIsPrepared getStateIsPrepared() {
+        return stateIsPrepared;
+    }
+    public StateIsCanceled getStateIsCanceled() {
+        return stateIsCanceled;
     }
 
-    public int getFollownr() {
-        return follownr;
+    public int getFollownr() { return follownr; }
+    public double getTotalPrice(){ return orderLines.stream().mapToDouble(OrderLine::getPrice).sum(); }
+    public ArrayList<OrderLine> getOrderLines() { return orderLines; }
+    public double getTotalPriceWithDiscount(DiscountStrategyEnum discount){ return getTotalPrice() - discount.getStrategy().calcDiscount(this); }
+    public double getCheapestOrderline(){ return orderLines.stream().mapToDouble(OrderLine::getPrice).min().orElseThrow(DomainException::new); }
+    public HashMap<OrderLine, Integer> giverorderashashmap(){
+        HashMap<OrderLine, Integer> order = new HashMap<>();
+        getOrderLines().forEach(orderline -> order.put(orderline, order.computeIfAbsent(orderline , k -> 0) + 1));
+        return order;
     }
 
-    public ArrayList<OrderLine> getOrderLines() {
-        return orderLines;
+    public void setOrderState(OrderState orderState) { this.orderState = orderState; }
+    public void addOrderLine(Sandwich sandwich) {
+        orderState.addSandwich();
+        this.orderLines.add(new OrderLine(sandwich));
     }
-    public void deleteSandwich(int id){
+    public void deleteOrderLine(int id){
         orderState.deleteSandwich();
         orderLines.remove(id);
-
-    }
-    public HashMap<OrderLine, Integer> giverorderashashmap(){
-        DefaultIntDict<OrderLine, Integer> order = new DefaultIntDict<>(0);
-        for (OrderLine orderline: getOrderLines()) {
-            order.put(orderline, order.safeGet(orderline) + 1);
-        }
-        return order;
     }
     public void addIdenticalSandwich(int id){
         orderState.addIdenticalSandwich();
         orderLines.add(orderLines.get(id));
     }
-    public void addOrderLine(Sandwich sandwich) {
-        orderState.addSandwich();
-        this.orderLines.add(new OrderLine(sandwich));
-    }
     public void addTopping(int sandwichid, Topping topping) {
         orderState.addTopping();
         orderLines.get(sandwichid).addTopping(topping);
     }
-    public void toKitchen() {
-        orderState.sendToKitchen();
-    }
-
-
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "orderLines=" + orderLines +
-                '}';
-    }
-
-    public OrderState getOrderState() {
-        return orderState;
-    }
-
-    public void setOrderLines(ArrayList<OrderLine> orderLines) {
-        this.orderLines = orderLines;
-    }
-
-    public StateInOrder getStateInOrder() {
-        return stateInOrder;
-    }
-
-    public StateIsTerminated getStateIsTerminated() {
-        return stateIsTerminated;
-    }
-
-    public StateInWait getStateInWait() {
-        return stateInWait;
-    }
-
-    public StateIsPayed getStateIsPayed() {
-        return stateIsPayed;
-    }
-
-    public StateInWaitingLine getStateInWaitingLine() {
-        return stateInWaitingLine;
-    }
-
-    public StateInPreparation getStateInPreparation() {
-        return stateInPreparation;
-    }
-
-    public StateIsPrepared getStateIsPrepared() {
-        return stateIsPrepared;
-    }
-
-    public StateIsCanceled getStateIsCanceled() {
-        return stateIsCanceled;
-    }
+    public void endOrder() { orderState.terminate(); }
+    public void pay() { orderState.pay(); }
+    public void toKitchen() { orderState.sendToKitchen(); }
+    public void startPreparation() { orderState.startPreparation(); }
+    public void orderIsDone() { orderState.done(); }
 
     public void reset(){
         orderState.cancelOrder();
         this.orderLines = new ArrayList<>();
     }
 
-    public double getTotalPrice(){
-        double total = 0;
-        for (OrderLine orderline:orderLines) {
-           total += orderline.getPrice();
-        }
-        return total;
+    @Override
+    public String toString() {
+        return orderLines.toString();
     }
 
-    public double getTotalPriceWithDiscount(DiscountStrategyEnum discount){
-        setDiscountStrategy(DiscountFactory.createLoadSaveStrategy(discount.getLocation()));
-        return getTotalPrice() - discountStrategy.calcDiscount(this);
-    }
-
-    public void setDiscountStrategy(DiscountStrategy discountStrategy) {
-        this.discountStrategy = discountStrategy;
-    }
-
-    public double getCheapestOrderline(){
-        double cheapest = orderLines.get(0).getPrice();
-        for (OrderLine orderLine:orderLines){
-            if(orderLine.getPrice() < cheapest){
-                cheapest=orderLine.getPrice();
-            }
-        }
-        return cheapest;
-    }
-
-    public void pay() {
-        orderState.pay();
-    }
-
-    public void endOrder() {
-        orderState.terminate();
-    }
-
-    public void startPreparation() {
-        System.out.println(orderState);
-        orderState.startPreparation();
-    }
-
-    public void orderIsDone() {
-        System.out.println(orderState);
-        orderState.done();
-    }
 }

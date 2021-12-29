@@ -21,51 +21,30 @@ public class AdminViewController implements Observer {
     public AdminViewController(OrderFacade orderFacade) {
         orderFacade.registerObserver(OrderEvent.ORDER_TO_KITCHEN, this);
     }
-
-    public void setView(AdminView view) {
-        this.adminView = view;
-    }
-
-    public OrderFacade getOrderFacade() {
-        return orderFacade;
-    }
-    public ArrayList<String> getAllDiscounts(){
-        return orderFacade.getDiscounts();
-    }
-    public LoadSaveStrategyEnum[] getLoadTypes() {
-        return orderFacade.getLoadTypes();
-    }
-
-    @Override
-    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int countrorder, boolean orderisinspected, HashMap<String, HashMap<String, Integer>> orderdone, HashMap<OrderLine, Integer> peek) {
-        System.out.println(toppingDatabase.toString() + " " + sandwichDatabase.toString() + " " + order.toString());
-        orderFacade.addOrderlineToDone();
-        adminView.update();
-    }
-
-    public Collection<Sandwich> getSandwichDatabase() {
-        return  orderFacade.getSandwichDatabase().getSandwichSorts().values();
-    }
-
-    public Collection<Topping> getToppingDatabase() {
-        return orderFacade.getToppingDatabase().getToppingSorts().values();
-    }
-
-    public HashMap<String , HashMap<String , Integer>> getSoldOrders() {
-        return orderFacade.getdoneorders();
-    }
-
-
-
     public void savePreferences(String format, String discount) {
         Settings.setProperties(format , discount);
     }
+    public void setView(AdminView view) { this.adminView = view; }
+
+    public HashMap<String , HashMap<String , Integer>> getSoldOrders() {
+        return getOrderFacade().getStockAsMap();
+    }
+    public Collection<Sandwich> getSandwichDatabase() { return  getOrderFacade().getSandwichDatabase().getDatabase().values(); }
+    public Collection<Topping> getToppingDatabase() { return getOrderFacade().getToppingDatabase().getDatabase().values(); }
     public String getPreferredDiscountStrategy(){
-       return Settings.getPreferredDiscountStrategySettings();
+        return Settings.getPreferredDiscountStrategySettings();
     }
     public String getProductFormatReader(){
         return Settings.getProductFormatReaderSettings();
     }
+    public ArrayList<String> getAllDiscounts(){ return getOrderFacade().getDiscounts(); }
+    public OrderFacade getOrderFacade() {
+        return orderFacade;
+    }
 
-
+    @Override
+    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int countrorder, boolean orderisinspected, HashMap<OrderLine, Integer> peek, int follownr) {
+        System.out.println(toppingDatabase.toString() + " " + sandwichDatabase.toString() + " " + order.toString());
+        adminView.update();
+    }
 }

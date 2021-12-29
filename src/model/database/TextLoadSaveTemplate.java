@@ -44,8 +44,8 @@ public abstract class TextLoadSaveTemplate<K, V> {
             e.printStackTrace();
         }
     }
-    protected abstract V makeObject(String[] tokens);
 
+    protected abstract V makeObject(String[] tokens);
     protected abstract K getKey(String[] tokens);
 
 }

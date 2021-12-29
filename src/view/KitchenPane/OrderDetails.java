@@ -11,11 +11,10 @@ import java.util.*;
 
 public class OrderDetails extends VBox {
     KitchenViewController kitchenViewController;
-    static Label follownumber;
     static int sandwichcount;
     static VBox sandwiches = new VBox();
     static HBox detailsOforder = new HBox();
-    Label follownr = new Label("Follownr order:" + follownumber + "- Count sandwiches: " + sandwichcount);
+    static Label follownr = new Label("Follownr order:" + "None" + "- Count sandwiches: " + sandwichcount);
     private static Label details = new Label("details broodje");
 
     public OrderDetails(KitchenViewController kitchenViewController) {
@@ -27,11 +26,14 @@ public class OrderDetails extends VBox {
     }
 
 
-    public static void update(HashMap<OrderLine, Integer> order, boolean isinspected) {
+    public static void update(int orderNumber, HashMap<OrderLine, Integer> order, boolean isinspected, KitchenViewController kitchenViewController) {
         if (order == null || !isinspected) {
             details.setText("");
+            follownr.setText("Follownr order: No order - Count sandwiches: " + kitchenViewController.getOrderCount());
+
         } else {
             details.setText(OrderDetails.orderToString(order));
+            follownr.setText("Follownr order: " + orderNumber + " - Count sandwiches: " + kitchenViewController.getOrderCount());
         }
     }
 

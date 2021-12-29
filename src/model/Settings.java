@@ -15,7 +15,6 @@ public class Settings {
             io.printStackTrace();
         }
     }
-
     public static String getProductFormatReaderSettings() {
         try (InputStream input = new FileInputStream("src/bestanden/properties.properties")) {
             Properties prop = new Properties();
@@ -26,7 +25,6 @@ public class Settings {
         }
         return null;
     }
-
     public static String getPreferredDiscountStrategySettings() {
         try (InputStream input = new FileInputStream("src/bestanden/properties.properties")) {
             Properties prop = new Properties();

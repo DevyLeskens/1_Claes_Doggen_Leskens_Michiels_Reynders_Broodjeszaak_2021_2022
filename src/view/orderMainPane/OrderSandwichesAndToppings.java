@@ -40,7 +40,7 @@ public class OrderSandwichesAndToppings extends VBox {
     }
 
     public void setSandwichesButtons() {
-        for (Sandwich sandwich : OrderFacade.getInstance().getSandwichDatabase().getSandwichSorts().values()) {
+        for (Sandwich sandwich : OrderFacade.getInstance().getSandwichDatabase().getDatabase().values()) {
             Button sandwichType = new Button(sandwich.getName());
             sandwichButtons.add(sandwichType);
             //css
@@ -63,7 +63,7 @@ public class OrderSandwichesAndToppings extends VBox {
     }
 
     public void setToppingsButtons() {
-        for (Topping topping : OrderFacade.getInstance().getToppingDatabase().getToppingSorts().values()) {
+        for (Topping topping : OrderFacade.getInstance().getToppingDatabase().getDatabase().values()) {
             Button toppingButton = new Button(topping.getName());
             toppingButtons.add(toppingButton);
             //css

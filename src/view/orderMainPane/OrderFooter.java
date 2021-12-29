@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class OrderFooter extends BorderPane {
+
     OrderViewController orderViewController;
     Button endOrder = new Button("End order");
     private double amount = 0;

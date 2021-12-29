@@ -38,11 +38,11 @@ public class Buttons extends BorderPane {
         });
 
     }
-    public static void update(int countorder, boolean orderisinspected, HashMap<OrderLine, Integer> order){
+    public static void update(int number, int countorder, boolean orderisinspected, HashMap<OrderLine, Integer> order, KitchenViewController kitchenViewController){
 
         next.setDisable(countorder < 1 || orderisinspected);
         orderFinished.setDisable(!orderisinspected);
-        OrderDetails.update(order, orderisinspected);
+        OrderDetails.update(number, order, orderisinspected, kitchenViewController);
 
     }
 

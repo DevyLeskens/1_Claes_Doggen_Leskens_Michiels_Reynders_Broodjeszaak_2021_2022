@@ -49,9 +49,9 @@ public class KitchenView {
 		countOrders.setBackground(new Background(new BackgroundFill(Color.DARKSEAGREEN,new CornerRadii(0),new Insets(0))));
 		countOrders.setPadding(new Insets(5,5,5,10));
 	}
-	public void update(int countorder, boolean orderisinspected, HashMap<OrderLine, Integer> order){
+	public void update(int number, int countorder, boolean orderisinspected, HashMap<OrderLine, Integer> order, KitchenViewController kitchenViewController){
 		countOrders.setText("Count of orders in waiting line: " + countorder);
-		Buttons.update(countorder, orderisinspected, order);
+		Buttons.update(number, countorder, orderisinspected, order, kitchenViewController );
 
 	}
 

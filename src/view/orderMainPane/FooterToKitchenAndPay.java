@@ -23,6 +23,7 @@ public class FooterToKitchenAndPay extends HBox {
         this.getChildren().addAll(pay, toKitchen);
 
         toKitchen.setOnAction(event -> {
+            orderViewController.updateBase();
             orderViewController.toKitchen();
             ArrayList<String> dontChange = new ArrayList<>(Arrays.asList("New order"));
             OrderView.changeAllButtons(OrderView.vBox, true, dontChange);
