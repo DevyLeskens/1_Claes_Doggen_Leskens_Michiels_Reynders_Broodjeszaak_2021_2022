@@ -15,13 +15,17 @@ public class FooterToKitchenAndPay extends HBox {
     Button toKitchen = new Button("To kitchen");
 
     public FooterToKitchenAndPay(OrderViewController orderViewController) {
+        //css
         this.setSpacing(15);
         pay.setFont(Font.font("Verdana", 20));
         pay.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT)));
         toKitchen.setFont(Font.font("Verdana", 20));
         toKitchen.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT)));
+
+        //add to root
         this.getChildren().addAll(pay, toKitchen);
 
+        //action
         toKitchen.setOnAction(event -> {
             orderViewController.updateBase();
             orderViewController.toKitchen();

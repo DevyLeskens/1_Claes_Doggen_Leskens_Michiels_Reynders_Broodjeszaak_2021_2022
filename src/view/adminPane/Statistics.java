@@ -28,8 +28,8 @@ public class Statistics extends VBox {
         //css
         sandwiches.setPadding(new Insets(10, 10, 10, 10));
         toppings.setPadding(new Insets(10, 10, 10, 10));
-        sandwiches.setFont(Font.font("Verdana", 20));
-        toppings.setFont(Font.font("Verdana", 20));
+        sandwiches.setFont(Font.font("Verdana", 15));
+        toppings.setFont(Font.font("Verdana", 15));
         sandwichesFullStats.setBackground(new Background(new BackgroundFill(Color.DARKSEAGREEN, new CornerRadii(0), new Insets(0))));
         toppingFullStats.setBackground(new Background(new BackgroundFill(Color.DARKSEAGREEN, new CornerRadii(0), new Insets(0))));
         sandwichesFullStats.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
@@ -50,7 +50,7 @@ public class Statistics extends VBox {
                 String sandwichCount = String.valueOf(product.getValue());
                 Label soldCount = new Label(sandwichCount);
                 borderPane.setLeft(sandwichType);
-                sandwichType.setFont(Font.font("Verdana", 20));
+                sandwichType.setFont(Font.font("Verdana", 15));
                 borderPane.setRight(soldCount);
                 borderPane.setPadding(new Insets(5, 0, 5, 10));
                 borderPane.setMinSize(150, 20);
