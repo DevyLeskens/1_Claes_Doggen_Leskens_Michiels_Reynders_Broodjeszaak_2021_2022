@@ -24,8 +24,10 @@ public class SandwichesTextLoadSaveStrategy extends TextLoadSaveTemplate<String,
 
     @Override
     public TreeMap<String, Sandwich> load() {
-        try { return super.load();
-        } catch (Exception ignored) { }
+        try {
+            return super.load();
+        } catch (Exception ignored) {
+        }
         return null;
     }
 

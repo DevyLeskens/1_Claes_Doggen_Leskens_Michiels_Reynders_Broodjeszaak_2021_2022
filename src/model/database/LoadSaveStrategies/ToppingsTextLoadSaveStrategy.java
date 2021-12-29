@@ -30,8 +30,10 @@ public class ToppingsTextLoadSaveStrategy extends TextLoadSaveTemplate<String, T
 
     @Override
     public TreeMap<String, Topping> load() {
-        try { return super.load();
-        } catch (Exception ignored) { }
+        try {
+            return super.load();
+        } catch (Exception ignored) {
+        }
         return null;
     }
 

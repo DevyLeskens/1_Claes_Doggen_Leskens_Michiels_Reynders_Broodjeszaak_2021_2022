@@ -3,7 +3,6 @@ package controller;
 import model.*;
 import model.database.SandwichDatabase;
 import model.database.ToppingDatabase;
-import model.discountStrategies.DiscountStrategy;
 import model.discountStrategies.DiscountStrategyEnum;
 import model.states.OrderStateException;
 import view.orderMainPane.OrderView;
@@ -22,99 +21,116 @@ public class OrderViewController implements Observer {
         orderFacade.registerObserver(OrderEvent.ADD_SANDWICH, this);
     }
 
-    public void setView(OrderView view) { this.orderView = view; }
-    public void errorBox(String infoMessage) {orderView.errorBox(infoMessage,"Action not permitted");}
+    public void setView(OrderView view) {
+        this.orderView = view;
+    }
+
+    public void errorBox(String infoMessage) {
+        orderView.errorBox(infoMessage, "Action not permitted");
+    }
 
     public void addOrderLine(String sandwichName) {
-        try{
-            orderFacade.addOrderline(sandwichName);
+        try {
+            orderFacade.addOrderLine(sandwichName);
             updateOrderLines();
             updateStatusSandwichesButtons();
-        }
-        catch (OrderStateException e){
+        } catch (OrderStateException e) {
             errorBox("You can not add this order.");
         }
     }
 
-    public void toKitchen(){
+    public void toKitchen() {
         orderFacade.toKitchen();
         updateOrderLines();
     }
-    public void addTopping(int id, String toppingName){
+
+    public void addTopping(int id, String toppingName) {
         try {
             orderFacade.addTopping(id, toppingName);
             updateOrderLines();
             updateStatusToppingButtons();
-        }
-        catch (OrderStateException e){
+        } catch (OrderStateException e) {
             errorBox("You first have to add a sandwich.");
         }
 
     }
-    public void calculateDiscount(DiscountStrategyEnum discount){
-        orderView.updateOrderLines(getOrderLines() , orderFacade.getDiscountAmount(discount));
+
+    public void calculateDiscount(DiscountStrategyEnum discount) {
+        orderView.updateOrderLines(getOrderLines(), orderFacade.getDiscountAmount(discount));
     }
 
-    public ArrayList<String> getDiscounts(){
+    public ArrayList<String> getDiscounts() {
         return orderFacade.getDiscounts();
     }
-    public DiscountStrategyEnum[] getDiscountsEnum(){
+
+    public DiscountStrategyEnum[] getDiscountsEnum() {
         return orderFacade.getDiscountsEnum();
     }
+
     public ArrayList<OrderLine> getOrderLines() {
         return orderFacade.getOrderLines();
     }
+
     public void updateOrderLines() {
-        orderView.updateOrderLines(getOrderLines() , orderFacade.getAmount());
+        orderView.updateOrderLines(getOrderLines(), orderFacade.getAmount());
     }
 
-    public void cancelOrder(){
-        try{
+    public void cancelOrder() {
+        try {
             orderFacade.cancelOrder();
             updateOrderLines();
-        }
-        catch (OrderStateException e){
+        } catch (OrderStateException e) {
             errorBox("Can not cancel order");
         }
 
     }
+
     public void updateStatusSandwichesButtons() {
         orderView.updateStatusSandwichesButtons(orderFacade.getStockListSandwiches());
     }
-    public void updateStatusToppingButtons(){
+
+    public void updateStatusToppingButtons() {
         orderView.updateStatusToppingButtons(orderFacade.getStockListToppings());
     }
-    public void updateBase(){
-        orderFacade.updatebase();
+
+    public void updateBase() {
+        orderFacade.updateBase();
     }
-    public OrderFacade getOrderFacade() { return orderFacade; }
-    public String getPreferredDiscountStrategy(){
+
+    public OrderFacade getOrderFacade() {
+        return orderFacade;
+    }
+
+    public String getPreferredDiscountStrategy() {
         return Settings.getPreferredDiscountStrategySettings();
     }
 
     public void addIdenticalSandwich(int id) {
-        try{
+        try {
             orderFacade.addIdenticalSandwich(id);
             updateOrderLines();
-        }catch (OrderStateException e){
+        } catch (OrderStateException e) {
             errorBox("Can not add order");
         }
 
     }
-    public int getfollownr() {
-       return orderFacade.getFollownr();
+
+    public int getFollowNr() {
+        return orderFacade.getFollowNr();
     }
-    public void deleteSandwich(int id){
-        try{
+
+    public void deleteSandwich(int id) {
+        try {
             orderFacade.deleteSandwich(id);
             updateOrderLines();
-        }catch (OrderStateException e){
+        } catch (OrderStateException e) {
             errorBox("can not delete order");
         }
 
     }
+
     @Override
-    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int ordercount, boolean orderisinspected, HashMap<OrderLine, Integer> peek, int follownr) {
+    public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int orderCount, boolean orderIsInspected, HashMap<OrderLine, Integer> peek, int followNr) {
         System.out.println("NotifyObserversReport:\n----------------------\n - " + order.toString() + "\n - " +
                 sandwichDatabase.toString() + "\n - " + toppingDatabase.toString() + "\n");
     }
@@ -123,7 +139,7 @@ public class OrderViewController implements Observer {
         orderFacade.pay();
     }
 
-    public ArrayList<String> getAllDiscounts(){
+    public ArrayList<String> getAllDiscounts() {
         return orderFacade.getDiscounts();
     }
 

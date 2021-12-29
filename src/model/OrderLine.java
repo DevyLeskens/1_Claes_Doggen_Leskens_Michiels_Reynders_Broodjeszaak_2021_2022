@@ -6,70 +6,82 @@ import model.domain.Topping;
 import java.util.*;
 
 public class OrderLine {
-    private String sandwichname;
+    private String sandwichName;
     private Sandwich sandwich;
-    private final ArrayList<Topping> toppingssort = new ArrayList<>();
+    private final ArrayList<Topping> toppingsSort = new ArrayList<>();
 
-    public OrderLine(Sandwich sandwich){
+    public OrderLine(Sandwich sandwich) {
         setSandwich(sandwich);
-        setSandwichname(sandwich.getName());
+        setSandwichName(sandwich.getName());
     }
-    public OrderLine() { }
 
-    public String getSandwichname() {
-        return sandwichname;
+    public OrderLine() {
     }
+
+    public String getSandwichName() {
+        return sandwichName;
+    }
+
     public Sandwich getSandwich() {
         return sandwich;
     }
-    public ArrayList<Topping> getToppingssort() {
-        return toppingssort;
+
+    public ArrayList<Topping> getToppingsSort() {
+        return toppingsSort;
     }
-    public double getPrice(){
+
+    public double getPrice() {
         double total = sandwich.getPrice();
-        for (Topping topping: toppingssort) {total += topping.getPrice(); }
+        for (Topping topping : toppingsSort) {
+            total += topping.getPrice();
+        }
         return total;
     }
 
 
     // wordt gebruikt door tabel in Orderview 'filltables'
-    public String getToppingnames() {
+    public String getToppingNames() {
         StringBuilder string = new StringBuilder(" ");
         this.getToppingsAsStringMap().forEach((key, value) -> string.append(value).append(" x ").append(key).append(", "));
-        return string.substring(0, string.length() > 2 ? string.length() - 2:string.length()-1);
+        return string.substring(0, string.length() > 2 ? string.length() - 2 : string.length() - 1);
     }
-    public HashMap<String, Integer> getToppingsAsStringMap(){
+
+    public HashMap<String, Integer> getToppingsAsStringMap() {
         HashMap<String, Integer> toppings = new HashMap<>();
-        for (Topping toppingsort: getToppingssort()) {
-            toppings.put(toppingsort.toString(), toppings.computeIfAbsent(toppingsort.toString(), k -> 0) + 1);
+        for (Topping toppingSort : getToppingsSort()) {
+            toppings.put(toppingSort.toString(), toppings.computeIfAbsent(toppingSort.toString(), k -> 0) + 1);
         }
         return toppings;
     }
 
-    public void setSandwichname(String sandwichname) {
-        this.sandwichname = sandwichname;
+    public void setSandwichName(String sandwichName) {
+        this.sandwichName = sandwichName;
     }
+
     public void setSandwich(Sandwich sandwich) {
         this.sandwich = sandwich;
     }
+
     public void addTopping(Topping topping) {
-        this.toppingssort.add(topping);
+        this.toppingsSort.add(topping);
     }
 
 
     @Override
     public String toString() {
-        return sandwichname + " : " + (toppingssort.size() != 0 ? getToppingsAsStringMap().toString().replace("{", "").replace("}", " "): "Geen toppings");
+        return sandwichName + " : " + (toppingsSort.size() != 0 ? getToppingsAsStringMap().toString().replace("{", "").replace("}", " ") : "Geen toppings");
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrderLine orderLine = (OrderLine) o;
-        return Objects.equals(sandwichname, orderLine.sandwichname)  && Objects.equals(sandwich, orderLine.sandwich) && Objects.equals(toppingssort, orderLine.toppingssort);
+        return Objects.equals(sandwichName, orderLine.sandwichName) && Objects.equals(sandwich, orderLine.sandwich) && Objects.equals(toppingsSort, orderLine.toppingsSort);
     }
+
     @Override
     public int hashCode() {
-        return Objects.hash(sandwichname, sandwich, toppingssort);
+        return Objects.hash(sandwichName, sandwich, toppingsSort);
     }
 }

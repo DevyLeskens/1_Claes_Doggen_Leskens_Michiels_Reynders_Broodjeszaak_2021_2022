@@ -3,7 +3,6 @@ package view.adminPane;
 
 import controller.AdminViewController;
 import javafx.geometry.Insets;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.Background;
@@ -11,8 +10,6 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-
 
 
 public class ToppingOverviewPane extends GridPane {

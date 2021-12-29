@@ -32,7 +32,7 @@ public abstract class Product {
         return price;
     }
 
-    public String getWriteFormat(){
+    public String getWriteFormat() {
         return this.getName() + "," + this.getPrice() + "," + this.getStock() + "," + this.getSold();
     }
 
@@ -43,7 +43,7 @@ public abstract class Product {
         this.price = price;
     }
 
-    public void increamentSold(){
+    public void incrementSold() {
         sold++;
     }
 

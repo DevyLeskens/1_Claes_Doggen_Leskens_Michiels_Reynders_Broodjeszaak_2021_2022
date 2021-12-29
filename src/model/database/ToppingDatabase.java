@@ -5,13 +5,11 @@ import model.database.LoadSaveStrategies.LoadSaveStrategyEnum;
 import model.database.LoadSaveStrategies.LoadSaveStrategyFactory;
 import model.domain.Topping;
 
-import java.util.HashMap;
-import java.util.TreeMap;
-
-public class ToppingDatabase extends ProductDatabase<String , Topping> {
+public class ToppingDatabase extends ProductDatabase<String, Topping> {
 
 
     private static ToppingDatabase toppingDatabase;
+
     private ToppingDatabase() {
         load();
     }
@@ -36,9 +34,9 @@ public class ToppingDatabase extends ProductDatabase<String , Topping> {
     }
 
     // dummy methode
-    public void save(){
+    public void save() {
         try {
-         LoadSaveStrategyFactory.createLoadSaveStrategy(Settings.getProductFormatReaderSettings() == "excel" ? LoadSaveStrategyEnum.EXCEL_TOPPING : LoadSaveStrategyEnum.TEXT_TOPPING).save();
+            LoadSaveStrategyFactory.createLoadSaveStrategy(Settings.getProductFormatReaderSettings() == "excel" ? LoadSaveStrategyEnum.EXCEL_TOPPING : LoadSaveStrategyEnum.TEXT_TOPPING).save();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

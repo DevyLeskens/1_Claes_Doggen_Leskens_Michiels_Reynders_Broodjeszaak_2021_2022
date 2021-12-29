@@ -31,10 +31,11 @@ public abstract class TextLoadSaveTemplate<K, V> {
         }
         return returnMap;
     }
-    protected void save(TreeMap<K, V> database, String name){
+
+    protected void save(TreeMap<K, V> database, String name) {
         try {
             FileWriter writer = new FileWriter("src/bestanden/" + name + ".txt");
-            for (V product:database.values()) {
+            for (V product : database.values()) {
                 writer.write(((Product) product).getWriteFormat() + "\n");
             }
             writer.close();
@@ -46,6 +47,7 @@ public abstract class TextLoadSaveTemplate<K, V> {
     }
 
     protected abstract V makeObject(String[] tokens);
+
     protected abstract K getKey(String[] tokens);
 
 }

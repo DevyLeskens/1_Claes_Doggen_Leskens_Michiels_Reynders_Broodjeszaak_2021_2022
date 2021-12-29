@@ -42,6 +42,7 @@ public class OrderFooter extends BorderPane {
             orderViewController.endOrder((DiscountStrategyEnum) OrderHeader.getChoiceBox().getSelectionModel().getSelectedItem());
         });
     }
+
     public static void updateAmount(double amount) {
         bill.setText("Amount: " + amount);
     }

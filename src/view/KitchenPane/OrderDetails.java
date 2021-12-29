@@ -11,48 +11,47 @@ import java.util.*;
 
 public class OrderDetails extends VBox {
     KitchenViewController kitchenViewController;
-    static int sandwichcount;
+    static int sandwichCount;
     static VBox sandwiches = new VBox();
-    static HBox detailsOforder = new HBox();
-    static Label follownr = new Label("Follownr order:" + "None" + "- Count sandwiches: " + sandwichcount);
+    static HBox detailsOfOrder = new HBox();
+    static Label followNr = new Label("Follownr order:" + "None" + "- Count sandwiches: " + sandwichCount);
     private static Label details = new Label("details broodje");
 
     public OrderDetails(KitchenViewController kitchenViewController) {
         this.kitchenViewController = kitchenViewController;
-        this.getChildren().addAll(follownr, details, detailsOforder);
+        this.getChildren().addAll(followNr, details, detailsOfOrder);
         this.setPadding(new Insets(5, 0, 20, 10));
         this.setMinHeight(120);
 
     }
 
 
-    public static void update(int orderNumber, HashMap<OrderLine, Integer> order, boolean isinspected, KitchenViewController kitchenViewController) {
-        if (order == null || !isinspected) {
+    public static void update(int orderNumber, HashMap<OrderLine, Integer> order, boolean isInspected, KitchenViewController kitchenViewController) {
+        if (order == null || !isInspected) {
             details.setText("");
-            follownr.setText("Follownr order: No order - Count sandwiches: " + kitchenViewController.getOrderCount());
+            followNr.setText("Follownr order: No order - Count sandwiches: " + kitchenViewController.getOrderCount());
 
         } else {
             details.setText(OrderDetails.orderToString(order));
-            follownr.setText("Follownr order: " + orderNumber + " - Count sandwiches: " + kitchenViewController.getOrderCount());
+            followNr.setText("Follownr order: " + orderNumber + " - Count sandwiches: " + kitchenViewController.getOrderCount());
         }
     }
 
-    private static String orderToString(HashMap<OrderLine, Integer> order){
-        StringBuilder displayedorder = new StringBuilder();
-        for (Map.Entry<OrderLine, Integer> entry:order.entrySet()) {
-            displayedorder.append(entry.getValue()).append(" x ").append(entry.getKey().getSandwich()).append(":");
-            if(entry.getKey().getToppingssort().size() != 0){
-            for (Map.Entry<String, Integer> ordeline : entry.getKey().getToppingsAsStringMap().entrySet()) {
-                displayedorder.append(", ").append(ordeline.getValue()).append(" x ").append(ordeline.getKey());
-            }}else {
-                displayedorder.append(" ZONDER toppings!");
+    private static String orderToString(HashMap<OrderLine, Integer> order) {
+        StringBuilder displayedOrder = new StringBuilder();
+        for (Map.Entry<OrderLine, Integer> entry : order.entrySet()) {
+            displayedOrder.append(entry.getValue()).append(" x ").append(entry.getKey().getSandwich()).append(":");
+            if (entry.getKey().getToppingsSort().size() != 0) {
+                for (Map.Entry<String, Integer> orderLine : entry.getKey().getToppingsAsStringMap().entrySet()) {
+                    displayedOrder.append(", ").append(orderLine.getValue()).append(" x ").append(orderLine.getKey());
+                }
+            } else {
+                displayedOrder.append(" ZONDER toppings!");
             }
-            displayedorder.append("\n");
+            displayedOrder.append("\n");
         }
-        return displayedorder.toString();
+        return displayedOrder.toString();
     }
-
-
 
 
 }

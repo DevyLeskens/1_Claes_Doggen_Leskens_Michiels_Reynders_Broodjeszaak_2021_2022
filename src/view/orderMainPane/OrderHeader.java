@@ -57,7 +57,8 @@ public class OrderHeader extends BorderPane {
     public static ChoiceBox getChoiceBox() {
         return choiceBox;
     }
+
     public void updateFollowNumber() {
-        followNumberLabel.setText("Follownr: " + orderViewController.getfollownr());
+        followNumberLabel.setText("Follownr: " + orderViewController.getFollowNr());
     }
 }
