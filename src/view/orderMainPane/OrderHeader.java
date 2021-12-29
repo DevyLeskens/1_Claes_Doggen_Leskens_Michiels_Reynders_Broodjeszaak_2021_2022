@@ -44,6 +44,7 @@ public class OrderHeader extends BorderPane {
             ArrayList<String> dontChange = new ArrayList<>(Arrays.asList("New order", "To kitchen", "Pay"));
             OrderView.changeAllButtons(OrderView.vBox, false, dontChange);
             newOrder.setDisable(true);
+            OrderView.updatebuttons(orderViewController);
         });
 
 

@@ -13,6 +13,7 @@ import java.util.*;
 
 public class OrderFacade implements Subject {
 
+    public static int sandwichCount = 0;
     private int followNr = 0;
     private boolean orderIsInspected;
     private static OrderFacade orderFacade;
@@ -55,7 +56,6 @@ public class OrderFacade implements Subject {
     public void addOrderLine(String sandwichName) {
         Sandwich sandwich = sandwichDatabase.getProduct(sandwichName);
         order.addOrderLine(sandwich);
-        sandwich.updateStock();
         notifyObservers(OrderEvent.ADD_SANDWICH);
     }
 
@@ -72,7 +72,6 @@ public class OrderFacade implements Subject {
     public void addTopping(int id, String toppingName) {
         Topping topping = toppingDatabase.getProduct(toppingName);
         order.addTopping(id, topping);
-        topping.updateStock();
         notifyObservers(OrderEvent.Add_TOPPING);
     }
 
@@ -80,10 +79,12 @@ public class OrderFacade implements Subject {
         this.sandwichDatabase.reset();
         this.toppingDatabase.reset();
         this.order.reset();
+        notifyObservers(OrderEvent.CANCEL_ORDER);
     }
 
     public void endOrder() {
         order.endOrder();
+        notifyObservers(OrderEvent.TERMINATE_ORDER);
     }
 
     public void pay() {
@@ -113,6 +114,8 @@ public class OrderFacade implements Subject {
         deletedOrder.orderIsDone();
         notifyObservers(OrderEvent.ORDER_IS_DONE);
     }
+
+    public int getSandwichCount() { return order.getOrderLines().size(); }
 
     public int getTopQueueFollowNr() {
         return kitchenQueue.size() != 0 ? getTopOfQueue().getFollowNr() : 0;
@@ -199,9 +202,7 @@ public class OrderFacade implements Subject {
             orderline.getToppingsSort().forEach(topping -> this.toppingDatabase.getDatabase().get(topping.getName()).incrementSold());
         }
     }
-    public void updateStock(){
 
-    }
 
 
 }

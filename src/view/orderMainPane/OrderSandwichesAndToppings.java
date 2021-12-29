@@ -19,8 +19,8 @@ import java.util.HashMap;
 
 public class OrderSandwichesAndToppings extends VBox {
     private static int selectedColumnId = 0;
-    ArrayList<Button> sandwichButtons = new ArrayList<>();
-    ArrayList<Button> toppingButtons = new ArrayList<>();
+    private static ArrayList<Button> sandwichButtons = new ArrayList<>();
+    private static ArrayList<Button> toppingButtons = new ArrayList<>();
     TilePane sandwiches = new TilePane();
     TilePane toppings = new TilePane();
     OrderViewController orderViewController;
@@ -59,7 +59,6 @@ public class OrderSandwichesAndToppings extends VBox {
             //action
             sandwichType.setOnAction(event -> {
                 orderViewController.addOrderLine(sandwich.getName());
-                OrderView.updateLabel();
             });
         }
     }
@@ -84,7 +83,7 @@ public class OrderSandwichesAndToppings extends VBox {
         }
     }
 
-    public void updateStatusSandwichButtons(HashMap<String, Integer> stockListSandwiches) {
+    public static void updateStatusSandwichButtons(HashMap<String, Integer> stockListSandwiches) {
         for (Button sandwichButton : sandwichButtons) {
             if (stockListSandwiches.get(sandwichButton.getText()) <= 0) {
                 sandwichButton.setDisable(true);
@@ -92,7 +91,7 @@ public class OrderSandwichesAndToppings extends VBox {
         }
     }
 
-    public void updateStatusToppingButtons(HashMap<String, Integer> stockListToppings) {
+    public static void updateStatusToppingButtons(HashMap<String, Integer> stockListToppings) {
         for (Button toppingButton : toppingButtons) {
             if (stockListToppings.get(toppingButton.getText()) <= 0) {
                 toppingButton.setDisable(true);

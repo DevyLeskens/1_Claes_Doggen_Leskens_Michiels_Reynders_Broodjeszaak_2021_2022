@@ -8,7 +8,7 @@ import java.util.*;
 public class OrderLine {
     private String sandwichName;
     private Sandwich sandwich;
-    private final ArrayList<Topping> toppingsSort = new ArrayList<>();
+    private ArrayList<Topping> toppingsSort = new ArrayList<>();
 
     public OrderLine(Sandwich sandwich) {
         setSandwich(sandwich);
@@ -57,6 +57,9 @@ public class OrderLine {
         return  toppings;
     }
 
+    public void setToppingsSort(ArrayList<Topping> toppingsSort) {
+        this.toppingsSort = toppingsSort;
+    }
     public void setSandwichName(String sandwichName) {
         this.sandwichName = sandwichName;
     }
@@ -84,5 +87,16 @@ public class OrderLine {
     @Override
     public int hashCode() {
         return Objects.hash(sandwichName, sandwich, toppingsSort);
+    }
+
+    @Override
+    protected OrderLine clone(){
+        OrderLine orderLine = new OrderLine();
+        orderLine.setSandwich(sandwich);
+        orderLine.setSandwichName(sandwichName);
+        ArrayList<Topping> sorts = new ArrayList<>();
+        sorts.addAll(getToppingsSort());
+        orderLine.setToppingsSort(sorts);
+        return orderLine;
     }
 }

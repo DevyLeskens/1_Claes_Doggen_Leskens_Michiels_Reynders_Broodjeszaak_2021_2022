@@ -94,23 +94,33 @@ public class Order {
     public void addOrderLine(Sandwich sandwich) {
         if(sandwich.getStock() < 1){ throw new OrdelineException(sandwich.getName() + " is uit stock!");}
         orderState.addSandwich();
+        sandwich.updateStock();
         this.orderLines.add(new OrderLine(sandwich));
     }
 
     public void deleteOrderLine(int id) {
         orderState.deleteSandwich();
-        orderLines.remove(id);
+        try {
+            orderLines.remove(id);
+        }catch (Exception e){
+            throw new OrdelineException("There are no items to delete");
+        }
+
     }
 
     public void addIdenticalSandwich(int id) {
-        checkifAddisPossible(orderLines.get(id));
+        OrderLine orderLine = orderLines.get(id);
+        checkifAddisPossible(orderLine);
         orderState.addIdenticalSandwich();
-        orderLines.add(orderLines.get(id));
+        orderLines.add(orderLine.clone());
+        orderLine.getSandwich().updateStock();
+        orderLine.getToppingsSort().forEach(Topping::updateStock);
     }
 
     public void addTopping(int sandwichId, Topping topping) {
         if(topping.getStock() == 0){ throw new OrdelineException(topping.getName() + " is uit stock!");}
         orderState.addTopping();
+        topping.updateStock();
         orderLines.get(sandwichId).addTopping(topping);
     }
 

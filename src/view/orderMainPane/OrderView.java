@@ -28,16 +28,16 @@ public class OrderView {
     public int orderCount;
     public static VBox vBox = new VBox();
     private Stage stage = new Stage();
-    public static int sandwichCount = 0;
-    public static Label countSandwiches = new Label("Sandwich count: " + sandwichCount);
+    public static Label countSandwiches = new Label("Sandwich count: /");
 
     OrderHeader orderHeader;
     OrderSandwichesAndToppings orderSandwichesAndToppings;
     OrderDetails orderDetails;
     OrderFooter orderFooter;
+    OrderViewController orderViewController;
 
     public OrderView(OrderViewController orderViewController) {
-
+        this.orderViewController = orderViewController;
         //go to lower functions
         orderHeader = new OrderHeader(orderViewController);
         orderSandwichesAndToppings = new OrderSandwichesAndToppings(orderViewController);
@@ -103,8 +103,7 @@ public class OrderView {
 
 
     public static void resetLabel() {
-        sandwichCount = 0;
-        countSandwiches.setText("Sandwich count: " + sandwichCount);
+        countSandwiches.setText("Sandwich count: 0");
     }
 
     public void errorBox(String infoMessage) {
@@ -114,21 +113,14 @@ public class OrderView {
         errorAlert.showAndWait();
     }
 
-    public static void updateLabel() {
-        sandwichCount++;
-        countSandwiches.setText("Sandwich count: " + sandwichCount);
-    }
-
-    public void updateOrderLines(List<OrderLine> orderLines, double amount) {
+    public void update(List<OrderLine> orderLines, double amount){
+        countSandwiches.setText("Sandwich count: " + orderViewController.getSandwichCount());
         orderDetails.fillTable(orderLines);
         OrderFooter.updateAmount(amount);
+        updatebuttons(orderViewController);
     }
-
-    public void updateStatusSandwichesButtons(HashMap<String, Integer> stockListSandwiches) {
-        orderSandwichesAndToppings.updateStatusSandwichButtons(stockListSandwiches);
-    }
-
-    public void updateStatusToppingButtons(HashMap<String, Integer> stockListToppings) {
-        orderSandwichesAndToppings.updateStatusToppingButtons(stockListToppings);
+    public static void updatebuttons(OrderViewController orderViewController){
+        OrderSandwichesAndToppings.updateStatusToppingButtons(orderViewController.getOrderFacade().getStockListToppings());
+        OrderSandwichesAndToppings.updateStatusSandwichButtons(orderViewController.getOrderFacade().getStockListSandwiches());
     }
 }
