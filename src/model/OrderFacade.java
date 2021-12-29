@@ -14,7 +14,7 @@ import java.util.*;
 public class OrderFacade implements Subject {
 
     public static int sandwichCount = 0;
-    private int followNr = 0;
+    private int followNr = 1;
     private boolean orderIsInspected;
     private static OrderFacade orderFacade;
     private Order order = new Order(getFollowNr());
