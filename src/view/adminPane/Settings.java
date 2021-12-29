@@ -1,7 +1,9 @@
 package view.adminPane;
 
 import controller.AdminViewController;
+import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -9,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.util.Duration;
 
 public class Settings extends VBox {
     AdminViewController adminViewController;
@@ -53,6 +56,8 @@ public class Settings extends VBox {
         discount.setFont(Font.font("Verdana", 20));
 
         //save button
+        PauseTransition transition = new PauseTransition(Duration.seconds(0.5));
+        transition.setOnFinished(event -> this.saveButton.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, new CornerRadii(0), new Insets(0)))));
         BorderPane saveButton = new BorderPane();
         saveButton.setCenter(this.saveButton);
         saveButton.setPadding(new Insets(10, 10, 5, 10));
@@ -60,7 +65,10 @@ public class Settings extends VBox {
         this.saveButton.setFont(Font.font("Verdana", 20));
         this.saveButton.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, new CornerRadii(5), new Insets(0))));
         this.saveButton.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT)));
-
+        this.saveButton.setOnAction((ActionEvent e) ->{
+            this.saveButton.setBackground(new Background(new BackgroundFill(Color.GREEN, new CornerRadii(5), new Insets(0))));
+            transition.playFromStart();
+        } );
         //add all to root
         this.getChildren().addAll(introw, fileReading, discountSelect, saveButton);
     }
