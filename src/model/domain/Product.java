@@ -69,12 +69,11 @@ public abstract class Product {
         this.sold = sold;
     }
 
-    public void updateStock() {
-        if (stock > 0) {
-            stock--;
-        } else {
-            throw new IllegalArgumentException("There is currently no stock available.");
-        }
+    public void decStock() {
+        stock--;
+    }
+    public void incStock() {
+        stock++;
     }
 
     @Override

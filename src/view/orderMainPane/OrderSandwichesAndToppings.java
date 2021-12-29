@@ -87,6 +87,8 @@ public class OrderSandwichesAndToppings extends VBox {
         for (Button sandwichButton : sandwichButtons) {
             if (stockListSandwiches.get(sandwichButton.getText()) <= 0) {
                 sandwichButton.setDisable(true);
+            }else{
+                sandwichButton.setDisable(false);
             }
         }
     }
@@ -95,6 +97,8 @@ public class OrderSandwichesAndToppings extends VBox {
         for (Button toppingButton : toppingButtons) {
             if (stockListToppings.get(toppingButton.getText()) <= 0) {
                 toppingButton.setDisable(true);
+            }else{
+                toppingButton.setDisable(false);
             }
         }
     }

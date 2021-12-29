@@ -23,7 +23,6 @@ public class OrderViewController implements Observer {
         orderFacade.registerObserver(OrderEvent.ADD_IDENTICAL_SANDWICH, this);
         orderFacade.registerObserver(OrderEvent.ORDER_TO_KITCHEN, this);
         orderFacade.registerObserver(OrderEvent.CANCEL_ORDER, this);
-        orderFacade.registerObserver(OrderEvent.TERMINATE_ORDER, this);
         orderFacade.registerObserver(OrderEvent.DELETE_SANDWICH, this);
 
     }
@@ -146,6 +145,7 @@ public class OrderViewController implements Observer {
     public void update(ToppingDatabase toppingDatabase, SandwichDatabase sandwichDatabase, Order order, int orderCount, boolean orderIsInspected, HashMap<OrderLine, Integer> peek, int followNr) {
         System.out.println("NotifyObserversReport:\n----------------------\n - " + order.toString() + "\n - " +
                 sandwichDatabase.toString() + "\n - " + toppingDatabase.toString() + "\n");
+
         orderView.update(getOrderLines(), orderFacade.getAmount());
     }
 

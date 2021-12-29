@@ -77,6 +77,10 @@ public class Order {
         return getTotalPrice() - discount.getStrategy().calcDiscount(this);
     }
 
+    public OrderState getOrderState() {
+        return orderState;
+    }
+
     public double getCheapestOrderLine() {
         return orderLines.stream().mapToDouble(OrderLine::getPrice).min().orElseThrow(DomainException::new);
     }
@@ -94,13 +98,17 @@ public class Order {
     public void addOrderLine(Sandwich sandwich) {
         if(sandwich.getStock() < 1){ throw new OrdelineException(sandwich.getName() + " is uit stock!");}
         orderState.addSandwich();
-        sandwich.updateStock();
+        sandwich.decStock();
         this.orderLines.add(new OrderLine(sandwich));
     }
 
     public void deleteOrderLine(int id) {
         orderState.deleteSandwich();
         try {
+            orderLines.get(id).getSandwich().incStock();
+            for (Topping topping: orderLines.get(id).getToppingsSort()) {
+                topping.incStock();
+            }
             orderLines.remove(id);
         }catch (Exception e){
             throw new OrdelineException("There are no items to delete");
@@ -113,14 +121,14 @@ public class Order {
         checkifAddisPossible(orderLine);
         orderState.addIdenticalSandwich();
         orderLines.add(orderLine.clone());
-        orderLine.getSandwich().updateStock();
-        orderLine.getToppingsSort().forEach(Topping::updateStock);
+        orderLine.getSandwich().decStock();
+        orderLine.getToppingsSort().forEach(Topping::decStock);
     }
 
     public void addTopping(int sandwichId, Topping topping) {
         if(topping.getStock() == 0){ throw new OrdelineException(topping.getName() + " is uit stock!");}
         orderState.addTopping();
-        topping.updateStock();
+        topping.decStock();
         orderLines.get(sandwichId).addTopping(topping);
     }
 

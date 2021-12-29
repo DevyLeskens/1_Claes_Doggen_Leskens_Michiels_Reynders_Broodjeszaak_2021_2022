@@ -16,7 +16,7 @@ public class Topping extends Product {
         this.keyCount = keyCount;
     }
 
-    public void updateStock() {
+    public void decStock() {
         if (stock > 0) {
             stock--;
         } else {
