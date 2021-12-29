@@ -66,7 +66,7 @@ public class Order {
     }
 
     public double getTotalPrice() {
-        return orderLines.stream().mapToDouble(OrderLine::getPrice).sum();
+        return Math.round(orderLines.stream().mapToDouble(OrderLine::getPrice).sum() * 100.0) / 100.0;
     }
 
     public ArrayList<OrderLine> getOrderLines() {
